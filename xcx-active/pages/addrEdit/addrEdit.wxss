@@ -8,7 +8,7 @@
     overflow: hidden;
     display: flex;
 }
-.postman,.province {
+.postman {
     margin-top: 30rpx;
 }
 .info-list text {
@@ -31,25 +31,6 @@
 .addressDefault .addrDefault{
    height:10rpx;
    margin-left:455rpx
-}
-.picker-area {
-    display: flex;
-    background-color: #fff;
-    padding: 0 30rpx;
-    font-size: 26rpx;
-    height: 80rpx;
-    line-height: 80rpx;
-    border-bottom: 1rpx solid #efeff4;
-    box-sizing: border-box;
-}
-.picker-area text {
-    flex:1;
-}
-.picker-area picker {
-    flex:3;
-}
-.picker-area view {
-    height: 80rpx;
 }
 .seve-btn{
     background-color: #339900;

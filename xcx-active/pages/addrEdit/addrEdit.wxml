@@ -7,23 +7,9 @@
     <text>联系电话</text>
     <input placeholder="请输入收货人的联系电话" value="{{mob}}"  bindblur="mobFn"/>
   </view>
-  <view class="picker-area province">
-    <text>省/直辖市</text>
-    <picker value="{{pIndex}}" range="{{provinceData}}" range-key="name" bindchange="provinceFn">
-      <view>{{provinceData[pIndex].name}}</view>
-    </picker>
-  </view>
-  <view class="picker-area city">
-    <text>城市</text>
-    <picker value="{{cIndex}}" range="{{cityData}}" range-key="name" bindchange="cityFn">
-      <view>{{cityData[cIndex].name}}</view>
-    </picker>
-  </view>
-  <view class="picker-area area">
-    <text>地区</text>
-    <picker value="{{aIndex}}" range="{{areaData}}" range-key="name" bindchange="areaFn">
-      <view>{{areaData[aIndex].name}}</view>
-    </picker>
+  <view class="info-list">
+    <text>所在地区</text>
+    <input placeholder="请输入您所在的省市区" value="{{regionName}}"/>
   </view>
   <view class="info-list">
     <text>详细地址</text>
