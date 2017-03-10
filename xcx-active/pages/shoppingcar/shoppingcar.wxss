@@ -1,0 +1,82 @@
+/* pages/shoppingcar/shoppingcar.wxss */
+.operation {float: left;}
+.container {
+    padding-bottom: 130rpx;
+}
+.shopping-list {
+    width: 100%;
+    margin-top: 30rpx;
+    background-color: #fff;
+    padding: 30rpx 0 30rpx 30rpx;
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+    display: flex;
+
+}
+.shopping-list image {
+    float: left;
+    width: 170rpx;
+    height: 170rpx;
+}
+.info-wrap {
+    padding: 0 30rpx;
+    width: 380rpx;
+    overflow: hidden;
+    flex:1;
+}
+
+.info-wrap .tit {
+    display: block;
+    font-size: 30rpx;
+    color: #000;
+    line-height: 1;
+    overflow: hidden;
+}
+.price-info {
+    padding: 25rpx 0 32rpx;
+    overflow: hidden;
+}
+.price-info text{
+    font-size: 26rpx;
+    color: #b2b2b2;
+    float: left;
+}
+.price-info .price {
+    font-size: 30rpx;
+    color: #e4383b;
+    float: right;
+}
+.del-order {
+    display: block;
+    width: 90rpx;
+    border-left: 1rpx solid #ddd;
+    margin: -30rpx 0;
+    background: url(../../images/delete_icon.png) no-repeat center center;
+    background-size: 34rpx 40rpx;
+}
+.footBar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+    right: 0;
+    height: 110rpx;
+    background-color: #fff;
+    display: flex;
+    line-height: 110rpx;
+    font-size: 32rpx;
+}
+.footBar .totail-price {
+    flex: 2;
+    color: #353535;
+    text-align: left;
+    padding-left: 30rpx;
+}
+.footBar .settlement-btn {
+    flex: 1;
+    text-align: center;
+    line-height: 110rpx;
+    font-size: 40rpx;
+    border-radius: 0;
+}

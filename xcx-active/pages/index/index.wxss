@@ -1,0 +1,176 @@
+/* pages/index/index.wxss */
+
+.coupons-tit {
+  display: block;
+  font-size: 26rpx;
+  color: #a9a9a9;
+  line-height: 1.5;
+  background-color: #fff;
+  text-align: left;
+  font-weight: bold;
+  padding: 30rpx;
+}
+
+.coupons-con {
+  padding-left: 30rpx;
+  white-space: nowrap;
+  display: flex;
+  background-color: #fff;
+  padding-bottom: 40rpx;
+  box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+
+.coupons {
+  width: 248rpx;
+  height: 141rpx;
+  margin-right: 30rpx;
+  display: inline-block;
+  background: url(../../images/coupon_bg_03.png) no-repeat center center;
+  background-size: 100% 100%;
+  padding: 20rpx 0 20rpx 30rpx;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.coupons text {
+  color: #fff;
+  line-height: 1.5;
+  font-size: 18rpx;
+}
+
+.coupons .quota {
+  font-size: 40rpx;
+}
+
+.coupons .requirement {
+  display: block;
+  font-size: 22rpx;
+  color: #e05d32;
+}
+
+.active-wrap {
+  width: 100%;
+  overflow: hidden;
+}
+
+.active-tit {
+  display: block;
+  padding-left: 74rpx;
+  line-height: 100rpx;
+  font-size: 28rpx;
+  color: #000;
+  background: url(../../images/active_icon_03.png) no-repeat 30rpx center;
+  background-size: 34rpx 34rpx;
+}
+
+.active-list {
+  overflow: hidden;
+  background-color: #fff;
+  padding-bottom: 20rpx;
+  margin-bottom: 30rpx;
+}
+
+.active-list image {
+  display: block;
+  margin: 0 auto;
+  width: 380rpx;
+  height: 380rpx;
+}
+
+.product-tit {
+  display: block;
+  border-top: 1rpx solid #ddd;
+  line-height: 54rpx;
+  color: #000;
+  padding: 32rpx 30rpx 0;
+  font-size: 30rpx;
+  overflow: hidden;
+}
+
+.product-pro {
+  display: block;
+  font-size: 26rpx;
+  padding: 0 30rpx 0;
+  color: #a9a9a9;
+  line-height: 1.5;
+}
+
+.operation {
+  float: left;
+}
+
+.product-info {
+  text-align: right;
+  padding: 40rpx 30rpx 35rpx;
+  color: #e4383b;
+  font-size: 24rpx;
+}
+
+.specifications {
+  float: left;
+  color: #353535;
+  font-size: 30rpx;
+}
+
+.price {
+  font-size: 36rpx;
+}
+
+.operation-group {
+  border-top: 1rpx solid #ddd;
+  padding: 20rpx 30rpx 0;
+  overflow: hidden;
+  text-align: right;
+}
+
+.join-shoppingcar-btn, .purchase-btn {
+  display: inline-block;
+  font-size: 24rpx;
+  color: #fff;
+  background-color: #390;
+}
+
+.purchase-btn {
+  background-color: #e4383b;
+  margin-left: 40rpx;
+}
+
+/*没有授权*/
+.noPosition {
+  padding: 30rpx;
+  padding-top: 600rpx;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  margin: auto;
+  background: url(../../images/gps_icon.png) no-repeat center 200rpx;
+  background-size: 245rpx 245rpx;
+  text-align: center;
+  overflow: hidden;
+}
+
+.noPosition text {
+  display: inline-block;
+  line-height: 80rpx;
+  overflow: hidden;
+  font-size: 32rpx;
+  margin-right: 20rpx;
+  color: #333;
+}
+
+.noPosition button {
+  display: inline-block;
+  color: #fff;
+  overflow: hidden;
+  font-size: 32rpx;
+  background: linear-gradient(#38ae3b, #226d25);
+  box-shadow: 2rpx 2rpx 6rpx #154216;
+}

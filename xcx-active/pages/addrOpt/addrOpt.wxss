@@ -1,0 +1,50 @@
+/* pages/addrOpt/addrOpt.wxss */
+
+.addr-list {
+    overflow: hidden;
+    line-height: 50rpx;
+    padding: 25rpx 50rpx;
+    display: block;
+    position: relative;
+    background-color: #fff;
+    margin-top: 30rpx;
+}
+.addr-list view text {
+    color: #353535;
+    font-size: 26rpx;
+}
+.addr-list view .isDefault {
+    color: #e4383b;
+}
+.addr-list view text.consignee {
+    display: block;
+}
+.addr-list .select-icon {
+    position: absolute;
+    left: 30rpx;
+    top: 50%;
+    margin-top: -30rpx;
+}
+.addr-list .edit-addr {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    margin-top: -75rpx;
+    width: 100rpx;
+    background: url(../../images/edit.png) no-repeat center center;
+    height: 150rpx;
+    background-size: 36rpx 36rpx;
+}
+.newedit-btn{
+    background-color: #339900;
+    margin: 30rpx;
+    color: #fff;
+    font-size: 36rpx;
+}
+.default{
+    position:absolute;
+    top:25rpx;
+    right:222rpx;
+    font-size:28rpx;
+    color:red;
+}

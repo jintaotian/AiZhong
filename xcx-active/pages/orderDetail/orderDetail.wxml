@@ -1,0 +1,47 @@
+<view class="container">
+  <view class="addr-list" wx:for="{{addrData}}" wx:key="i">
+    <text>{{item.userName}} {{item.phoneNum}}</text>
+    <text class="detailAddr">{{item.userAddr}}</text>
+  </view>
+
+  <!--订单列表-start-->
+  <view class="order-con">
+    <image src="../../images/list1.jpg"></image>
+    <view class="order-info">
+      <text class="order-tit ellipsis">【爱种网】葵花种子【爱种网】葵花种子【爱种网】葵花种子【爱种网】葵花种子</text>
+      <text class="order-pro ellipsis2">由 河北双星种业股份有限公司 提供发货和售后</text>
+      <view class="peice-wrap">
+        <text class="weight">500g/袋</text>
+        <text class="num">x1</text>
+        <text class="price">￥88.00</text>
+      </view>
+    </view>
+  </view>
+
+  <!--订单操作-start-->
+  <view class="order-settlement">
+    <view class="price-wrap">
+      <text>￥商品金额</text>
+      <text class="settlement-price">100.00</text>
+    </view>
+    <view class="price-wrap">
+      <text>优惠券</text>
+      <text class="settlement-coupon">-￥10.00</text>
+    </view>
+    <view class="price-wrap">
+      <text>运费</text>
+      <text class="settlement-freight">+￥0.00</text>
+    </view>
+    <view class="tatail-price">
+      <text>合计</text>
+      <text class="total">￥88.00</text>
+    </view>
+  </view>
+  <view class="payment-type">
+    <text>支付方式</text>
+    <text class="type">微信支付</text>
+  </view>
+
+  <button class="payment-btn">立即支付</button>
+  <button class="cancle-btn" bindtap="cancleOrderFn">取消订单</button>
+</view>

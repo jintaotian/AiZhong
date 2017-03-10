@@ -1,0 +1,130 @@
+/* pages/orderDetail/orderDetail.wxss */
+
+.addr-list {
+    overflow: hidden;
+    line-height: 50rpx;
+    padding: 25rpx 30rpx 25rpx 80rpx;
+    display: block;
+    position: relative;
+    margin-bottom: 30rpx;
+    font-size: 30rpx;
+    color: #353535;
+    background: #fff url(../../images/user_addr.png) no-repeat 30rpx center;
+    background-size: 33rpx 38rpx;
+}
+.addr-list .detailAddr {
+    font-size: 26rpx;
+    display: block;
+    color: #353535;
+}
+
+.order-con {
+  padding: 25rpx 20rpx;
+  background-color: #fff;
+  display: flex;
+  border-bottom: 1rpx solid #d2d2d2;
+}
+
+.order-con image {
+  width: 170rpx;
+  height: 170rpx;
+  margin-right: 30rpx;
+}
+
+.order-info {
+  flex: 1;
+  overflow: hidden;
+}
+
+.order-info .order-tit {
+  font-size: 30rpx;
+  line-height: 1;
+  color: #353535;
+  display: block;
+}
+
+.order-info .order-pro {
+  font-size: 26rpx;
+  line-height: 1.5;
+  padding: 6rpx 0;
+  color: #b2b2b2;
+  overflow: hidden;
+}
+.peice-wrap {
+  overflow: hidden;
+  line-height: 50rpx;
+}
+
+.peice-wrap .weight, .peice-wrap .num {
+  color: #b2b2b2;
+  font-size: 26rpx;
+  float: left;
+}
+
+.peice-wrap .weight {
+  margin-right: 30rpx;
+}
+.peice-wrap .price {
+  color: #e4383b;
+  font-size: 30rpx;
+  float: right;
+}
+
+.order-settlement {
+  overflow: hidden;
+  background-color: #fff;
+  color: #b2b2b2;
+  font-size: 26rpx;
+  padding: 10rpx 0;
+}
+.order-settlement view {
+  display: flex;
+}
+.order-settlement .price-wrap {
+  line-height: 60rpx;
+  padding: 0 30rpx;
+}
+.order-settlement text {
+  flex:1;
+}
+.settlement-freight,.settlement-coupon,.settlement-price,.total {
+  text-align: right;
+}
+.tatail-price {
+  line-height: 100rpx;
+  padding: 0 30rpx;
+  border-top: 1rpx solid #d2d2d2;
+  color: #353535;
+  font-size: 26rpx;
+}
+.tatail-price .total {
+  font-size: 30rpx;
+  color: #e4383b;
+}
+.payment-type {
+  display: flex;
+  background-color: #fff;
+  margin-top: 30rpx;
+  line-height: 100rpx;
+  color: #353535;
+  font-size: 30rpx;
+  padding: 0 30rpx;
+}
+.payment-type text{
+  flex: 1;
+}
+
+.payment-type .type {
+  text-align: right;
+}
+.payment-btn,.cancle-btn{
+    background-color: #339900;
+    margin: 50rpx 30rpx;
+    color: #fff;
+    font-size: 36rpx;
+}
+.cancle-btn {
+  margin-top: 50rpx;
+  background-color: #fff;
+  color: #353535;
+}

@@ -1,0 +1,68 @@
+/* pages/coupons/coupons.wxss */
+
+.coupons-tab {
+  overflow: hidden;
+  background-color: #fff;
+  display: flex;
+  color: #7f8389;
+}
+
+.coupons-tab text {
+  flex: 1;
+  text-align: center;
+  line-height: 100rpx;
+  box-sizing: border-box;
+  font-size: 30rpx;
+}
+
+.coupons-tab .on {
+  color: #390;
+  border-bottom: 1rpx solid #390;
+}
+
+.coupons-wrap {
+  overflow: hidden;
+  padding: 30rpx;
+  margin: 0 -15rpx;
+}
+
+.coupons {
+  width: 332rpx;
+  height: 184rpx;
+  float: left;
+  margin: 0 15rpx 30rpx;
+}
+
+.coupons button {
+  width: 332rpx;
+  height: 184rpx;
+  box-sizing: border-box;
+  text-align: center;
+  padding: 20rpx 0 40rpx 30rpx;
+  display: block;
+  background: url(../../images/coupon_bg_03.png) no-repeat center center;
+  background-size: 100% 100%;
+}
+
+.coupons button::after {
+  border: none;
+}
+
+button[disabled][type="default"], wx-button[disabled]:not([type]) {
+  color: rgba(0, 0, 0, 0.3);
+  background-color: none !important;
+  filter: grayscale(1);
+}
+
+.coupons .quota {
+  color: #fff;
+  line-height: 1;
+  font-size: 36rpx;
+}
+
+.coupons .requirement {
+  display: block;
+  font-size: 32rpx;
+  line-height: 30rpx;
+  color: #e05d32;
+}

@@ -1,0 +1,41 @@
+<view class="container">
+  <view class="info-list postman">
+    <text>收货人</text>
+    <input placeholder="请输入收货人姓名" value="{{consignee}}" bindinput="consigneeFn" />
+  </view>
+  <view class="info-list">
+    <text>联系电话</text>
+    <input placeholder="请输入收货人的联系电话" value="{{mob}}"  bindblur="mobFn"/>
+  </view>
+  <view class="picker-area province">
+    <text>省/直辖市</text>
+    <picker value="{{pIndex}}" range="{{provinceData}}" range-key="name" bindchange="provinceFn">
+      <view>{{provinceData[pIndex].name}}</view>
+    </picker>
+  </view>
+  <view class="picker-area city">
+    <text>城市</text>
+    <picker value="{{cIndex}}" range="{{cityData}}" range-key="name" bindchange="cityFn">
+      <view>{{cityData[cIndex].name}}</view>
+    </picker>
+  </view>
+  <view class="picker-area area">
+    <text>地区</text>
+    <picker value="{{aIndex}}" range="{{areaData}}" range-key="name" bindchange="areaFn">
+      <view>{{areaData[aIndex].name}}</view>
+    </picker>
+  </view>
+  <view class="info-list">
+    <text>详细地址</text>
+    <input placeholder="请输入收货人的详细地址" value="{{address}}"  bindinput="addressFn"/>
+  </view>
+  <view class="addressDefault">
+    <text>默认地址</text>
+    <switch checked="{{isDefault == 1 ? true : false}}" class="addrDefault" bindchange="isChose"/>
+</view>
+  <button class="seve-btn" bindtap="editAddrFn" hidden="{{isAdd}}">保存并使用</button>
+  <button class="seve-btn" bindtap="addAddrFn" hidden="{{!isAdd}}">保存并使用</button>
+  <button class="seve-btn remove-btn" bindtap="removeAddrFn" hidden="{{isAdd}}">删除该地址</button>
+</view>
+<view class="section">
+</view>

@@ -1,0 +1,47 @@
+<view class="container">
+    <view class="errorTip" class="noPosition" hidden="{{!isPosition}}">
+      <text>请授权当前位置信息</text>
+      <button bindtap="getPositionFn">点击授权</button>
+    </view>
+
+  <view hidden="{{isPosition}}">
+    <text class="coupons-tit">活动通告：通告通告</text>
+
+    <!--优惠券-start-->
+    <scroll-view class="coupons-con" scroll-x="true">
+      <block wx:for="{{couponsData}}" wx:key="i">
+        <view class="coupons" data-couponsId="{{item.id}}" bindtap="useCouponsFn" data-index="{{index}}">
+          <text>￥</text>
+          <text class="quota">{{item.discount}}</text>
+          <text class="requirement">满{{item.fullPrice}}可用券</text>
+        </view>
+      </block>
+    </scroll-view>
+
+    <!--优惠券-end-->
+    <view class="active-wrap">
+      <text class="active-tit" id="textId">活动产品</text>
+
+      <!--产品列表-start-->
+      <view class="active-list" wx:for="{{actData}}" wx:key="i">
+        <image src="{{item.img?item.img:item.defauliImg}}"></image>
+        <text class="product-tit ellipsis">{{item.name}}</text>
+        <text class="product-pro">{{item.companyName}}</text>
+        <view class="product-info">
+          <text class="specifications">{{item.norm}}/{{item.units}}</text>
+          <text>￥</text>
+          <text class="price">{{item.retailPrice}}</text>
+        </view>
+        <view class="operation-group" data-index="{{index}}">
+          <view class="operation">
+            <text class="decr-btn" bindtap="decrFn" data-cartid="{{item.itemId}}">-</text>
+            <input class="operation-result" disabled="true" value="{{item.moq}}" type="number" />
+            <text class="incr-btn" bindtap="incrFn" data-cartid="{{item.itemId}}">+</text>
+          </view>
+          <button class="join-shoppingcar-btn" data-shopcar="false" data-cartid="{{item.itemId}}" bindtap="joinCarFn">加入购物车</button>
+          <button class="purchase-btn" data-cartid="{{item.itemId}}" bindtap="purchaseFn">立即购买</button>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

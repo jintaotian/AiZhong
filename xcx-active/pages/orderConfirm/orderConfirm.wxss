@@ -1,0 +1,139 @@
+/* pages/orderConfirm/orderConfirm.wxss */
+.container {
+  padding-bottom: 50rpx;
+}
+.addr-opt {
+  line-height: 100rpx;
+  padding: 10rpx 100rpx;
+  font-size: 28rpx;
+  color: #353535;
+  background: url(../../images/addr.png) no-repeat 30rpx center,url(../../images/arr.png) no-repeat 680rpx center;
+  background-size: 45rpx 40rpx;
+  background-color: #fff;
+  margin-top:20rpx;
+}
+
+.order-con {
+  padding: 25rpx 20rpx;
+  background-color: #fff;
+  display: flex;
+  margin-bottom: 20rpx;
+  position: relative;
+}
+
+.order-con image {
+  width: 170rpx;
+  height: 170rpx;
+  margin-right: 30rpx;
+}
+
+.order-info {
+  flex: 1;
+  overflow: hidden;
+}
+
+.order-info .order-tit {
+  font-size: 30rpx;
+  line-height: 1;
+  color: #353535;
+  display: block;
+}
+
+.order-info .order-pro {
+  font-size: 26rpx;
+  line-height: 1.5;
+  padding-top: 12rpx;
+  color: #b2b2b2;
+  overflow: hidden;
+}
+.peice-wrap {
+  overflow: hidden;
+  line-height: 50rpx;
+  position: absolute;
+  bottom: 20rpx;
+  width: 500rpx;
+}
+
+.peice-wrap .weight, .peice-wrap .num {
+  color: #b2b2b2;
+  font-size: 26rpx;
+  float: left;
+}
+
+.peice-wrap .weight {
+  margin-right: 30rpx;
+}
+.peice-wrap .price {
+  color: #e4383b;
+  font-size: 30rpx;
+  float: right;
+}
+
+.coupon {
+  overflow: hidden;
+  font-size: 26rpx;
+  color: #353535;
+  line-height: 100rpx;
+  padding: 0 30rpx;
+  background-color: #fff;
+  margin-bottom: 20rpx;
+}
+
+.coupon .text {
+    float:left; 
+}
+.coupon .coupon-used {
+  float: right;
+  padding-right: 40rpx;
+  background: url(../../images/arr.png) no-repeat right center;
+  background-size: 35rpx 36rpx;
+}
+
+.order-settlement {
+  overflow: hidden;
+  background-color: #fff;
+  color: #b2b2b2;
+  font-size: 26rpx;
+}
+.order-settlement .price-wrap {
+  display: flex;
+  line-height: 60rpx;
+  padding: 0 30rpx;
+}
+.order-settlement text {
+  flex:1;
+}
+.settlement-freight,.settlement-coupon,.settlement-price {
+  text-align: right;
+}
+.tatail-price {
+  text-align: right;
+  line-height: 100rpx;
+  padding: 0 30rpx;
+  border-top: 1rpx solid #d2d2d2;
+  color: #353535;
+}
+.tatail-price text {
+  font-size: 32rpx;
+  color: #e4383b;
+}
+
+.payment-btn{
+    background-color: #339900;
+    margin: 50rpx 30rpx 0;
+    color: #fff;
+    font-size: 36rpx;
+}
+.addr-opt{
+  line-height:60rpx;
+}
+.addr-opt text {
+    display: block;
+    color: #353535;
+    font-size: 26rpx;
+}
+.addr-color{
+  background:url('../../images/addr-color.png') repeat-X;
+  height:19rpx;
+  margin-bottom:10rpx;
+}

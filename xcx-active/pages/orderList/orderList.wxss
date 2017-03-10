@@ -1,0 +1,127 @@
+/* pages/orderList/orderList.wxss */
+.order-tabBar {
+    display: flex;
+    overflow: hidden;
+    text-align: center;
+    line-height: 100rpx;
+    color: #7f8389;
+    background-color: #fff;
+}
+.order-tabBar text{
+    flex: 1;
+    box-sizing:border-box;
+    font-size: 30rpx;
+}
+.order-tabBar .on {
+    color: #339900;
+    box-sizing: border-box;
+    border-bottom: 1rpx solid #339900;
+}
+
+.order-paid,.order-unpaid {
+    margin: 20rpx 0;
+    overflow: hidden;
+}
+
+.order-list {
+    overflow: hidden;
+    margin-bottom: 30rpx;
+}
+.order-head {
+    background-color: #fff;
+    padding: 0 30rpx;
+    display: block;
+    border-bottom: 1rpx solid #efeff4;
+    line-height: 90rpx;
+    font-size: 24rpx;
+    overflow: hidden;
+}
+.order-status {
+    float: left;
+    color: #ff774b;
+    font-size: 30rpx;
+}
+.paid-status {color: #7f8389;}
+.order-price {
+    float: right;
+}
+.order-price .totail-price {
+    color: #e4383b;
+    font-size: 30rpx;
+}
+.order-con {
+  padding: 25rpx 20rpx;
+  background-color: #fff;
+  display: flex;
+}
+
+.order-con image {
+  width: 170rpx;
+  height: 170rpx;
+  margin-right: 30rpx;
+}
+
+.order-info {
+  flex: 1;
+  overflow: hidden;
+}
+
+.order-info .order-tit {
+  font-size: 30rpx;
+  line-height: 1;
+  color: #353535;
+  display: block;
+}
+
+.order-info .order-pro {
+  font-size: 26rpx;
+  line-height: 1.5;
+  padding: 6rpx 0;
+  color: #b2b2b2;
+  overflow: hidden;
+}
+.peice-wrap {
+  overflow: hidden;
+  line-height: 50rpx;
+}
+
+.peice-wrap .weight, .peice-wrap .num {
+  color: #b2b2b2;
+  font-size: 26rpx;
+  float: left;
+}
+
+.peice-wrap .weight {
+  margin-right: 30rpx;
+}
+.peice-wrap .price {
+  color: #e4383b;
+  font-size: 30rpx;
+  float: right;
+}
+
+.order-work {
+    overflow: hidden;
+    border-top: 1rpx solid #efeff4;
+    background-color: #fff;
+    padding: 20rpx 30rpx;
+    text-align: right;
+}
+.order-work button {
+    display: inline-block;
+    line-height: 1;
+    font-size: 26rpx;
+    padding: 18rpx 34rpx;
+    color: #353535;
+    background-color:#fff;
+}
+.order-work button::after {
+    border-color: #888;
+}
+.order-work .order-payment {
+    margin-left: 50rpx;
+    color: #e4383b;
+}
+.order-work .order-payment::after {
+    border-color: #e4383b;
+}

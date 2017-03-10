@@ -1,0 +1,48 @@
+<view class="container">
+  <view class="addr-opt" bindtap="addrOptFn" hidden="{{!adr}}">
+  <text>{{name}} {{mobile}}</text>                              
+  <text>{{value}}</text> 
+  </view>
+  <view class="addr-opt" bindtap="addrOptFn" hidden="{{adr}}">
+  </view>
+  <view class="addr-color"></view>
+
+  <!--订单列表-start-->
+  <view class="order-con" wx:for="{{orderData}}" wx:key="i">
+    <image src="{{item.img ? item.img : item.defauliImg}}"></image>
+    <view class="order-info">
+      <text class="order-tit ellipsis">{{item.name}}</text>
+      <text class="order-pro ellipsis2">{{item.companyName}}</text>
+      <view class="peice-wrap">
+        <text class="weight">{{item.norm}}/{{item.units}}</text>
+        <text class="num">x{{item.moq}}</text>
+        <text class="price">￥{{item.retailPrice}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="coupon" bindtap="couponsOptFn">
+      <text>优惠券</text>
+      <text class="coupon-used">已使用{{coupon}}元优惠券</text>
+  </view>
+  
+  <view class="order-settlement">
+    <view class="price-wrap">
+      <text>订单金额</text>
+      <text class="settlement-price">{{totalPrice}}</text>
+    </view>
+    <view class="price-wrap">
+      <text>优惠券</text>
+      <text class="settlement-coupon">-￥{{coupon}}</text>
+    </view>
+    <view class="price-wrap">
+      <text>运费</text>
+      <text class="settlement-freight">+￥{{freight}}</text>
+    </view>
+    <view class="tatail-price">
+        共1件，合计：￥ 
+        <text>{{totalPrice - coupon + freight}}</text>
+    </view>
+  </view>
+  <button class="payment-btn" bindtap="placeOrderFn">微信支付</button>
+</view>
