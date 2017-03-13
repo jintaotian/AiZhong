@@ -25,7 +25,7 @@ Page({
           units: goodslist[i].units,
           norm: goodslist[i].norm,
           retailPrice: goodslist[i].retailPrice,
-          moq: goodslist[i].moq
+          moq: goodslist[i].moq <=1 ? 1 : goodslist[i].moq
         })
 
         wx.setStorage({
@@ -108,7 +108,7 @@ Page({
           units: goodslist[i].units,
           norm: goodslist[i].norm,
           retailPrice: goodslist[i].retailPrice,
-          moq: goodslist[i].moq
+          moq: goodslist[i].moq <=1 ? 1 : goodslist[i].moq
         })
       }
     }

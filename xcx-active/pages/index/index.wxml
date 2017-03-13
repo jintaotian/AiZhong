@@ -35,7 +35,7 @@
         <view class="operation-group" data-index="{{index}}">
           <view class="operation">
             <text class="decr-btn" bindtap="decrFn" data-cartid="{{item.itemId}}">-</text>
-            <input class="operation-result" disabled="true" value="{{item.moq}}" type="number" />
+            <input class="operation-result" disabled="true" value="{{item.moq <= 1 ? 1 : item.moq}}" type="number" />
             <text class="incr-btn" bindtap="incrFn" data-cartid="{{item.itemId}}">+</text>
           </view>
           <button class="join-shoppingcar-btn" data-shopcar="false" data-cartid="{{item.itemId}}" bindtap="joinCarFn">加入购物车</button>
