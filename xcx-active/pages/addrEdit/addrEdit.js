@@ -6,7 +6,6 @@ Page({
   },
   onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数
-    console.log(options)
     if (options.region) {
       this.setData({
         consignee: options.consignee,
@@ -47,6 +46,10 @@ Page({
   addressFn: function (event) {
     this.data.address = event.detail.value;
   },
+  isDefaultFn: function (event) {
+    this.data.isDefault = event.detail.value;
+    console.log(event.detail.value)
+  },
   editAddrFn: function () {
     // 修改地址
     var that = this;
@@ -61,7 +64,7 @@ Page({
         mob: that.data.mob,
         region: userData.region,
         address: that.data.address,
-        isDefault: 1
+        isDefault: that.data.isDefault ? 1 : 0
       },
       header: {
         'content-type': 'application/json'
@@ -95,7 +98,7 @@ Page({
           mob: that.data.mob,
           region: userData.region,
           address: that.data.address,
-          isDefault: 1
+          isDefault: that.data.isDefault ? 1 : 0
         },
         header: {
           'content-type': 'application/json'

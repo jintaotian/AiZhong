@@ -8,7 +8,6 @@ Page({
     that.setData({
          management:options.management
     })
-    console.log(that.data.management)   
   },
   onReady: function () {
     // 页面渲染完成a
@@ -62,7 +61,6 @@ Page({
             'content-type': 'application/json'
           },
           success: function (res) {
-            console.log(res)
             that.setData({
               addrData: res.data.data.list
             })

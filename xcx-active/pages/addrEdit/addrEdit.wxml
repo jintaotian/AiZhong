@@ -17,7 +17,7 @@
   </view>
   <view class="addressDefault">
     <text>默认地址</text>
-    <switch checked="{{isDefault == 1 ? true : false}}" class="addrDefault" bindchange="isChose"/>
+    <switch checked="{{isDefault == 1 ? true : ''}}" class="addrDefault" bindchange="isDefaultFn"/>
 </view>
   <button class="seve-btn" bindtap="editAddrFn" hidden="{{isAdd}}">保存并使用</button>
   <button class="seve-btn" bindtap="addAddrFn" hidden="{{!isAdd}}">保存并使用</button>
