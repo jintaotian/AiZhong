@@ -5,7 +5,7 @@
     </view>
 
   <view hidden="{{isPosition}}">
-    <text class="coupons-tit">活动通告：通告通告</text>
+    <text class="coupons-tit">活动通告：本次活动由爱种网络有限公司承办，最终解释权归爱种网络有限公司所有</text>
 
     <!--优惠券-start-->
     <scroll-view class="coupons-con" scroll-x="true">

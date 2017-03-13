@@ -2,12 +2,12 @@
 var gConfig = getApp();
 Page({
   data: {
-    adr:true
+    adr: true
   },
   onLoad: function () {
     var that = this;
     that.setData({
-        value:'请选择收货地址'
+      value: '请选择收货地址'
     })
   },
   onShow: function () {
@@ -15,6 +15,7 @@ Page({
     var that = this;
     var totalPrice = 0;
     var orderData = wx.getStorageSync('orderData');
+    var userData = wx.getStorageSync('userData');
     // 合计金额
     for (var i = 0; i < orderData.length; i++) {
       var price = parseInt(orderData[i].moq) * parseInt(orderData[i].retailPrice);
@@ -31,14 +32,16 @@ Page({
     wx.getStorage({
       key: 'addressData',
       success: function (res) {
-           that.setData({
-            value: res.data.regionName + res.data.address,
-            mobile: res.data.mob,
-            name: res.data.consignee,
-            id: res.data.id
+        that.setData({
+          value: res.data.regionName + res.data.address,
+          mobile: res.data.mob,
+          name: res.data.consignee,
+          id: res.data.id
         })
       }
     })
+    // 从后台获取商品相关数据
+    that.getOrderInfoFn(userData.region,orderData)
   },
   onHide: function () {
     // 页面隐藏
@@ -63,7 +66,6 @@ Page({
         "qty": orderInfoData[i].moq
       })
     }
-    console.log(that.data.orderData[0].companyId)
     wx.request({
       url: gConfig.http + 'xcx/order/save',
       data: {
@@ -104,6 +106,29 @@ Page({
         //   }
         // })
         // 微信支付接口
+      }
+    })
+  },
+  getOrderInfoFn: function (region,itemList) {
+    var that = this;
+    var itemListData = [];
+    for(var i = 0; i < itemList.length;i++){
+      itemListData.push({
+        qty:itemList[i].moq,
+        skuId:itemList[i].id
+      })
+    }
+    wx.request({
+      url: gConfig.http + 'xcx/order/itemsAmount', //仅为示例，并非真实的接口地址
+      data: {
+        region: region,
+        itemList: itemListData
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      success: function (res) {
+        console.log(res)
       }
     })
   }

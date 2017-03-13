@@ -25,7 +25,7 @@ Page({
           units: goodslist[i].units,
           norm: goodslist[i].norm,
           retailPrice: goodslist[i].retailPrice,
-          moq: goodslist[i].moq <=1 ? 1 : goodslist[i].moq
+          moq: goodslist[i].moq <= 1 ? 1 : goodslist[i].moq
         })
 
         wx.setStorage({
@@ -108,7 +108,7 @@ Page({
           units: goodslist[i].units,
           norm: goodslist[i].norm,
           retailPrice: goodslist[i].retailPrice,
-          moq: goodslist[i].moq <=1 ? 1 : goodslist[i].moq
+          moq: goodslist[i].moq <= 1 ? 1 : goodslist[i].moq
         })
       }
     }
@@ -139,7 +139,6 @@ Page({
         'content-type': 'application/json'
       },
       success: function (res) {
-        console.log(res)
         var region = res.data.data.region;
         var companyId = res.data.data.companyId;
         wx.setStorage({
@@ -147,15 +146,15 @@ Page({
           data: {
             "wxOpenid": gConfig.wxOpenid,
             "clientId": gConfig.clientId,
-            "region":res.data.data.region,
-            "regionName":res.data.data.fullName,
-            "companyId":res.data.data.companyId
+            "region": res.data.data.region,
+            "regionName": res.data.data.fullName,
+            "companyId": res.data.data.companyId
           }
         })
-        
+
         that.getGoodsListFn(region);
         that.getCouponsFn(region, companyId)
-        
+
       },
     })
   },
@@ -189,7 +188,6 @@ Page({
         'content-type': 'application/json'
       },
       success: function (res) {
-        console.log(res)
         that.setData({
           couponsData: res.data.data,
         })
@@ -197,36 +195,11 @@ Page({
     })
   },
   useCouponsFn: function (event) {
-     var that=this;
-     var couponsData=that.data.couponsData;
-     console.log(couponsData)
-     var index = parseInt(event.currentTarget.dataset.index);
-     var  id,companyId;
-     for (var i = 0; i < couponsData.length; i++) {
-          if(index==i){
-            id = couponsData[i].id
-            companyId=couponsData[i].companyId
-     }
-    }
-    console.log(id);
-    console.log(companyId)
-        wx.request({
-          url: gConfig.http + 'xcx/coupon/getcoupon',
-          data: {
-            companyId:companyId,
-            id:id
-          },
-          header: {
-            'content-type': 'application/json'
-          },
-          success:function(res){
-              wx.showToast({
-                title: '领取成功', 
-                icon: 'success',
-                duration: 1000
-              })
-          }
-        })
+    wx.showToast({
+      title: '下单后根据金额自动使用',
+      icon: 'success',
+      duration: 1000
+    })
   },
   getPositionFn: function () {
     var that = this;
