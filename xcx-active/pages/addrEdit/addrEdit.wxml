@@ -5,23 +5,21 @@
   </view>
   <view class="info-list">
     <text>联系电话</text>
-    <input placeholder="请输入收货人的联系电话" value="{{mob}}"  bindblur="mobFn"/>
+    <input placeholder="请输入收货人的联系电话" value="{{mob}}" bindblur="mobFn" />
   </view>
   <view class="info-list">
     <text>所在地区</text>
-    <input placeholder="请输入您所在的省市区" value="{{regionName}}"/>
+    <input placeholder="请输入您所在的省市区" value="{{regionName}}" />
   </view>
   <view class="info-list">
     <text>详细地址</text>
-    <input placeholder="请输入收货人的详细地址" value="{{address}}"  bindinput="addressFn"/>
+    <input placeholder="请输入收货人的详细地址" value="{{address}}" bindinput="addressFn" />
   </view>
   <view class="addressDefault">
     <text>默认地址</text>
-    <switch checked="{{isDefault == 1 ? true : ''}}" class="addrDefault" bindchange="isDefaultFn"/>
-</view>
+    <switch checked="{{isDefault == 1 ? true : ''}}" class="addrDefault" bindchange="isDefaultFn" />
+  </view>
   <button class="seve-btn" bindtap="editAddrFn" hidden="{{isAdd}}">保存并使用</button>
   <button class="seve-btn" bindtap="addAddrFn" hidden="{{!isAdd}}">保存并使用</button>
   <button class="seve-btn remove-btn" bindtap="removeAddrFn" hidden="{{isAdd}}">删除该地址</button>
-</view>
-<view class="section">
 </view>
