@@ -1,40 +1,43 @@
 <view class="container">
   <view class="addr-list" wx:for="{{addrData}}" wx:key="i">
-    <text>{{item.userName}} {{item.phoneNum}}</text>
-    <text class="detailAddr">{{item.userAddr}}</text>
+    <text>{{item.consignee}} {{item.mob}}</text>
+    <text class="detailAddr">{{item.address}}</text>
   </view>
 
   <!--订单列表-start-->
-  <view class="order-con">
-    <image src="../../images/list1.jpg"></image>
+  <view class="order-con" wx:for="{{addrData}}" wx:key="i">
+  <view class="include" wx:for="{{item.items}}" wx:key="i" wx:for-item="include">
+  <view class="company" wx:for="{{item.company}}" wx:key="i" wx:for-item="company">
+    <image src="{{include.img}}"></image>
     <view class="order-info">
       <text class="order-tit ellipsis">【爱种网】葵花种子【爱种网】葵花种子【爱种网】葵花种子【爱种网】葵花种子</text>
-      <text class="order-pro ellipsis2">由 河北双星种业股份有限公司 提供发货和售后</text>
+      <text class="order-pro ellipsis2">由 {{compay.name}} 提供发货和售后</text>
       <view class="peice-wrap">
-        <text class="weight">500g/袋</text>
-        <text class="num">x1</text>
-        <text class="price">￥88.00</text>
+        <text class="weight">{{include.skuName}}</text>
+        <text class="num">x{{include.qty}}</text>
+        <text class="price">￥{{include.price}}</text>
       </view>
     </view>
+    </view>
+    </view>
   </view>
-
   <!--订单操作-start-->
   <view class="order-settlement">
     <view class="price-wrap">
       <text>￥商品金额</text>
-      <text class="settlement-price">100.00</text>
+      <text class="settlement-price">{{amount}}</text>
     </view>
     <view class="price-wrap">
       <text>优惠券</text>
-      <text class="settlement-coupon">-￥10.00</text>
+      <text class="settlement-coupon">-￥{{couponDiscount}}</text>
     </view>
     <view class="price-wrap">
       <text>运费</text>
-      <text class="settlement-freight">+￥0.00</text>
+      <text class="settlement-freight">+￥{{feeAmount}}</text>
     </view>
     <view class="tatail-price">
       <text>合计</text>
-      <text class="total">￥88.00</text>
+      <text class="total">￥{{retailPayAmount}}</text>
     </view>
   </view>
   <view class="payment-type">

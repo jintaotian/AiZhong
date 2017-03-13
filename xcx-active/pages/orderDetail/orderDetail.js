@@ -1,14 +1,26 @@
 // pages/orderDetail/orderDetail.js
+var gConfig=getApp();
 Page({
-  data: {
-    addrData: [{
-      phoneNum: "123456789",
-      userName: "小明",
-      userAddr: "北京市朝阳区望京东大街望京SOHO塔2 C座2705"
-    }]
-  },
+  data:{},
   onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数
+    //获取姓名，地址，电话,图片路径，服务商名称等信息
+    var that=this;
+    wx.request({
+      url:gConfig.http + 'xcx/order/detail',
+      data:{
+         orderId:''
+      },
+      header: {
+         'content-type': 'application/json'
+      },
+      success:function(res){
+           that.setData({
+             addrData:res.data.data,
+           })
+      }
+
+    })
   },
   onReady: function () {
     // 页面渲染完成
@@ -39,5 +51,6 @@ Page({
       'fail': function (res) {
       }
     })
-  }
+  },
+
 })
