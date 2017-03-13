@@ -26,6 +26,20 @@ Page({
   consigneeFn: function (event) {
     this.data.consignee = event.detail.value;
   },
+  isDefaultFn:function(event){
+    var that=this;
+    that.data.isDefault= event.detail.value;
+    if(that.data.isDefault){
+       that.setData({
+          isDefault:1
+       })
+    }else{
+         that.setData({
+          isDefault:0
+       })
+    }
+    console.log(this.data.isDefault)
+  },
   mobFn: function (event) {
     var that = this;
     that.data.mob = event.detail.value;
@@ -46,10 +60,6 @@ Page({
   addressFn: function (event) {
     this.data.address = event.detail.value;
   },
-  isDefaultFn: function (event) {
-    this.data.isDefault = event.detail.value;
-    console.log(event.detail.value)
-  },
   editAddrFn: function () {
     // 修改地址
     var that = this;
@@ -64,7 +74,7 @@ Page({
         mob: that.data.mob,
         region: userData.region,
         address: that.data.address,
-        isDefault: that.data.isDefault ? 1 : 0
+        isDefault: that.data.isDefault
       },
       header: {
         'content-type': 'application/json'
@@ -98,7 +108,7 @@ Page({
           mob: that.data.mob,
           region: userData.region,
           address: that.data.address,
-          isDefault: that.data.isDefault ? 1 : 0
+          isDefault: that.data.isDefault
         },
         header: {
           'content-type': 'application/json'

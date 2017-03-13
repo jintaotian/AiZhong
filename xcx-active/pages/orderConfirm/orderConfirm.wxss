@@ -84,9 +84,7 @@
 }
 .coupon .coupon-used {
   float: right;
-  padding-right: 40rpx;
-  background: url(../../images/arr.png) no-repeat right center;
-  background-size: 35rpx 36rpx;
+  padding-right: 8rpx;
 }
 
 .order-settlement {

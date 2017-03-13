@@ -6,44 +6,6 @@ Page({
   },
   onLoad: function () {
     var that = this;
-    wx.getStorage({
-      key: 'userData',
-      success: function (res) {
-        wx.request({
-          url: gConfig.http + 'xcx/coupon/mycoupons',
-          data: {
-            clientId: res.data.clientId,
-            useStatus: 1
-          },
-          header: {
-            'content-type': 'application/json'
-          },
-          success: function (res) {
-            console.log(res)
-            that.setData({
-              useCouponData: res.data.data
-            })
-            var useCouponData = that.data.useCouponData;
-            //循环将所需要的值放入arr[]中
-            var arr = [];
-            for (var i = 0; i < useCouponData.length; i++) {
-              if(that.data.totailPrice>=useCouponData[i].discount){
-                  arr.push(useCouponData[i].discount)
-              }
-            }
-
-            //循环arr数组找出最大的discount
-            var max = arr[0];
-            for (var j = 1; j < arr.length; j++) {
-              if (max < arr[j]) {
-                max = arr[j];
-              }
-            }
-            console.log(max)
-          }
-        })
-      }
-    }),
     that.setData({
         value:'请选择收货地址'
     })
@@ -65,15 +27,6 @@ Page({
       coupon: 0,
       freight: 0
     })
-    //获取优惠劵减免金额
-    wx.getStorage({
-      key: 'couponsData',
-      success: function (res) {
-        that.setData({
-          coupon: res.data.discount
-        })
-      }
-    })
     //获取收货地址
     wx.getStorage({
       key: 'addressData',
@@ -83,19 +36,6 @@ Page({
             mobile: res.data.mob,
             name: res.data.consignee,
             id: res.data.id
-        })
-      }
-    })
-    //拿本地companyId
-    wx.getStorage({
-      key: 'orderData',
-      success: function (res) {
-        that.setData({
-          orderData: res.data
-        })
-        var companyId = that.data.orderData[0].companyId;
-        that.setData({
-          companyId: companyId
         })
       }
     })
@@ -109,11 +49,6 @@ Page({
   addrOptFn: function () {
     wx.navigateTo({
       url: '../addrOpt/addrOpt'
-    })
-  },
-  couponsOptFn: function () {
-    wx.navigateTo({
-      url: '../coupons/coupons?price=' + this.data.totalPrice
     })
   },
   placeOrderFn: function () {
