@@ -40,8 +40,9 @@
       <text class="settlement-freight">+￥{{freight}}</text>
     </view>
     <view class="tatail-price">
-        共1件，合计：￥ 
-        <text>{{totalPrice - coupon + freight}}</text>
+        共1件 合计：
+        <text>￥</text> 
+        <text class="num">{{totalPrice - coupon + freight}}</text>
     </view>
   </view>
   <button class="payment-btn" bindtap="placeOrderFn">微信支付</button>

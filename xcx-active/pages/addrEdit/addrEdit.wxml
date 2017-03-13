@@ -1,21 +1,21 @@
 <view class="container">
   <view class="info-list postman">
     <text>收货人</text>
-    <input placeholder="请输入收货人姓名" value="{{consignee}}" bindinput="consigneeFn" />
+    <input placeholder="请输入收货人姓名" placeholder-style="color:#ddd" value="{{consignee}}" bindinput="consigneeFn" />
   </view>
   <view class="info-list">
     <text>联系电话</text>
-    <input placeholder="请输入收货人的联系电话" value="{{mob}}" bindblur="mobFn" />
+    <input placeholder="请输入收货人的联系电话"  placeholder-style="color:#ddd" value="{{mob}}" bindblur="mobFn" />
   </view>
   <view class="info-list">
     <text>所在地区</text>
-    <input placeholder="请输入您所在的省市区" value="{{regionName}}" />
+    <input placeholder="请输入您所在的省市区"  value="{{regionName}}" disabled="true" />
   </view>
   <view class="info-list">
     <text>详细地址</text>
-    <input placeholder="请输入收货人的详细地址" value="{{address}}" bindinput="addressFn" />
+    <input placeholder="请输入收货人的详细地址"  placeholder-style="color:#ddd" value="{{address}}" bindinput="addressFn" />
   </view>
-  <view class="addressDefault">
+  <view class="info-list">
     <text>默认地址</text>
     <switch checked="{{isDefault == 1 ? true : ''}}" class="addrDefault" bindchange="isDefaultFn" />
   </view>

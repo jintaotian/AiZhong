@@ -42,10 +42,12 @@
   color: #fff;
   line-height: 1.5;
   font-size: 18rpx;
+  font-weight: 700;
 }
 
 .coupons .quota {
   font-size: 40rpx;
+  font-weight: 700;
 }
 
 .coupons .requirement {
@@ -61,12 +63,12 @@
 
 .active-tit {
   display: block;
-  padding-left: 74rpx;
+  padding-left: 80rpx;
   line-height: 100rpx;
   font-size: 28rpx;
   color: #000;
-  background: url(../../images/active_icon_03.png) no-repeat 30rpx center;
-  background-size: 34rpx 34rpx;
+  background: url(../../active_icon_03.png) no-repeat 30rp;
+  background-size: 40rpx 40rpx;
 }
 
 .active-list {
@@ -124,14 +126,14 @@
 
 .operation-group {
   border-top: 1rpx solid #ddd;
-  padding: 20rpx 30rpx 0;
+  padding: 30rpx 30rpx 0;
   overflow: hidden;
   text-align: right;
 }
 
 .join-shoppingcar-btn, .purchase-btn {
   display: inline-block;
-  font-size: 24rpx;
+  font-size: 26rpx;
   color: #fff;
   background-color: #390;
 }

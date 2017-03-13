@@ -111,9 +111,13 @@
   border-top: 1rpx solid #d2d2d2;
   color: #353535;
 }
-.tatail-price text {
-  font-size: 32rpx;
+.tatail-price text{
+  color: #e4383b; 
+}
+.tatail-price text.num {
+  font-size: 42rpx;
   color: #e4383b;
+  font-weight: 700;
 }
 
 .payment-btn{
@@ -123,7 +127,7 @@
     font-size: 36rpx;
 }
 .addr-opt{
-  line-height:60rpx;
+  line-height:80rpx;
 }
 .addr-opt text {
     display: block;
@@ -132,6 +136,6 @@
 }
 .addr-color{
   background:url('../../images/addr-color.png') repeat-X;
-  height:19rpx;
+  height:20rpx;
   margin-bottom:10rpx;
 }
