@@ -124,6 +124,9 @@ Page({
           }
         })
         // 微信支付接口
+      },
+      complete:function(){
+        wx.removeStorageSync('shoppingcarData')
       }
     })
   },

@@ -7,18 +7,19 @@ Page({
   onShow: function () {
     // 页面显示 
     var that = this;
-    wx.getStorage({
-      key: 'shoppingcarData',
-      success: function (res) {
-        if (res.data.length > 0) {
-          that.setData({
-            shoppingListData: res.data,
-            isOrder: ""
-          })
-          that.sumcalcFn();
-        }
-      }
-    })
+    var shoppingcarData = wx.getStorageSync('shoppingcarData')
+    if (shoppingcarData) {
+      console.log(shoppingcarData)
+      that.setData({
+        shoppingListData: shoppingcarData,
+        isOrder: ""
+      })
+    }else{
+      that.setData({
+        shoppingListData: [],
+        isOrder: "true"
+      })
+    }
   },
   settlementFn: function () {
     var that = this;
