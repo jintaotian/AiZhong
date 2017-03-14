@@ -16,36 +16,7 @@ Page({
     that.setData({
       orderData: orderData,
     })
-     //当地址为默认值时
-    wx.getStorage({
-      key:'userData',
-      success:function(res){
-           wx.request({
-             url:gConfig.http+'xcx/address/list',
-             data:{
-                clientId:res.data.clientId
-             },
-             header: {
-                'content-type': 'application/json'
-              },
-              success:function(res){
-                console.log(res)
-                that.setData({
-                  firstData:res.data.data.list
-                })
-                var firstData=that.data.firstData
-                    that.setData({
-                       value: firstData[0].regionName + firstData[0].address,
-                       mobile: firstData[0].mob,
-                       name: firstData[0].consignee,
-                       id: firstData[0].id,
-                       isDefault:firstData[0].isDefault
-                   })
-              }
-           })
-      },
-    })
-       //当地址自己选择时
+    //当地址自己选择时
     wx.getStorage({
       key: 'addressData',
       success: function (res) {
@@ -102,7 +73,7 @@ Page({
           "orderSource": 3,
           "payMode": 1,
           "seller": userData.companyId,
-          "region":userData.region
+          "region": userData.region
         }
       },
       header: {
@@ -124,6 +95,9 @@ Page({
           }
         })
         // 微信支付接口
+      },
+      complete: function () {
+        wx.removeStorageSync('shoppingcarData')
       }
     })
   },
@@ -153,7 +127,7 @@ Page({
         that.setData({
           totalPrice: res.data.data.total,
           coupon: res.data.data.discount,
-          couponId:res.data.data.couponId
+          couponId: res.data.data.couponId
         })
       }
     })

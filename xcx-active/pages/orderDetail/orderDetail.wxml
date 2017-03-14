@@ -45,6 +45,6 @@
     <text class="type">微信支付</text>
   </view>
 
-  <button class="payment-btn">立即支付</button>
+  <button class="payment-btn" bindtap="placeOrderFn">立即支付</button>
   <button class="cancle-btn" bindtap="cancleOrderFn">取消订单</button>
 </view>
