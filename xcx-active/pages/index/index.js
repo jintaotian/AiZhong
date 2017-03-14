@@ -84,7 +84,7 @@ Page({
     var that = this;
     var goodslist = that.data.actData;
     var cartid = event.currentTarget.dataset.cartid;
-    var storageData = [];
+    var shoppingcarData = [];
     for (var i = 0; i < goodslist.length; i++) {
       if (goodslist[i].itemId == cartid) {
         goodslist[i].shopcar = true
@@ -97,7 +97,7 @@ Page({
     /*循环数据查找商品是否加入购物车*/
     for (var i = 0; i < goodslist.length; i++) {
       if (goodslist[i].shopcar == true) {
-        storageData.push({
+        shoppingcarData.push({
           id: goodslist[i].id,
           itemId: goodslist[i].itemId,
           companyId: goodslist[i].companyId,
@@ -115,8 +115,8 @@ Page({
 
     /*--将加入购物车数据存入缓存到后台数据库==ps:要将用户openId一起存入本地，用于辨别同一手机的不同购物车列表--*/
     wx.setStorage({
-      key: "storageData",
-      data: storageData
+      key: "shoppingcarData",
+      data: shoppingcarData
     })
 
     /*--加入购物车成功提示--*/

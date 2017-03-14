@@ -8,7 +8,7 @@ Page({
     // 页面显示 
     var that = this;
     wx.getStorage({
-      key: 'storageData',
+      key: 'shoppingcarData',
       success: function (res) {
         if (res.data.length > 0) {
           that.setData({
@@ -22,7 +22,7 @@ Page({
   },
   settlementFn: function () {
     var that = this;
-    var orderData = wx.getStorageSync('storageData')
+    var orderData = wx.getStorageSync('shoppingcarData')
     wx.setStorage({
       key: "orderData",
       data: orderData
@@ -52,7 +52,7 @@ Page({
       shoppingListData: goodslist,
     })
     wx.setStorage({
-      key: "storageData",
+      key: "shoppingcarData",
       data: goodslist
     })
     /*--求和--*/
@@ -75,7 +75,7 @@ Page({
       shoppingListData: goodslist,
     })
     wx.setStorage({
-      key: "storageData",
+      key: "shoppingcarData",
       data: goodslist
     })
     /*--求和--*/
@@ -112,7 +112,7 @@ Page({
               goodslist.splice(goodslist[i].index, 1);/*从当前列表删除*/
               /*--重新渲染--*/
               wx.setStorage({
-                key: "storageData",
+                key: "shoppingcarData",
                 data: goodslist
               })
               if (goodslist.length > 0) {
