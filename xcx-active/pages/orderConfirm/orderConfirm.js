@@ -63,16 +63,17 @@ Page({
           "buyer": userData.clientId,
           "itemCartsList": [
             {
-              "companyId": that.data.orderData[0].companyId,
-              "couponId": "001abc97de1352790c5aa9ff2d3e6c66",
+              "companyId": userData.companyId,
+              "couponId": that.data.couponId,
               "itemList": itemListData,
-              "key": "N" + that.data.orderData[0].companyId
+              "key": "N" + userData.companyId
             }
           ],
           "logisticsId": 0,
           "orderSource": 3,
           "payMode": 1,
-          "seller": that.data.orderData[0].companyId
+          "seller": userData.companyId,
+          "region":userData.region
         }
       },
       header: {
@@ -82,17 +83,17 @@ Page({
 
         console.log(res)
         // 微信支付接口
-        // wx.requestPayment({
-        //   'timeStamp': '',
-        //   'nonceStr': '',
-        //   'package': res.data.data.prepayId,
-        //   'signType': 'MD5',
-        //   'paySign': '',
-        //   'success': function (res) {
-        //   },
-        //   'fail': function (res) {
-        //   }
-        // })
+        wx.requestPayment({
+          'timeStamp': res.data.data.timeStamp,
+          'nonceStr': res.data.data.nonceStr,
+          'package': res.data.data.package,
+          'signType': 'MD5',
+          'paySign': res.data.data.paySign,
+          'success': function (res) {
+          },
+          'fail': function (res) {
+          }
+        })
         // 微信支付接口
       }
     })
@@ -123,6 +124,7 @@ Page({
         that.setData({
           totalPrice: res.data.data.total,
           coupon: res.data.data.discount,
+          couponId:res.data.data.couponId
         })
       }
     })
