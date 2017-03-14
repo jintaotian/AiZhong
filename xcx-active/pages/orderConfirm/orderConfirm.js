@@ -20,7 +20,6 @@ Page({
                 'content-type': 'application/json'
               },
               success:function(res){
-                console.log(res)
                 that.setData({
                   firstData:res.data.data.list
                 })
