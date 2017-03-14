@@ -73,7 +73,6 @@ Page({
     var that = this;
     var addrData = that.data.addrData;
     var index = parseInt(event.currentTarget.dataset.index);
-    console.log(index);
     var consignee,mob,region,address,isDefault,id,regionName;
     for (var i = 0; i < addrData.length; i++) {
           if(index==i){
@@ -84,11 +83,15 @@ Page({
           isDefault = addrData[i].isDefault,
           id = addrData[i].id,
           regionName=addrData[i].regionName
-     }
-    }
+            that.setData({
+              isDefault:1
+            })
+     }else{
        that.setData({
-         isDefault:1
-       })
+              isDefault:0
+            })
+     }
+    }       
          if(that.data.management){
 
          }else{
@@ -105,7 +108,7 @@ Page({
               },
        success:function(res){
              wx.navigateBack({
-                dleta:1
+                delta:1
               })
          }
        })

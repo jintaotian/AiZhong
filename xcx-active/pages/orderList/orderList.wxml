@@ -6,14 +6,14 @@
 
   <!--未支付-->
   <view class="order-paid" hidden="{{!ispaid}}">
-    <view class="order-list" wx:for="{{listData}}" wx:key="i" bindtap="listDataFn">
+    <view class="order-list" wx:for="{{listData}}" wx:key="i">
       <view class="order-head">
         <text class="order-status">未支付</text>
         <view class="order-price">共件 合计：
             <text class="totail-price">￥{{item.amount}}</text>
         </view>
       </view>
-      <view class="order-con" wx:for="{{item.items}}" wx:key="i" wx:for-item="list">
+      <view class="order-con" wx:for="{{item.items}}" wx:key="i" wx:for-item="list" bindtap="listDataFn">
         <image src="{{list.img}}"></image>
         <view class="order-info">
          <text class="order-tit ellipsis"></text>

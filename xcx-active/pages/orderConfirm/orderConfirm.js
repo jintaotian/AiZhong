@@ -7,6 +7,37 @@ Page({
     that.setData({
       value: '请选择收货地址'
     })
+       var userData = wx.getStorageSync('userData');
+       that.setData({
+         userData:userData
+       })
+       var userData=that.data.userData;
+       wx.request({
+         url:gConfig.http+'xcx/address/list',
+         data:{
+           clientId:userData.clientId
+         },
+         header: {
+            'content-type': 'application/json'
+          },
+          success:function(res){
+            that.setData({
+               addrList:res.data.data.list
+            })
+            var addrList=that.data.addrList;
+            for(var i=0;i<addrList.length;i++){
+              if(addrList[i].isDefault==1){
+                  var string=addrList[i]
+              }
+            }
+            that.setData({
+                  value: string.regionName + string.address,
+                  mobile: string.mob,
+                  name: string.consignee,
+                  id:string.id
+            })
+          }
+       })
   },
   onShow: function () {
     // 页面显示
@@ -16,18 +47,18 @@ Page({
     that.setData({
       orderData: orderData,
     })
-    //当地址自己选择时
-    wx.getStorage({
-      key: 'addressData',
-      success: function (res) {
-        that.setData({
-          value: res.data.regionName + res.data.address,
-          mobile: res.data.mob,
-          name: res.data.consignee,
-          id: res.data.id
+      //当地址自己选择时
+        wx.getStorage({
+          key: 'addressData',
+          success: function (res) {
+            that.setData({
+              value: res.data.regionName + res.data.address,
+              mobile: res.data.mob,
+              name: res.data.consignee,
+              id: res.data.id
+            })
+          }
         })
-      }
-    })
     // 从后台获取商品相关数据
     that.getOrderInfoFn(userData.region, orderData)
   },
