@@ -1,9 +1,7 @@
 // pages/orderConfirm/orderConfirm.js
 var gConfig = getApp();
 Page({
-  data: {
-    adr: true
-  },
+  data: {},
   onLoad: function () {
     var that = this;
     that.setData({
@@ -42,20 +40,10 @@ Page({
   onShow: function () {
     // 页面显示
     var that = this;
-    var totalPrice = 0;
     var orderData = wx.getStorageSync('orderData');
     var userData = wx.getStorageSync('userData');
-    // 合计金额
-    for (var i = 0; i < orderData.length; i++) {
-      var price = parseInt(orderData[i].moq) * parseInt(orderData[i].retailPrice);
-      totalPrice += price;
-    }
-    // 重新渲染页面
     that.setData({
       orderData: orderData,
-      totalPrice: totalPrice,
-      coupon: 0,
-      freight: 0
     })
        //当地址自己选择时
     wx.getStorage({
@@ -70,7 +58,7 @@ Page({
       }
     })
     // 从后台获取商品相关数据
-    that.getOrderInfoFn(userData.region,orderData)
+    that.getOrderInfoFn(userData.region, orderData)
   },
   onHide: function () {
     // 页面隐藏
@@ -104,16 +92,17 @@ Page({
           "buyer": userData.clientId,
           "itemCartsList": [
             {
-              "companyId": that.data.orderData[0].companyId,
-              "couponId": "001abc97de1352790c5aa9ff2d3e6c66",
+              "companyId": userData.companyId,
+              "couponId": that.data.couponId,
               "itemList": itemListData,
-              "key": "N" + that.data.orderData[0].companyId
+              "key": "N" + userData.companyId
             }
           ],
           "logisticsId": 0,
           "orderSource": 3,
           "payMode": 1,
-          "seller": that.data.orderData[0].companyId
+          "seller": userData.companyId,
+          "region":userData.region
         }
       },
       header: {
@@ -123,40 +112,49 @@ Page({
 
         console.log(res)
         // 微信支付接口
-        // wx.requestPayment({
-        //   'timeStamp': '',
-        //   'nonceStr': '',
-        //   'package': res.data.data.prepayId,
-        //   'signType': 'MD5',
-        //   'paySign': '',
-        //   'success': function (res) {
-        //   },
-        //   'fail': function (res) {
-        //   }
-        // })
+        wx.requestPayment({
+          'timeStamp': res.data.data.timeStamp,
+          'nonceStr': res.data.data.nonceStr,
+          'package': res.data.data.package,
+          'signType': 'MD5',
+          'paySign': res.data.data.paySign,
+          'success': function (res) {
+          },
+          'fail': function (res) {
+          }
+        })
         // 微信支付接口
       }
     })
   },
-  getOrderInfoFn: function (region,itemList) {
+  getOrderInfoFn: function (region, itemList) {
     var that = this;
     var itemListData = [];
-    for(var i = 0; i < itemList.length;i++){
+    for (var i = 0; i < itemList.length; i++) {
       itemListData.push({
-        qty:itemList[i].moq,
-        skuId:itemList[i].id
+        qty: itemList[i].moq,
+        skuId: itemList[i].id
       })
     }
     wx.request({
       url: gConfig.http + 'xcx/order/itemsAmount', //仅为示例，并非真实的接口地址
       data: {
-        region: region,
-        itemList: itemListData
+        data: {
+          region: region,
+          itemList: itemListData
+        }
       },
       header: {
         'content-type': 'application/json'
       },
       success: function (res) {
+        console.log(res)
+        // 重新渲染页面
+        that.setData({
+          totalPrice: res.data.data.total,
+          coupon: res.data.data.discount,
+          couponId:res.data.data.couponId
+        })
       }
     })
   }
