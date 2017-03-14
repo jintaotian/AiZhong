@@ -9,6 +9,35 @@ Page({
     that.setData({
       value: '请选择收货地址'
     })
+    //当地址为默认值时
+    wx.getStorage({
+      key:'userData',
+      success:function(res){
+           wx.request({
+             url:gConfig.http+'xcx/address/list',
+             data:{
+                clientId:res.data.clientId
+             },
+             header: {
+                'content-type': 'application/json'
+              },
+              success:function(res){
+                console.log(res)
+                that.setData({
+                  firstData:res.data.data.list
+                })
+                var firstData=that.data.firstData
+                    that.setData({
+                       value: firstData[0].regionName + firstData[0].address,
+                       mobile: firstData[0].mob,
+                       name: firstData[0].consignee,
+                       id: firstData[0].id,
+                       isDefault:firstData[0].isDefault
+                   })
+              }
+           })
+      },
+    })
   },
   onShow: function () {
     // 页面显示
@@ -28,7 +57,7 @@ Page({
       coupon: 0,
       freight: 0
     })
-    //获取收货地址
+       //当地址自己选择时
     wx.getStorage({
       key: 'addressData',
       success: function (res) {
@@ -128,7 +157,6 @@ Page({
         'content-type': 'application/json'
       },
       success: function (res) {
-        console.log(res)
       }
     })
   }

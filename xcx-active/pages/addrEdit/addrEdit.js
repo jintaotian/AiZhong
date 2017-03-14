@@ -97,6 +97,7 @@ Page({
   addAddrFn: function () {
     // 新增地址
     var that = this;
+    console.log(that.data.isDefault)
     var userData = wx.getStorageSync('userData');
     if (that.data.consignee && that.data.mob && that.data.address) {
       wx.request({
