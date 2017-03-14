@@ -1,9 +1,7 @@
 // pages/orderConfirm/orderConfirm.js
 var gConfig = getApp();
 Page({
-  data: {
-    adr: true
-  },
+  data: {},
   onLoad: function () {
     var that = this;
     that.setData({
@@ -13,20 +11,10 @@ Page({
   onShow: function () {
     // 页面显示
     var that = this;
-    var totalPrice = 0;
     var orderData = wx.getStorageSync('orderData');
     var userData = wx.getStorageSync('userData');
-    // 合计金额
-    for (var i = 0; i < orderData.length; i++) {
-      var price = parseInt(orderData[i].moq) * parseInt(orderData[i].retailPrice);
-      totalPrice += price;
-    }
-    // 重新渲染页面
     that.setData({
       orderData: orderData,
-      totalPrice: totalPrice,
-      coupon: 0,
-      freight: 0
     })
     //获取收货地址
     wx.getStorage({
@@ -41,7 +29,7 @@ Page({
       }
     })
     // 从后台获取商品相关数据
-    that.getOrderInfoFn(userData.region,orderData)
+    that.getOrderInfoFn(userData.region, orderData)
   },
   onHide: function () {
     // 页面隐藏
@@ -109,26 +97,33 @@ Page({
       }
     })
   },
-  getOrderInfoFn: function (region,itemList) {
+  getOrderInfoFn: function (region, itemList) {
     var that = this;
     var itemListData = [];
-    for(var i = 0; i < itemList.length;i++){
+    for (var i = 0; i < itemList.length; i++) {
       itemListData.push({
-        qty:itemList[i].moq,
-        skuId:itemList[i].id
+        qty: itemList[i].moq,
+        skuId: itemList[i].id
       })
     }
     wx.request({
       url: gConfig.http + 'xcx/order/itemsAmount', //仅为示例，并非真实的接口地址
       data: {
-        region: region,
-        itemList: itemListData
+        data: {
+          region: region,
+          itemList: itemListData
+        }
       },
       header: {
         'content-type': 'application/json'
       },
       success: function (res) {
         console.log(res)
+        // 重新渲染页面
+        that.setData({
+          totalPrice: res.data.data.total,
+          coupon: res.data.data.discount,
+        })
       }
     })
   }

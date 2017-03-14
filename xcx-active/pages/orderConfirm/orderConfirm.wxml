@@ -1,9 +1,7 @@
 <view class="container">
-  <view class="addr-opt" bindtap="addrOptFn" hidden="{{!adr}}">
-  <text>{{name}} {{mobile}}</text>                              
-  <text>{{value}}</text> 
-  </view>
-  <view class="addr-opt" bindtap="addrOptFn" hidden="{{adr}}">
+  <view class="addr-opt" bindtap="addrOptFn">
+    <text>{{name}} {{mobile}}</text>
+    <text>{{value}}</text>
   </view>
   <view class="addr-color"></view>
 
@@ -20,16 +18,14 @@
       </view>
     </view>
   </view>
-
   <view class="coupon" bindtap="couponsOptFn">
-      <text>优惠券</text>
-      <text class="coupon-used">已使用{{coupon}}元优惠券</text>
+    <text>优惠券</text>
+    <text class="coupon-used">已使用{{coupon}}元优惠券</text>
   </view>
-  
   <view class="order-settlement">
     <view class="price-wrap">
       <text>订单金额</text>
-      <text class="settlement-price">{{totalPrice}}</text>
+      <text class="settlement-price">{{totalPrice + coupon}}</text>
     </view>
     <view class="price-wrap">
       <text>优惠券</text>
@@ -37,13 +33,13 @@
     </view>
     <view class="price-wrap">
       <text>运费</text>
-      <text class="settlement-freight">+￥{{freight}}</text>
+      <text class="settlement-freight">+￥{{0}}</text>
     </view>
     <view class="tatail-price">
-        共1件 合计：
-        <text>￥</text> 
-        <text class="num">{{totalPrice - coupon + freight}}</text>
+      共1件 合计：
+      <text>￥</text>
+      <text class="num">{{totalPrice}}</text>
     </view>
   </view>
-  <button class="payment-btn" bindtap="placeOrderFn">微信支付</button>
+  <button class="payment-btn" bindtap="placeOrderFn" disabled="{{adr}}">微信支付</button>
 </view>

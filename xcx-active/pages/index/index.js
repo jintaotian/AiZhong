@@ -151,10 +151,8 @@ Page({
             "companyId": res.data.data.companyId
           }
         })
-
         that.getGoodsListFn(region);
         that.getCouponsFn(region, companyId)
-
       },
     })
   },
