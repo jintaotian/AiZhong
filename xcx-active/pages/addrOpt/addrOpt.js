@@ -86,6 +86,9 @@ Page({
           regionName=addrData[i].regionName
      }
     }
+       that.setData({
+         isDefault:1
+       })
          if(that.data.management){
 
          }else{
@@ -96,7 +99,7 @@ Page({
                   'mob':mob,
                   'region':region,
                   'address':address,
-                  'isDefault':1,
+                  'isDefault':isDefault,
                   'id':id,
                   'regionName':regionName
               },

@@ -17,6 +17,10 @@ Page({
         isDefault:options.isDefault
       })
     }
+    var that=this;
+    that.setData({
+      isDefault:0,
+    })
   },
   onShow: function () {
     // 页面显示

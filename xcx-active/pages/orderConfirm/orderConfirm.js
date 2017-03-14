@@ -7,7 +7,16 @@ Page({
     that.setData({
       value: '请选择收货地址'
     })
-    //当地址为默认值时
+  },
+  onShow: function () {
+    // 页面显示
+    var that = this;
+    var orderData = wx.getStorageSync('orderData');
+    var userData = wx.getStorageSync('userData');
+    that.setData({
+      orderData: orderData,
+    })
+     //当地址为默认值时
     wx.getStorage({
       key:'userData',
       success:function(res){
@@ -35,15 +44,6 @@ Page({
               }
            })
       },
-    })
-  },
-  onShow: function () {
-    // 页面显示
-    var that = this;
-    var orderData = wx.getStorageSync('orderData');
-    var userData = wx.getStorageSync('userData');
-    that.setData({
-      orderData: orderData,
     })
        //当地址自己选择时
     wx.getStorage({
