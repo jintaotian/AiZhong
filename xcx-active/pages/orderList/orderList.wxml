@@ -27,7 +27,7 @@
       </view>
       <view class="order-work">
         <button class="order-cancle" bindtap="overFn" data-index="{{index}}">取消订单</button>
-        <button class="order-payment">立即支付</button>
+        <button class="order-payment" bindtap="placeOrderFn">立即支付</button>
       </view>
     </view>
   </view>

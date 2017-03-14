@@ -101,8 +101,6 @@ Page({
         })
       }
     }
-
-
   },
   switchUnPaidFn: function () {
     var that = this;
@@ -139,6 +137,59 @@ Page({
   unListDataFn: function () {
     wx.navigateTo({
       url: '../orderDetail/orderDetail'
+    })
+  },
+  placeOrderFn: function () {
+    // 下单方法
+    var that = this;
+    var orderInfoData = that.data.orderData;
+    var userData = wx.getStorageSync('userData');
+    var itemListData = [];
+    for (var i = 0; i < orderInfoData.length; i++) {
+      itemListData.push({
+        "id": orderInfoData[i].id,
+        "qty": orderInfoData[i].moq
+      })
+    }
+    wx.request({
+      url: gConfig.http + 'xcx/order/save',
+      data: {
+        data: {
+          "appId": "wxaf16046e5515de4c",
+          "clientAddrId": 513,
+          "buyer": userData.clientId,
+          "itemCartsList": [
+            {
+              "companyId": userData.companyId,
+              "couponId": that.data.couponId,
+              "itemList": itemListData,
+              "key": "N" + userData.companyId
+            }
+          ],
+          "logisticsId": 0,
+          "orderSource": 3,
+          "payMode": 1,
+          "seller": userData.companyId,
+          "region": userData.region
+        }
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      success: function (res) {
+        // 微信支付接口
+        wx.requestPayment({
+          'timeStamp': res.data.data.timeStamp,
+          'nonceStr': res.data.data.nonceStr,
+          'package': res.data.data.package,
+          'signType': 'MD5',
+          'paySign': res.data.data.paySign
+        })
+        // 微信支付接口
+      },
+      complete: function () {
+        wx.removeStorageSync('shoppingcarData')
+      }
     })
   }
 })

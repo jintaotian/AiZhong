@@ -1,43 +1,8 @@
 // pages/orderConfirm/orderConfirm.js
 var gConfig = getApp();
 Page({
-  data: {},
+  data: {value: '请选择收货地址'},
   onLoad: function () {
-    var that = this;
-    that.setData({
-      value: '请选择收货地址'
-    })
-       var userData = wx.getStorageSync('userData');
-       that.setData({
-         userData:userData
-       })
-       var userData=that.data.userData;
-       wx.request({
-         url:gConfig.http+'xcx/address/list',
-         data:{
-           clientId:userData.clientId
-         },
-         header: {
-            'content-type': 'application/json'
-          },
-          success:function(res){
-            that.setData({
-               addrList:res.data.data.list
-            })
-            var addrList=that.data.addrList;
-            for(var i=0;i<addrList.length;i++){
-              if(addrList[i].isDefault==1){
-                  var string=addrList[i]
-              }
-            }
-            that.setData({
-                  value: string.regionName + string.address,
-                  mobile: string.mob,
-                  name: string.consignee,
-                  id:string.id
-            })
-          }
-       })
   },
   onShow: function () {
     // 页面显示
@@ -47,26 +12,21 @@ Page({
     that.setData({
       orderData: orderData,
     })
+    var addressData = wx.getStorageSync('addressData');
+    if (addressData) {
       //当地址自己选择时
-        wx.getStorage({
-          key: 'addressData',
-          success: function (res) {
-            that.setData({
-              value: res.data.regionName + res.data.address,
-              mobile: res.data.mob,
-              name: res.data.consignee,
-              id: res.data.id
-            })
-          }
-        })
+      that.setData({
+        value: addressData.regionName + addressData.address,
+        mobile: addressData.mob,
+        name: addressData.consignee,
+        id: addressData.id
+      })
+    } else {
+      //获取默认地址
+      that.setDefaultAddrFn();
+    }
     // 从后台获取商品相关数据
     that.getOrderInfoFn(userData.region, orderData)
-  },
-  onHide: function () {
-    // 页面隐藏
-  },
-  onUnload: function () {
-    // 页面关闭
   },
   addrOptFn: function () {
     wx.navigateTo({
@@ -90,7 +50,7 @@ Page({
       data: {
         data: {
           "appId": "wxaf16046e5515de4c",
-          "clientAddrId": 513,
+          "clientAddrId": that.data.id,
           "buyer": userData.clientId,
           "itemCartsList": [
             {
@@ -111,24 +71,19 @@ Page({
         'content-type': 'application/json'
       },
       success: function (res) {
-
-        console.log(res)
         // 微信支付接口
         wx.requestPayment({
           'timeStamp': res.data.data.timeStamp,
           'nonceStr': res.data.data.nonceStr,
           'package': res.data.data.package,
           'signType': 'MD5',
-          'paySign': res.data.data.paySign,
-          'success': function (res) {
-          },
-          'fail': function (res) {
-          }
+          'paySign': res.data.data.paySign
         })
         // 微信支付接口
       },
       complete: function () {
-        wx.removeStorageSync('shoppingcarData')
+        wx.removeStorageSync('shoppingcarData');
+        wx.removeStorageSync('addressData')
       }
     })
   },
@@ -142,7 +97,7 @@ Page({
       })
     }
     wx.request({
-      url: gConfig.http + 'xcx/order/itemsAmount', //仅为示例，并非真实的接口地址
+      url: gConfig.http + 'xcx/order/itemsAmount',
       data: {
         data: {
           region: region,
@@ -160,6 +115,32 @@ Page({
           coupon: res.data.data.discount,
           couponId: res.data.data.couponId
         })
+      }
+    })
+  },
+  setDefaultAddrFn: function () {
+    var that = this;
+    var userData = wx.getStorageSync('userData');
+    wx.request({
+      url: gConfig.http + 'xcx/address/list',
+      data: {
+        clientId: userData.clientId
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      success: function (res) {
+        var addrList = res.data.data.list;
+        for (var i = 0; i < addrList.length; i++) {
+          if (addrList[i].isDefault == 1) {
+            that.setData({
+              value: addrList[i].regionName + addrList[i].address,
+              mobile: addrList[i].mob,
+              name: addrList[i].consignee,
+              id: addrList[i].id
+            })
+          }
+        }
       }
     })
   }
