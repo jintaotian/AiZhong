@@ -1,26 +1,17 @@
 // pages/orderDetail/orderDetail.js
 var gConfig = getApp();
 Page({
-  data: {},
+  data: {ispaid:true},
   onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数
-    //获取姓名，地址，电话,图片路径，服务商名称等信息
     var that = this;
-    wx.request({
-      url: gConfig.http + 'xcx/order/detail',
-      data: {
-        orderId: ''
-      },
-      header: {
-        'content-type': 'application/json'
-      },
-      success: function (res) {
-        that.setData({
-          addrData: res.data.data,
-        })
-      }
-
-    })
+    if(options.ispaid == true || options.ispaid == 'true'){
+      that.getOrderInfoFn(options.orderId);
+      that.setData({ispaid:''})
+    }else{
+       that.getOrderInfoFn(options.orderId);
+       that.setData({ispaid:true})
+    }
   },
   onReady: function () {
     // 页面渲染完成
@@ -34,69 +25,83 @@ Page({
   onUnload: function () {
     // 页面关闭
   },
-  cancleOrderFn: function () {
-    wx.switchTab({
-      url: '../index/index'
-    })
-  },
-  placeOrderFn: function () {
-    // 下单方法
+  getOrderInfoFn: function (orderId) {
     var that = this;
-    var orderInfoData = that.data.orderData;
-    var userData = wx.getStorageSync('userData');
-    var itemListData = [];
-    for (var i = 0; i < orderInfoData.length; i++) {
-      itemListData.push({
-        "id": orderInfoData[i].id,
-        "qty": orderInfoData[i].moq
-      })
-    }
     wx.request({
-      url: gConfig.http + 'xcx/order/save',
+      url: gConfig.http + 'xcx/order/detail',
       data: {
-        data: {
-          "appId": "wxaf16046e5515de4c",
-          "clientAddrId": 513,
-          "buyer": userData.clientId,
-          "itemCartsList": [
-            {
-              "companyId": userData.companyId,
-              "couponId": that.data.couponId,
-              "itemList": itemListData,
-              "key": "N" + userData.companyId
-            }
-          ],
-          "logisticsId": 0,
-          "orderSource": 3,
-          "payMode": 1,
-          "seller": userData.companyId,
-          "region": userData.region
-        }
+        orderId: orderId
       },
       header: {
         'content-type': 'application/json'
       },
       success: function (res) {
-
         console.log(res)
+        that.setData({
+          orderDeatilData: res.data.data,
+        })
+      }
+
+    })
+  },
+  //取消订单
+  cancleFn: function (event) {
+    var orderId = event.currentTarget.dataset.orderid;
+    wx.showModal({
+      title: '取消提示',
+      content: '您确定要取消该订单吗？',
+      success: function (res) {
+        if (res.confirm) {
+          /*--重新渲染--*/
+          wx.request({
+            url: gConfig.http + 'xcx/order/del',
+            data: { id: orderId },
+            header: {
+              'content-type': 'application/json'
+            },
+            success: function (res) {
+              wx.showToast({
+                title: '取消成功',
+                icon: 'success',
+                duration: 500
+              })
+              setTimeout(function () {
+                wx.switchTab({
+                  url: '../index/index'
+                })
+              }, 1000)
+            }
+          })
+
+        }
+      }
+    })
+  },
+  placeOrderFn: function (event) {
+    // 下单方法
+    var that = this;
+    var orderId = event.currentTarget.dataset.orderid;
+    var userData = wx.getStorageSync('userData');
+    wx.request({
+      url: gConfig.http + 'xcx/wx/prepardId',
+      data: {
+        orderId: orderId
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      success: function (res) {
         // 微信支付接口
         wx.requestPayment({
           'timeStamp': res.data.data.timeStamp,
           'nonceStr': res.data.data.nonceStr,
           'package': res.data.data.package,
           'signType': 'MD5',
-          'paySign': res.data.data.paySign,
-          'success': function (res) {
-          },
-          'fail': function (res) {
-          }
+          'paySign': res.data.data.paySign
         })
         // 微信支付接口
-      },
-      complete: function () {
-        wx.removeStorageSync('shoppingcarData')
       }
     })
-  },
+  }
 
 })

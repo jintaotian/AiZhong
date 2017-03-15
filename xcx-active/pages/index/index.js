@@ -121,7 +121,7 @@ Page({
 
     /*--加入购物车成功提示--*/
     wx.showToast({
-      title: '成功加入',
+      title: '已加入购物车',
       icon: 'shoppingcar',
       duration: 500
     })
@@ -141,16 +141,22 @@ Page({
       success: function (res) {
         var region = res.data.data.region;
         var companyId = res.data.data.companyId;
+        var clientId = wx.getStorageSync('clientId')
+        var wxOpenid = wx.getStorageSync('wxOpenid')
         wx.setStorage({
           key: 'userData',
           data: {
-            "wxOpenid": gConfig.wxOpenid,
-            "clientId": gConfig.clientId,
+            "wxOpenid": wxOpenid,
+            "clientId": clientId,
             "region": res.data.data.region,
             "regionName": res.data.data.fullName,
             "companyId": res.data.data.companyId
           }
         })
+        setTimeout(function(){
+          wx.removeStorageSync('wxOpenid');
+          wx.removeStorageSync('clientId');
+        },8000)
         that.getGoodsListFn(region);
         that.getCouponsFn(region, companyId)
       },
@@ -194,7 +200,7 @@ Page({
   },
   useCouponsFn: function (event) {
     wx.showToast({
-      title: '下单后根据金额自动使用',
+      title: '下单自动使用',
       icon: 'success',
       duration: 1000
     })

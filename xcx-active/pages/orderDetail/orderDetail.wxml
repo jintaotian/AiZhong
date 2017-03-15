@@ -1,43 +1,40 @@
 <view class="container">
-  <view class="addr-list" wx:for="{{addrData}}" wx:key="i">
-    <text>{{item.consignee}} {{item.mob}}</text>
-    <text class="detailAddr">{{item.address}}</text>
+  <view class="addr-list">
+    <text>{{orderDeatilData.consignee}} {{orderDeatilData.mob}}</text>
+    <text class="detailAddr">{{orderDeatilData.regionName}}{{orderDeatilData.address}}</text>
   </view>
 
   <!--订单列表-start-->
-  <view class="order-con" wx:for="{{addrData}}" wx:key="i">
-  <view class="include" wx:for="{{item.items}}" wx:key="i" wx:for-item="include">
-  <view class="company" wx:for="{{item.company}}" wx:key="i" wx:for-item="company">
-    <image src="{{include.img}}"></image>
+  <view class="order-con" wx:for="{{orderDeatilData.items}}" wx:key="i">
+    <image src="{{item.img}}"></image>
     <view class="order-info">
-      <text class="order-tit ellipsis">【爱种网】葵花种子【爱种网】葵花种子【爱种网】葵花种子【爱种网】葵花种子</text>
-      <text class="order-pro ellipsis2">由 {{compay.name}} 提供发货和售后</text>
+      <text class="order-tit ellipsis">{{item.name}}</text>
+      <text class="order-pro ellipsis2">由 {{item.name}} 提供发货和售后</text>
       <view class="peice-wrap">
-        <text class="weight">{{include.skuName}}</text>
-        <text class="num">x{{include.qty}}</text>
-        <text class="price">￥{{include.price}}</text>
+        <text class="weight">{{item.norm}}</text>
+        <text class="num">x{{item.qty}}</text>
+        <text class="price">￥{{item.price}}</text>
       </view>
     </view>
-    </view>
-    </view>
   </view>
+
   <!--订单操作-start-->
   <view class="order-settlement">
     <view class="price-wrap">
-      <text>￥商品金额</text>
-      <text class="settlement-price">{{amount}}</text>
+      <text>商品金额</text>
+      <text class="settlement-price">{{orderDeatilData.retailPayAmount + orderDeatilData.couponDiscount}}</text>
     </view>
     <view class="price-wrap">
       <text>优惠券</text>
-      <text class="settlement-coupon">-￥{{couponDiscount}}</text>
+      <text class="settlement-coupon">-￥{{orderDeatilData.couponDiscount}}</text>
     </view>
     <view class="price-wrap">
       <text>运费</text>
-      <text class="settlement-freight">+￥{{feeAmount}}</text>
+      <text class="settlement-freight">+￥0.00</text>
     </view>
     <view class="tatail-price">
       <text>合计</text>
-      <text class="total">￥{{retailPayAmount}}</text>
+      <text class="total">￥{{orderDeatilData.retailPayAmount}}</text>
     </view>
   </view>
   <view class="payment-type">
@@ -45,6 +42,6 @@
     <text class="type">微信支付</text>
   </view>
 
-  <button class="payment-btn" bindtap="placeOrderFn">立即支付</button>
-  <button class="cancle-btn" bindtap="cancleOrderFn">取消订单</button>
+  <button class="payment-btn" hidden="{{ispaid}}" data-orderId="{{orderDeatilData.id}}" bindtap="placeOrderFn">立即支付</button>
+  <button class="cancle-btn" hidden="{{ispaid}}" data-orderId="{{orderDeatilData.id}}" bindtap="cancleFn">取消订单</button>
 </view>

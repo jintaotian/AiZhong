@@ -31,7 +31,6 @@
     background-color: #fff;
     padding: 0 30rpx;
     display: block;
-    border-bottom: 1rpx solid #efeff4;
     line-height: 90rpx;
     font-size: 24rpx;
     overflow: hidden;
@@ -50,6 +49,7 @@
     font-size: 30rpx;
 }
 .order-con {
+  border-top: 1rpx solid #efeff4;
   padding: 25rpx 20rpx;
   background-color: #fff;
   display: flex;
@@ -98,6 +98,10 @@
   color: #e4383b;
   font-size: 30rpx;
   float: right;
+}
+.order-price .conpousTip {
+    color: #e4383b;
+    font-size: 26rpx;
 }
 
 .order-work {

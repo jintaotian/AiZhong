@@ -1,6 +1,7 @@
 //app.js
 App({
   onLaunch: function () {
+    wx.clearStorageSync()
     this.wxLogFn()
   },
   wxLogFn: function () {
@@ -14,8 +15,8 @@ App({
             data: { code: res.code },
             header: { 'content-type': 'application/json' },
             success: function (res) {
-              that.wxOpenid = res.data.data.wxOpenid;
-              that.clientId = res.data.data.clientId;
+              wx.setStorageSync('wxOpenid', res.data.data.wxOpenid);
+              wx.setStorageSync('clientId', res.data.data.clientId)
             }
           })
         } else {
