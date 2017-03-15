@@ -16,7 +16,7 @@
     <input placeholder="请输入收货人的详细地址"  placeholder-style="color:#ddd" value="{{address}}" bindinput="addressFn" />
   </view>
   <view class="info-list">
-    <text>默认地址</text>
+    <text>设为默认地址</text>
     <switch checked="{{isDefault == 1 ? true : ''}}" class="addrDefault" bindchange="isDefaultFn" />
   </view>
   <button class="seve-btn" bindtap="editAddrFn" hidden="{{isAdd}}">保存并使用</button>

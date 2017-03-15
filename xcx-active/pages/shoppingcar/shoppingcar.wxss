@@ -81,3 +81,6 @@
     font-size: 40rpx;
     border-radius: 0;
 }
+button::after {
+    border: none;
+}

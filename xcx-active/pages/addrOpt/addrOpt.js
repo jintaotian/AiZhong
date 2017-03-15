@@ -4,9 +4,9 @@ Page({
   data: {},
   onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数
-    var that=this;
+    var that = this;
     that.setData({
-         management:options.management
+      management: options.management
     })
   },
   onReady: function () {
@@ -24,12 +24,12 @@ Page({
   },
   editorFn: function (event) {
     var that = this;
-    var consignee,mob,region,address,isDefault,id;
+    var consignee, mob, region, address, isDefault, id;
     var addrData = that.data.addrData;
     var regionId = event.currentTarget.dataset.region;
     for (var i = 0; i < addrData.length; i++) {
       if (addrData[i].id == regionId) {
-          consignee = addrData[i].consignee,
+        consignee = addrData[i].consignee,
           mob = addrData[i].mob,
           region = addrData[i].region,
           address = addrData[i].address,
@@ -73,45 +73,45 @@ Page({
     var that = this;
     var addrData = that.data.addrData;
     var index = parseInt(event.currentTarget.dataset.index);
-    var consignee,mob,region,address,isDefault,id,regionName;
+    var consignee, mob, region, address, isDefault, id, regionName;
     for (var i = 0; i < addrData.length; i++) {
-          if(index==i){
-          consignee = addrData[i].consignee,
+      if (index == i) {
+        consignee = addrData[i].consignee,
           mob = addrData[i].mob,
           region = addrData[i].region,
           address = addrData[i].address,
           isDefault = addrData[i].isDefault,
           id = addrData[i].id,
-          regionName=addrData[i].regionName
-            that.setData({
-              isDefault:1
-            })
-     }else{
-       that.setData({
-              isDefault:0
-            })
-     }
-    }       
-         if(that.data.management){
+          regionName = addrData[i].regionName
+        that.setData({
+          isDefault: 1
+        })
+      } else {
+        that.setData({
+          isDefault: 0
+        })
+      }
+    }
+    if (that.data.management) {
 
-         }else{
-              wx.setStorage({
-              key:'addressData',
-              data:{
-                  'consignee':consignee,
-                  'mob':mob,
-                  'region':region,
-                  'address':address,
-                  'isDefault':isDefault,
-                  'id':id,
-                  'regionName':regionName
-              },
-       success:function(res){
-             wx.navigateBack({
-                delta:1
-              })
-         }
-       })
+    } else {
+      wx.setStorage({
+        key: 'addressData',
+        data: {
+          'consignee': consignee,
+          'mob': mob,
+          'region': region,
+          'address': address,
+          'isDefault': isDefault,
+          'id': id,
+          'regionName': regionName
+        },
+        success: function (res) {
+          wx.navigateBack({
+            delta: 1
+          })
+        }
+      })
     }
   }
 })

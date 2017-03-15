@@ -14,11 +14,6 @@ Page({
   },
   myAddrListFn: function (e) {
     var that=this;
-    that.setData({
-      management:true
-    })
-    var management=that.data.management;
-    console.log(management)
     wx.navigateTo({
       url: '../addrOpt/addrOpt?management='+ true
     })
