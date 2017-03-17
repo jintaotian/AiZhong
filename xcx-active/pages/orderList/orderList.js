@@ -1,5 +1,6 @@
 // pages/orderList/orderList.js
 var gConfig = getApp();
+var util = require('../../utils/md5.js');
 Page({
   data: {
     ispaid: true
@@ -23,14 +24,17 @@ Page({
   },
   unPaidListFn: function () {
     var that = this;
-    var userData = wx.getStorageSync('userData')
+    var userData = wx.getStorageSync('userData');
+    var wxData = wx.getStorageSync('wxData');
+    var sign = util.hexMD5('clientId=' + wxData.clientId+'&sdate=1&status=1' + gConfig.key);
     console.log(userData)
     wx.request({
       url: gConfig.http + 'xcx/order/list',
       data: {
-        clientId: userData.clientId,
+        clientId: wxData.clientId,
         sdate: 1,
-        status: 1
+        status: 1,
+        sign:sign
       },
       header: {
         'content-type': 'application/json'
@@ -47,15 +51,16 @@ Page({
   },
   paidListFn: function () {
     var that = this;
-    var userData = wx.getStorageSync('userData')
-    console.log(userData)
-    console.log(userData.clientId)
+    var userData = wx.getStorageSync('userData');
+    var wxData = wx.getStorageSync('wxData');
+    var sign = util.hexMD5('clientId=' + wxData.clientId+'&sdate=1&status=1' + gConfig.key);
     wx.request({
       url: gConfig.http + 'xcx/order/list',
       data: {
-        clientId: userData.clientId,
+        clientId: wxData.clientId,
         sdate: 1,
-        status: 2
+        status: 2,
+        sign:sign
       },
       header: {
         'content-type': 'application/json'
@@ -83,6 +88,7 @@ Page({
     var orderId = event.currentTarget.dataset.orderid;
     var orderList = that.data.listData;
     var index = {};
+    var sign = util.hexMD5('id=' + orderId + gConfig.key);
     for (let i = 0; i < orderList.length; i++) {
       orderList[i].index = i;//闭包
       if (orderList[i].id == orderId) {
@@ -95,7 +101,7 @@ Page({
               /*--重新渲染--*/
               wx.request({
                 url: gConfig.http + 'xcx/order/del',
-                data: { id: orderId },
+                data: { id: orderId,sign:sign },
                 header: {
                   'content-type': 'application/json'
                 },
@@ -115,11 +121,12 @@ Page({
     // 下单方法
     var that = this;
     var orderId = event.currentTarget.dataset.orderid;
-    var userData = wx.getStorageSync('userData');
+    var sign = util.hexMD5('orderId=' + orderId + gConfig.key);
     wx.request({
       url: gConfig.http + 'xcx/wx/prepardId',
       data: {
-        orderId: orderId
+        orderId: orderId,
+        sign:sign
       },
       header: {
         'content-type': 'application/json'

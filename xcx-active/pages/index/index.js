@@ -1,5 +1,6 @@
 // pages/index/index.js
 var gConfig = getApp();
+var util = require('../../utils/md5.js');
 Page({
   data: {},
   onLoad: function (options) {
@@ -129,11 +130,13 @@ Page({
   getRegionFn: function (lati, longi) {
     //获取当前所在区域
     var that = this;
+    var sign = util.hexMD5('x=' + lati + '&y=' + longi + gConfig.key);
     wx.request({
       url: gConfig.http + 'xcx/common/region',
       data: {
         x: lati,
-        y: longi
+        y: longi,
+        sign: sign
       },
       header: {
         'content-type': 'application/json'
@@ -141,22 +144,11 @@ Page({
       success: function (res) {
         var region = res.data.data.region;
         var companyId = res.data.data.companyId;
-        var clientId = wx.getStorageSync('clientId')
-        var wxOpenid = wx.getStorageSync('wxOpenid')
-        wx.setStorage({
-          key: 'userData',
-          data: {
-            "wxOpenid": wxOpenid,
-            "clientId": clientId,
-            "region": res.data.data.region,
-            "regionName": res.data.data.fullName,
-            "companyId": res.data.data.companyId
-          }
-        })
-        setTimeout(function(){
-          wx.removeStorageSync('wxOpenid');
-          wx.removeStorageSync('clientId');
-        },8000)
+        wx.setStorageSync('userData', {
+          "region": res.data.data.region,
+          "regionName": res.data.data.fullName,
+          "companyId": res.data.data.companyId
+        });
         that.getGoodsListFn(region);
         that.getCouponsFn(region, companyId)
       },
@@ -165,10 +157,12 @@ Page({
   getGoodsListFn: function (region) {
     //商品信息请求
     var that = this;
+    var sign = util.hexMD5('region=' + region + gConfig.key);
     wx.request({
       url: gConfig.http + 'xcx/item/promotionitems',
       data: {
-        region: region
+        region: region,
+        sign: sign
       },
       header: {
         'content-type': 'application/json'
@@ -182,11 +176,13 @@ Page({
   },
   getCouponsFn: function (region, companyId) {
     var that = this;
+    var sign = util.hexMD5('region=' + region + '&companyId=' + companyId + gConfig.key);
     wx.request({
       url: gConfig.http + 'xcx/coupon/list',
       data: {
         region: region,
-        companyId: companyId
+        companyId: companyId,
+        sign: sign
       },
       header: {
         'content-type': 'application/json'
@@ -213,9 +209,7 @@ Page({
         that.setData({
           isPosition: ''
         })
-        var latitude = res.latitude
-        var longitude = res.longitude
-        that.getRegionFn(latitude, longitude)
+        that.getRegionFn(res.latitude, res.longitude)
       },
       fail: function () {
         that.setData({

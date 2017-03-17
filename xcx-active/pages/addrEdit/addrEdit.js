@@ -1,5 +1,6 @@
 // pages/addrEdit/addrEdit.js
 var gConfig = getApp();
+var util = require('../../utils/md5.js');
 Page({
   data: {
     isAdd: true,
@@ -67,12 +68,13 @@ Page({
   editAddrFn: function () {
     // 修改地址
     var that = this;
-    var userData = wx.getStorageSync('userData')
+    var userData = wx.getStorageSync('userData');
+    var wxData = wx.getStorageSync('wxData')
     wx.request({
       url: gConfig.http + 'xcx/address/update',
       data: {
-        wxOpenid: userData.wxOpenid,
-        clientId: userData.clientId,
+        wxOpenid: wxData.wxOpenid,
+        clientId: wxData.clientId,
         id: that.data.id,
         consignee: that.data.consignee,
         mob: that.data.mob,
@@ -103,12 +105,14 @@ Page({
     var that = this;
     console.log(that.data.isDefault)
     var userData = wx.getStorageSync('userData');
+    var wxData = wx.getStorageSync('wxData');
+    var sign = util.hexMD5(gConfig.key);
     if (that.data.consignee && that.data.mob && that.data.address) {
       wx.request({
         url: gConfig.http + 'xcx/address/add',
         data: {
-          wxOpenid: userData.wxOpenid,
-          clientId: userData.clientId,
+          wxOpenid: wxData.wxOpenid,
+          clientId: wxData.clientId,
           consignee: that.data.consignee,
           mob: that.data.mob,
           region: userData.region,
@@ -143,10 +147,12 @@ Page({
   removeAddrFn: function () {
     // 删除地址
     var that = this;
+    var sign = util.hexMD5('id=' + that.data.id + gConfig.key);
     wx.request({
       url: gConfig.http + 'xcx/address/delete',
       data: {
-        id: that.data.id
+        id: that.data.id,
+        sign:sign
       },
       header: {
         'content-type': 'application/json'

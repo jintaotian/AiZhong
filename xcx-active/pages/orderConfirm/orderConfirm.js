@@ -1,5 +1,6 @@
 // pages/orderConfirm/orderConfirm.js
 var gConfig = getApp();
+var util = require('../../utils/md5.js');
 Page({
   data: {value: '请选择收货地址'},
   onLoad: function () {
@@ -38,6 +39,7 @@ Page({
     var that = this;
     var orderInfoData = that.data.orderData;
     var userData = wx.getStorageSync('userData');
+    var wxData = wx.getStorageSync('wxData');
     var itemListData = [];
     for (var i = 0; i < orderInfoData.length; i++) {
       itemListData.push({
@@ -51,7 +53,7 @@ Page({
         data: {
           "appId": "wxaf16046e5515de4c",
           "clientAddrId": that.data.id,
-          "buyer": userData.clientId,
+          "buyer": wxData.clientId,
           "itemCartsList": [
             {
               "companyId": userData.companyId,
@@ -121,10 +123,13 @@ Page({
   setDefaultAddrFn: function () {
     var that = this;
     var userData = wx.getStorageSync('userData');
+    var wxData = wx.getStorageSync('wxData');
+    var sign = util.hexMD5('clientId=' + wxData.clientId + gConfig.key);
     wx.request({
       url: gConfig.http + 'xcx/address/list',
       data: {
-        clientId: userData.clientId
+        clientId: wxData.clientId,
+        sign:sign
       },
       header: {
         'content-type': 'application/json'

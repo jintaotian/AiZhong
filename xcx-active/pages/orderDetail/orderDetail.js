@@ -1,16 +1,17 @@
 // pages/orderDetail/orderDetail.js
 var gConfig = getApp();
+var util = require('../../utils/md5.js');
 Page({
-  data: {ispaid:true},
+  data: { ispaid: true },
   onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数
     var that = this;
-    if(options.ispaid == true || options.ispaid == 'true'){
+    if (options.ispaid == true || options.ispaid == 'true') {
       that.getOrderInfoFn(options.orderId);
-      that.setData({ispaid:''})
-    }else{
-       that.getOrderInfoFn(options.orderId);
-       that.setData({ispaid:true})
+      that.setData({ ispaid: '' })
+    } else {
+      that.getOrderInfoFn(options.orderId);
+      that.setData({ ispaid: true })
     }
   },
   onReady: function () {
@@ -27,10 +28,12 @@ Page({
   },
   getOrderInfoFn: function (orderId) {
     var that = this;
+    var sign = util.hexMD5('orderId=' + orderId + gConfig.key);
     wx.request({
       url: gConfig.http + 'xcx/order/detail',
       data: {
-        orderId: orderId
+        orderId: orderId,
+        sign: sign
       },
       header: {
         'content-type': 'application/json'
@@ -47,6 +50,7 @@ Page({
   //取消订单
   cancleFn: function (event) {
     var orderId = event.currentTarget.dataset.orderid;
+    var sign = util.hexMD5('id=' + orderId + gConfig.key);
     wx.showModal({
       title: '取消提示',
       content: '您确定要取消该订单吗？',
@@ -55,7 +59,10 @@ Page({
           /*--重新渲染--*/
           wx.request({
             url: gConfig.http + 'xcx/order/del',
-            data: { id: orderId },
+            data: {
+              id: orderId,
+              sign: sign
+            },
             header: {
               'content-type': 'application/json'
             },
@@ -80,12 +87,13 @@ Page({
   placeOrderFn: function (event) {
     // 下单方法
     var that = this;
-    var orderId = event.currentTarget.dataset.orderid;
-    var userData = wx.getStorageSync('userData');
+    var orderId = event.currentTarget.dataset.orderid;    
+    var sign = util.hexMD5('orderId=' + orderId + gConfig.key);
     wx.request({
       url: gConfig.http + 'xcx/wx/prepardId',
       data: {
-        orderId: orderId
+        orderId: orderId,
+        sign: sign
       },
       header: {
         'content-type': 'application/json'

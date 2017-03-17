@@ -1,5 +1,6 @@
 // pages/addrOpt/addrOpt.js
 var gConfig = getApp();
+var util = require('../../utils/md5.js');
 Page({
   data: {},
   onLoad: function (options) {
@@ -49,22 +50,20 @@ Page({
   getAddrListFn: function () {
     // 获取地址列表
     var that = this;
-    wx.getStorage({
-      key: 'userData',
+    var wxData = wx.getStorageSync('wxData');
+    var sign = util.hexMD5('clientId=' + wxData.clientId + gConfig.key);
+    wx.request({
+      url: gConfig.http + 'xcx/address/list',
+      data: {
+        clientId: wxData.clientId,
+        sign: sign
+      },
+      header: {
+        'content-type': 'application/json'
+      },
       success: function (res) {
-        wx.request({
-          url: gConfig.http + 'xcx/address/list',
-          data: {
-            clientId: res.data.clientId,
-          },
-          header: {
-            'content-type': 'application/json'
-          },
-          success: function (res) {
-            that.setData({
-              addrData: res.data.data.list
-            })
-          }
+        that.setData({
+          addrData: res.data.data.list
         })
       }
     })
