@@ -176,7 +176,7 @@ Page({
   },
   getCouponsFn: function (region, companyId) {
     var that = this;
-    var sign = util.hexMD5('region=' + region + '&companyId=' + companyId + gConfig.key);
+    var sign = util.hexMD5('companyId=' + companyId + '&region=' + region + gConfig.key);
     wx.request({
       url: gConfig.http + 'xcx/coupon/list',
       data: {

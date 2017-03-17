@@ -20,14 +20,10 @@ App({
             },
             header: { 'content-type': 'application/json' },
             success: function (res) {
-              console.log(res)
               wx.setStorageSync('wxData', {
                 "wxOpenid": res.data.data.wxOpenid,
                 "clientId": res.data.data.clientId
               });
-            },
-            fail: function () {
-              console.log(res)
             }
           })
         } else {
