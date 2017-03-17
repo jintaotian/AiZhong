@@ -74,6 +74,10 @@ Page({
       },
       success: function (res) {
         // 微信支付接口
+        console.log(res.data.data.timeStamp)
+        console.log(res.data.data.nonceStr)
+        console.log(res.data.data.package)
+        console.log(res.data.data.paySign)
         wx.requestPayment({
           'timeStamp': res.data.data.timeStamp,
           'nonceStr': res.data.data.nonceStr,

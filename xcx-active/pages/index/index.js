@@ -196,9 +196,10 @@ Page({
   },
   useCouponsFn: function (event) {
     wx.showToast({
-      title: '下单自动使用',
+      title: '领券成功下单自动使用',
       icon: 'success',
-      duration: 1000
+      duration: 2000,
+      mask:true
     })
   },
   getPositionFn: function () {
