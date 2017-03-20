@@ -53,7 +53,7 @@ Page({
     var that = this;
     var userData = wx.getStorageSync('userData');
     var wxData = wx.getStorageSync('wxData');
-    var sign = util.hexMD5('clientId=' + wxData.clientId+'&sdate=1&status=1' + gConfig.key);
+    var sign = util.hexMD5('clientId=' + wxData.clientId+'&sdate=1&status=2' + gConfig.key);
     wx.request({
       url: gConfig.http + 'xcx/order/list',
       data: {

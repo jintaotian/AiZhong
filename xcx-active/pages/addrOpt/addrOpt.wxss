@@ -18,6 +18,7 @@
 }
 .addr-list view text.consignee {
     display: block;
+    font-size: 32rpx;
 }
 .addr-list .select-icon {
     position: absolute;
