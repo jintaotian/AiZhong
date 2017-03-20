@@ -1,6 +1,6 @@
 <view class="container">
   <view class="addr-opt" bindtap="addrOptFn">
-    <text>{{name}} {{mobile}}</text>
+    <text class="consignee">{{name}} {{mobile}}</text>
     <text>{{value}}</text>
   </view>
   <view class="addr-color"></view>

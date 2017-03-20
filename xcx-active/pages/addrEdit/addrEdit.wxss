@@ -25,5 +25,6 @@
     font-size: 36rpx;
 }
 .remove-btn {
-    background-color: #e4383b;
+    background-color: #dddddd;
+    color: #666666;
 }
