@@ -1,6 +1,7 @@
 <view class="container">
         <view class="shopping-list" wx:for="{{shoppingListData}}" wx:key="i">
-          <image src="{{item.img ? item.img : item.defauliImg}}"  bindtap="orderDetailFn"></image>
+        <!--{{item.img ? item.img : item.defauliImg}}-->
+          <image src="../../images/list1.jpg"  bindtap="orderDetailFn"></image>
           <view class="info-wrap">
             <text class="tit ellipsis">{{item.name}}</text>
             <view class="price-info">
