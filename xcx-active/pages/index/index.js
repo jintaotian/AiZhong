@@ -196,7 +196,7 @@ Page({
   },
   useCouponsFn: function (event) {
     wx.showToast({
-      title: '领券成功下单自动使用',
+      title: '下单自动使用',
       icon: 'success',
       duration: 2000,
       mask:true

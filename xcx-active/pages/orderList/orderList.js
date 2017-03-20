@@ -53,7 +53,7 @@ Page({
     var that = this;
     var userData = wx.getStorageSync('userData');
     var wxData = wx.getStorageSync('wxData');
-    var sign = util.hexMD5('clientId=' + wxData.clientId+'&sdate=1&status=1' + gConfig.key);
+    var sign = util.hexMD5('clientId=' + wxData.clientId+'&sdate=1&status=2' + gConfig.key);
     wx.request({
       url: gConfig.http + 'xcx/order/list',
       data: {
@@ -63,7 +63,8 @@ Page({
         sign:sign
       },
       header: {
-        'content-type': 'application/json'
+        'content-type': 'application/json',
+        sign:sign
       },
       success: function (res) {
         console.log(res)
@@ -132,6 +133,10 @@ Page({
         'content-type': 'application/json'
       },
       success: function (res) {
+        console.log(res.data.data.timeStamp)
+        console.log(res.data.data.nonceStr)
+        console.log(res.data.data.package)
+        console.log(res.data.data.paySign)
         // 微信支付接口
         wx.requestPayment({
           'timeStamp': res.data.data.timeStamp,

@@ -39,6 +39,9 @@
     <view class="order-list" wx:for="{{unListData}}" wx:key="i">
       <view class="order-head">
         <text class="order-status paid-status">已支付</text>
+        <view class="order-price">
+          <text class="conpousTip conpousTiped">已使用￥{{item.couponDiscount}}优惠券</text>
+        </view>
       </view>
       <view class="order-con"  wx:for="{{item.items}}" data-orderId="{{item.id}}" bindtap="orderDetailFn" wx:key="i" wx:for-item="unList">
         <image src="{{unList.img}}"></image>

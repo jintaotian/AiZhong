@@ -103,7 +103,7 @@
     color: #e4383b;
     font-size: 26rpx;
 }
-
+.order-price .conpousTiped {color: #7f8389;}
 .order-work {
     overflow: hidden;
     border-top: 1rpx solid #efeff4;
