@@ -52,7 +52,7 @@
     width: 90rpx;
     border-left: 1rpx solid #ddd;
     margin: -30rpx 0;
-    background: url(../../images/delete_icon.png) no-repeat center center;
+    background: url(https://xcx.51zhongzi.com/farms-msi/images/xcx/delete_icon.png) no-repeat center center;
     background-size: 34rpx 40rpx;
 }
 .footBar {

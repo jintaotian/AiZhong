@@ -7,7 +7,7 @@
   padding: 10rpx 100rpx;
   font-size: 28rpx;
   color: #353535;
-  background: url(../../images/addr.png) no-repeat 30rpx center,url(../../images/arr.png) no-repeat 680rpx center;
+  background: url(https://xcx.51zhongzi.com/farms-msi/images/xcx/addr.png) no-repeat 30rpx center,url(https://xcx.51zhongzi.com/farms-msi/images/xcx/arr.png) no-repeat 680rpx center;
   background-size: 45rpx 40rpx;
   background-color: #fff;
   margin-top:20rpx;
@@ -135,7 +135,7 @@
     font-size: 26rpx;
 }
 .addr-color{
-  background:url('../../images/addr-color.png') repeat-X;
+  background:url('https://xcx.51zhongzi.com/farms-msi/images/xcx/addr-color.png') repeat-X;
   height:20rpx;
   margin-bottom:10rpx;
 }

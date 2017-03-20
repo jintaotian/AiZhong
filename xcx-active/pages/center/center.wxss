@@ -25,10 +25,10 @@
     color: #353535;
 }
 .icon-order {
-    background: url("../../images/order.png") no-repeat 30rpx center,url(../../images/arr.png) no-repeat 680rpx center;
+    background: url("https://xcx.51zhongzi.com/farms-msi/images/xcx/order.png") no-repeat 30rpx center,url(https://xcx.51zhongzi.com/farms-msi/images/xcx/arr.png) no-repeat 680rpx center;
     background-size: 35rpx 36rpx;
 }
 .icon-addr {
-   background: url(../../images/addr.png) no-repeat 30rpx center,url(../../images/arr.png) no-repeat 680rpx center;
+   background: url(https://xcx.51zhongzi.com/farms-msi/images/xcx/addr.png) no-repeat 30rpx center,url(https://xcx.51zhongzi.com/farms-msi/images/xcx/arr.png) no-repeat 680rpx center;
     background-size: 35rpx 36rpx;
 }

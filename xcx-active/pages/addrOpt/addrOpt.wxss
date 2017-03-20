@@ -32,7 +32,7 @@
     top: 50%;
     margin-top: -75rpx;
     width: 100rpx;
-    background: url(../../images/edit.png) no-repeat center center;
+    background: url(https://xcx.51zhongzi.com/farms-msi/images/xcx/edit.png) no-repeat center center;
     height: 150rpx;
     background-size: 36rpx 36rpx;
 }

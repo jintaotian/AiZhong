@@ -31,7 +31,7 @@
   height: 141rpx;
   margin-right: 30rpx;
   display: inline-block;
-  background: url(../../images/coupon_bg_03.png) no-repeat center center;
+  background: url(https://xcx.51zhongzi.com/farms-msi/images/xcx/coupon_bg_03.png) no-repeat center center;
   background-size: 100% 100%;
   padding: 20rpx 0 20rpx 30rpx;
   box-sizing: border-box;
@@ -67,7 +67,7 @@
   line-height: 100rpx;
   font-size: 28rpx;
   color: #000;
-  background: url(../../active_icon_03.png) no-repeat 30rp;
+  background: url(https://xcx.51zhongzi.com/farms-msi/images/xcx/active_icon_03.png) no-repeat 30rpx center;
   background-size: 40rpx 40rpx;
 }
 
@@ -153,7 +153,7 @@
   bottom: 0;
   top: 0;
   margin: auto;
-  background: url(../../images/gps_icon.png) no-repeat center 200rpx;
+  background: url(https://xcx.51zhongzi.com/farms-msi/images/xcx/gps_icon.png) no-repeat center 200rpx;
   background-size: 245rpx 245rpx;
   text-align: center;
   overflow: hidden;

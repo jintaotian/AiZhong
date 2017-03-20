@@ -9,7 +9,7 @@
     margin-bottom: 30rpx;
     font-size: 30rpx;
     color: #353535;
-    background: #fff url(../../images/user_addr.png) no-repeat 30rpx center;
+    background: #fff url(https://xcx.51zhongzi.com/farms-msi/images/xcx/user_addr.png) no-repeat 30rpx center;
     background-size: 33rpx 38rpx;
 }
 .addr-list .detailAddr {
