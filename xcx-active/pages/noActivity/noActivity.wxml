@@ -1,0 +1,2 @@
+<!--pages/noActivity/noActivity.wxml-->
+<text class="isActivity">该地区暂无相关活动！</text>

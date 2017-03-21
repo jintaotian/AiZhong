@@ -1,7 +1,7 @@
 //app.js
 App({
   onLaunch: function () {
-    wx.removeStorageSync('shoppingcarData');
+    // wx.removeStorageSync('shoppingcarData');
     this.wxLogFn()
   },
   wxLogFn: function () {

@@ -3,7 +3,7 @@
         <!--{{item.img ? item.img : item.defauliImg}}-->
           <image src="../../images/list1.jpg"  bindtap="orderDetailFn"></image>
           <view class="info-wrap">
-            <text class="tit ellipsis">{{item.name}}</text>
+            <text class="tit ellipsis">{{item.brand}}{{item.itemName}}</text>
             <view class="price-info">
               <text>{{item.norm}}/{{item.units}}</text>
               <text class="price">￥{{item.retailPrice}}</text>

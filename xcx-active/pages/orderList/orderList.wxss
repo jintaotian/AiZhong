@@ -99,17 +99,23 @@
   font-size: 30rpx;
   float: right;
 }
-.order-price .conpousTip {
-    color: #e4383b;
-    font-size: 26rpx;
-}
-.order-price .conpousTiped {color: #7f8389;}
 .order-work {
     overflow: hidden;
     border-top: 1rpx solid #efeff4;
     background-color: #fff;
     padding: 20rpx 30rpx;
     text-align: right;
+}
+.order-work .conpousTip {
+    color: #e4383b;
+    font-size: 26rpx;
+    float: left;
+    padding-top: 15rpx;
+}
+.order-work .conpousTiped {
+    color: #7f8389;
+    padding: 0;
+    float: right;
 }
 .order-work button {
     display: inline-block;

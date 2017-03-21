@@ -3,9 +3,8 @@ var gConfig = getApp();
 var util = require('../../utils/md5.js');
 Page({
   data: {},
-  onLoad: function (options) {
-    // 页面初始化 options为页面跳转所带来的参数
-    this.getPositionFn()
+  onShow: function () {
+    this.getPositionFn();
   },
   purchaseFn: function (event) {
     /*循环数据查找商品是否加入购物车*/
@@ -16,12 +15,13 @@ Page({
     for (var i = 0; i < goodslist.length; i++) {
       if (goodslist[i].itemId == cartid) {
         orderData.push({
+          brand: goodslist[i].brand,
           id: goodslist[i].id,
           itemId: goodslist[i].itemId,
           companyId: goodslist[i].companyId,
           img: goodslist[i].img,
           defauliImg: goodslist[i].defauliImg,
-          name: goodslist[i].name,
+          itemName: goodslist[i].itemName,
           companyName: goodslist[i].companyName,
           units: goodslist[i].units,
           norm: goodslist[i].norm,
@@ -99,12 +99,13 @@ Page({
     for (var i = 0; i < goodslist.length; i++) {
       if (goodslist[i].shopcar == true) {
         shoppingcarData.push({
+          brand: goodslist[i].brand,
           id: goodslist[i].id,
           itemId: goodslist[i].itemId,
           companyId: goodslist[i].companyId,
           img: goodslist[i].img,
           defauliImg: goodslist[i].defauliImg,
-          name: goodslist[i].name,
+          itemName: goodslist[i].itemName,
           companyName: goodslist[i].companyName,
           units: goodslist[i].units,
           norm: goodslist[i].norm,
@@ -149,6 +150,7 @@ Page({
           "regionName": res.data.data.fullName,
           "companyId": res.data.data.companyId
         });
+        that.setData({ regionName: res.data.data.fullName });
         that.getGoodsListFn(region);
         that.getCouponsFn(region, companyId)
       },
@@ -168,9 +170,41 @@ Page({
         'content-type': 'application/json'
       },
       success: function (res) {
-        that.setData({
-          actData: res.data.data
-        })
+        console.log(res)
+        var isActivity = res.data.data.length
+
+        if (isActivity > 0) {
+          var actDataArr = []
+          for (var i = 0; i < res.data.data.length; i++) {
+            actDataArr.push({
+              brand: res.data.data[i].brand,
+              companyId: res.data.data[i].companyId,
+              companyName: res.data.data[i].companyName,
+              defauliImg: res.data.data[i].defauliImg,
+              id: res.data.data[i].id,
+              img: res.data.data[i].img,
+              itemId: res.data.data[i].itemId,
+              moq: res.data.data[i].moq,
+              itemName: res.data.data[i].itemName,
+              norm: res.data.data[i].norm,
+              price: res.data.data[i].price.toFixed(2),
+              qty: res.data.data[i].qty,
+              retailPrice: res.data.data[i].retailPrice.toFixed(2),
+              retailPromotionPrice: res.data.data[i].retailPromotionPrice.toFixed(2),
+              skuId: res.data.data[i].skuId,
+              skuName: res.data.data[i].skuName,
+              units: res.data.data[i].units
+            })
+          }
+          that.setData({
+            actData: actDataArr
+          })
+        } else {
+          wx.redirectTo({
+            url: '../noActivity/noActivity'
+          })
+        }
+
       }
     })
   },
@@ -199,7 +233,7 @@ Page({
       title: '下单自动使用',
       icon: 'success',
       duration: 2000,
-      mask:true
+      mask: true
     })
   },
   getPositionFn: function () {

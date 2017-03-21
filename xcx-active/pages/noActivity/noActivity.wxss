@@ -1,0 +1,8 @@
+/* pages/noActivity/noActivity.wxss */
+.isActivity {
+    color: #999;
+    font-size: 38rpx;
+    display: block;
+    text-align: center;
+    margin-top: 120rpx;
+}

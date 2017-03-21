@@ -8,10 +8,10 @@ Page({
     var that = this;
     if (options.ispaid == true || options.ispaid == 'true') {
       that.getOrderInfoFn(options.orderId);
-      that.setData({ ispaid: '' })
+      that.setData({ ispaid: '',orderId:options.orderId })
     } else {
       that.getOrderInfoFn(options.orderId);
-      that.setData({ ispaid: true })
+      that.setData({ ispaid: true,orderId:options.orderId })
     }
   },
   onReady: function () {

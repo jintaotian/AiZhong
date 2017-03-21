@@ -108,7 +108,7 @@ Page({
       if (goodslist[i].itemId == cartid) {
         wx.showModal({
           title: '删除提示',
-          content: '您确定要删除该条数据吗？',
+          content: '您确定要删除该商品吗？',
           success: function (res) {
             if (res.confirm) {
               goodslist.splice(goodslist[i].index, 1);/*从当前列表删除*/

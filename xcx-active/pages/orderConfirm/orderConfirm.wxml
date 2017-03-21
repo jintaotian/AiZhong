@@ -10,7 +10,7 @@
   <!--{{item.img ? item.img : item.defauliImg}}-->
     <image src="../../images/list1.jpg"></image>
     <view class="order-info">
-      <text class="order-tit ellipsis">{{item.name}}</text>
+      <text class="order-tit ellipsis">{{item.brand}}{{item.itemName}}</text>
       <text class="order-pro ellipsis2">{{item.companyName}}</text>
       <view class="peice-wrap">
         <text class="weight">{{item.norm}}/{{item.units}}</text>
@@ -21,23 +21,23 @@
   </view>
   <view class="coupon" bindtap="couponsOptFn">
     <text>优惠券</text>
-    <text class="coupon-used">已使用{{coupon}}元优惠券</text>
+    <text class="coupon-used">已使用￥{{coupon}}元优惠券</text>
   </view>
   <view class="order-settlement">
     <view class="price-wrap">
       <text>订单金额</text>
-      <text class="settlement-price">{{totalPrice + coupon}}</text>
+      <text class="settlement-price">￥{{orderPrice}}</text>
     </view>
     <view class="price-wrap">
       <text>优惠券</text>
-      <text class="settlement-coupon">-￥{{coupon}}</text>
+      <text class="settlement-coupon">￥{{coupon}}</text>
     </view>
     <view class="price-wrap">
       <text>运费</text>
-      <text class="settlement-freight">+￥{{0}}</text>
+      <text class="settlement-freight">￥0.00</text>
     </view>
     <view class="tatail-price">
-      共1件 合计：
+      共{{itemListLen}}件 合计：
       <text>￥</text>
       <text class="num">{{totalPrice}}</text>
     </view>

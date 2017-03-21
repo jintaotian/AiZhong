@@ -3,7 +3,7 @@
 .addr-list {
     overflow: hidden;
     line-height: 50rpx;
-    padding: 25rpx 30rpx 25rpx 80rpx;
+    padding: 25rpx 30rpx 25rpx 100rpx;
     display: block;
     position: relative;
     margin-bottom: 30rpx;
@@ -76,6 +76,7 @@
   color: #b2b2b2;
   font-size: 26rpx;
   padding: 10rpx 0;
+  margin-bottom: 30rpx;
 }
 .order-settlement view {
   display: flex;
@@ -104,12 +105,13 @@
 .payment-type {
   display: flex;
   background-color: #fff;
-  margin-top: 30rpx;
   line-height: 100rpx;
   color: #353535;
   font-size: 30rpx;
   padding: 0 30rpx;
+  border-top: 1rpx solid #d2d2d2;
 }
+.noborder {border: none;}
 .payment-type text{
   flex: 1;
 }
@@ -119,12 +121,12 @@
 }
 .payment-btn,.cancle-btn{
     background-color: #339900;
-    margin: 50rpx 30rpx;
+    margin: 50rpx 30rpx 0;
     color: #fff;
     font-size: 36rpx;
 }
 .cancle-btn {
-  margin-top: 50rpx;
+  margin: 30rpx 30rpx 50rpx;
   background-color: #fff;
   color: #353535;
 }

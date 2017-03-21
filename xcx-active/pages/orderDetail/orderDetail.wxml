@@ -9,8 +9,8 @@
   <!--{{item.img}}-->
     <image src="../../images/list1.jpg"></image>
     <view class="order-info">
-      <text class="order-tit ellipsis">{{item.name}}</text>
-      <text class="order-pro ellipsis2">由 {{item.name}} 提供发货和售后</text>
+      <text class="order-tit ellipsis">{{list.brand}}{{list.itemName}}</text>
+      <text class="order-pro ellipsis2">由{{item.saleName}}提供发货和售后</text>
       <view class="peice-wrap">
         <text class="weight">{{item.norm}}</text>
         <text class="num">x{{item.qty}}</text>
@@ -38,9 +38,13 @@
       <text class="total">￥{{orderDeatilData.retailPayAmount}}</text>
     </view>
   </view>
-  <view class="payment-type">
+  <view class="payment-type noborder">
     <text>支付方式</text>
     <text class="type">微信支付</text>
+  </view>
+  <view class="payment-type">
+    <text>订单号</text>
+    <text class="type">{{orderId}}</text>
   </view>
 
   <button class="payment-btn" hidden="{{ispaid}}" data-orderId="{{orderDeatilData.id}}" bindtap="placeOrderFn">立即支付</button>

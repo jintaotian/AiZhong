@@ -5,7 +5,7 @@
     </view>
 
   <view hidden="{{isPosition}}">
-    <text class="coupons-tit">活动通告：本次活动由爱种网络有限公司承办，最终解释权归爱种网络有限公司所有</text>
+    <text class="coupons-tit">{{regionName}}种子促销会</text>
 
     <!--优惠券-start-->
     <scroll-view class="coupons-con" scroll-x="true">
@@ -26,7 +26,7 @@
       <view class="active-list" wx:for="{{actData}}" wx:key="i">
       <!--{{item.img?item.img:item.defauliImg}}-->
         <image src="../../images/list1.jpg"></image>
-        <text class="product-tit ellipsis">{{item.name}}</text>
+        <text class="product-tit ellipsis">{{item.brand}}{{item.itemName}}</text>
         <text class="product-pro">{{item.companyName}}</text>
         <view class="product-info">
           <text class="specifications">{{item.norm}}/{{item.units}}</text>

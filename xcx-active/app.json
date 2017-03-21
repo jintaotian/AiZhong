@@ -4,6 +4,7 @@
     "pages/index/index",
     "pages/shoppingcar/shoppingcar",
     "pages/orderConfirm/orderConfirm",
+    "pages/noActivity/noActivity",
     "pages/orderList/orderList",
     "pages/orderDetail/orderDetail",
     "pages/addrEdit/addrEdit",
@@ -13,7 +14,7 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#22292c",
-    "navigationBarTitleText": "线下活动首页",
+    "navigationBarTitleText": "爱种网线上体验会",
     "backgroundColor": "#efeff4",
     "navigationBarTextStyle": "#fff"
   },
