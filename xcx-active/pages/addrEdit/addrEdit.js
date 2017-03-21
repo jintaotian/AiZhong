@@ -21,7 +21,7 @@ Page({
     }
     var that = this;
     that.setData({
-      isDefault: 1,
+      isDefault: 0,
     })
   },
   onShow: function () {
@@ -94,19 +94,19 @@ Page({
           wx.showToast({
             title: '修改成功',
             icon: 'success',
-            duration: 500
+            duration: 1000
           })
           setTimeout(function () {
             wx.navigateBack({
               delta: 1
             })
-          }, 1000)
+          }, 1500)
         }
       })
     }
     setTimeout(function () {
       that.setData({ isError: true });
-    }, 1000)
+    }, 1500)
   },
   addAddrFn: function () {
     // 新增地址
@@ -130,6 +130,7 @@ Page({
         isError: ''
       })
     } else {
+      
       wx.request({
         url: gConfig.http + 'xcx/address/add',
         data: {
@@ -145,22 +146,24 @@ Page({
           'content-type': 'application/json'
         },
         success: function (res) {
+          console.log(res)
+          wx.setStorageSync('wxData', {wxOpenid:wxData.wxOpenid,clientId:res.data.data.clientId})
           wx.showToast({
             title: '新增成功',
             icon: 'success',
-            duration: 500
+            duration: 1000
           })
           setTimeout(function () {
             wx.navigateBack({
               delta: 1
             })
-          }, 1000)
+          }, 1500)
         }
       })
     }
     setTimeout(function () {
       that.setData({ isError: true });
-    }, 1000)
+    }, 1500)
   },
   removeAddrFn: function () {
     // 删除地址
@@ -176,9 +179,17 @@ Page({
         'content-type': 'application/json'
       },
       success: function (res) {
-        wx.navigateBack({
-          delta: 1
+        wx.showToast({
+          title: '删除成功',
+          icon: 'success',
+          duration: 1000
         })
+        setTimeout(function () {
+          wx.navigateBack({
+            delta: 1
+          })
+        }, 1500)
+
       }
     })
   },

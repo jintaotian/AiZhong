@@ -40,7 +40,7 @@ Page({
     var cartid = event.currentTarget.dataset.cartid;
     var goodslist = that.data.shoppingListData;
     for (var i = 0; i < goodslist.length; i++) {
-      if (goodslist[i].itemId == cartid) {
+      if (goodslist[i].id == cartid) {
         if ((goodslist[i].moq - 1) < 1) {
           goodslist[i].moq = 1;
         } else {
@@ -67,7 +67,7 @@ Page({
     var cartid = event.currentTarget.dataset.cartid;
     var goodslist = that.data.shoppingListData;
     for (var i = 0; i < goodslist.length; i++) {
-      if (goodslist[i].itemId == cartid) {
+      if (goodslist[i].id == cartid) {
         goodslist[i].moq = parseInt(goodslist[i].moq) + 1;
       }
     }
@@ -105,7 +105,7 @@ Page({
     var index = {};
     for (let i = 0; i < goodslist.length; i++) {
       goodslist[i].index = i;//闭包
-      if (goodslist[i].itemId == cartid) {
+      if (goodslist[i].id == cartid) {
         wx.showModal({
           title: '删除提示',
           content: '您确定要删除该商品吗？',

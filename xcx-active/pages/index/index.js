@@ -3,7 +3,8 @@ var gConfig = getApp();
 var util = require('../../utils/md5.js');
 Page({
   data: {},
-  onShow: function () {
+  onLoad:function(options){
+    // 页面初始化 options为页面跳转所带来的参数
     this.getPositionFn();
   },
   purchaseFn: function (event) {
@@ -13,7 +14,7 @@ Page({
     var goodslist = that.data.actData;
     var orderData = [];
     for (var i = 0; i < goodslist.length; i++) {
-      if (goodslist[i].itemId == cartid) {
+      if (goodslist[i].id == cartid) {
         orderData.push({
           brand: goodslist[i].brand,
           id: goodslist[i].id,
@@ -49,7 +50,7 @@ Page({
     var goodslist = that.data.actData;
     var sum = that.data.sumretailPrice;
     for (var i = 0; i < goodslist.length; i++) {
-      if (goodslist[i].itemId == cartid) {
+      if (goodslist[i].id == cartid) {
         if ((goodslist[i].moq - 1) < 1) {
           goodslist[i].moq = 1;
         } else {
@@ -69,7 +70,7 @@ Page({
     var cartid = event.currentTarget.dataset.cartid;
     var goodslist = that.data.actData;
     for (var i = 0; i < goodslist.length; i++) {
-      if (goodslist[i].itemId == cartid) {
+      if (goodslist[i].id == cartid) {
         goodslist[i].moq = parseInt(goodslist[i].moq) + 1;
         //break; 
       }
@@ -87,14 +88,13 @@ Page({
     var cartid = event.currentTarget.dataset.cartid;
     var shoppingcarData = [];
     for (var i = 0; i < goodslist.length; i++) {
-      if (goodslist[i].itemId == cartid) {
-        goodslist[i].shopcar = true
+      if (goodslist[i].id == cartid) {
+        goodslist[i].shopcar = true;
         that.setData({
           actData: goodslist
         })
       }
     }
-
     /*循环数据查找商品是否加入购物车*/
     for (var i = 0; i < goodslist.length; i++) {
       if (goodslist[i].shopcar == true) {

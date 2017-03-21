@@ -85,7 +85,17 @@ Page({
             'nonceStr': res.data.data.nonceStr,
             'package': res.data.data.package,
             'signType': 'MD5',
-            'paySign': res.data.data.paySign
+            'paySign': res.data.data.paySign,
+            'success': function (res) {
+              wx.switchTab({
+                url: '../index/index'
+              })
+            },
+            'fail': function (res) {
+              wx.navigateTo({
+                url: '../orderList/orderList'
+              })
+            }
           })
           // 微信支付接口
         },

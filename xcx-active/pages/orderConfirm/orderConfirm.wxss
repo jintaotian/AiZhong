@@ -79,13 +79,8 @@
   margin-bottom: 20rpx;
 }
 
-.coupon .text {
-    float:left; 
-}
-.coupon .coupon-used {
-  float: right;
-  padding-right: 8rpx;
-}
+.coupon .text {float:left; }
+.coupon .coupon-used {float: right;}
 
 .order-settlement {
   overflow: hidden;

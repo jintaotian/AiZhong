@@ -44,7 +44,7 @@
       <view class="order-con"  wx:for="{{item.items}}" data-orderId="{{item.id}}" bindtap="orderDetailFn" wx:key="i" wx:for-item="unList">
         <image src="{{unList.img}}"></image>
         <view class="order-info">
-          <text class="order-tit ellipsis">{{list.brand}}{{list.itemName}}</text>
+          <text class="order-tit ellipsis">{{unList.brand}}{{unList.itemName}}</text>
           <text class="order-pro ellipsis2">由 {{item.saleName}} 提供发货和售后</text>
           <view class="peice-wrap">
             <text class="weight">{{unList.norm}}</text>
