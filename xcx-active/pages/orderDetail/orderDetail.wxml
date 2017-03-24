@@ -9,10 +9,10 @@
   <!--{{item.img}}-->
     <image src="../../images/list1.jpg"></image>
     <view class="order-info">
-      <text class="order-tit ellipsis">{{list.brand}}{{list.itemName}}</text>
-      <text class="order-pro ellipsis2">由{{item.saleName}}提供发货和售后</text>
+      <text class="order-tit ellipsis">{{item.brand}}{{item.itemName}}</text>
+      <text class="order-pro ellipsis2">由{{orderDeatilData.company.name}}提供发货和售后</text>
       <view class="peice-wrap">
-        <text class="weight">{{item.norm}}</text>
+        <text class="weight">{{item.norm}}/{{item.units}}</text>
         <text class="num">x{{item.qty}}</text>
         <text class="price">￥{{item.price}}</text>
       </view>
@@ -23,15 +23,15 @@
   <view class="order-settlement">
     <view class="price-wrap">
       <text>商品金额</text>
-      <text class="settlement-price">{{orderDeatilData.retailPayAmount + orderDeatilData.couponDiscount}}</text>
+      <text class="settlement-price">{{amountPrice}}</text>
     </view>
     <view class="price-wrap">
       <text>优惠券</text>
-      <text class="settlement-coupon">-￥{{orderDeatilData.couponDiscount}}</text>
+      <text class="settlement-coupon">￥{{orderDeatilData.couponDiscount}}</text>
     </view>
     <view class="price-wrap">
       <text>运费</text>
-      <text class="settlement-freight">+￥0.00</text>
+      <text class="settlement-freight">￥0.00</text>
     </view>
     <view class="tatail-price">
       <text>合计</text>

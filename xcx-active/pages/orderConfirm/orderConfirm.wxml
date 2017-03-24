@@ -11,11 +11,11 @@
     <image src="../../images/list1.jpg"></image>
     <view class="order-info">
       <text class="order-tit ellipsis">{{item.brand}}{{item.itemName}}</text>
-      <text class="order-pro ellipsis2">{{item.companyName}}</text>
+      <text class="order-pro ellipsis2">由{{item.companyName}}提供发货和售后服务</text>
       <view class="peice-wrap">
         <text class="weight">{{item.norm}}/{{item.units}}</text>
-        <text class="num">x{{item.moq}}</text>
-        <text class="price">￥{{item.retailPrice}}</text>
+        <text class="num">x{{item.qty}}</text>
+        <text class="price">￥{{item.price}}</text>
       </view>
     </view>
   </view>

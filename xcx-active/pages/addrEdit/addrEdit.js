@@ -8,6 +8,7 @@ Page({
   },
   onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数
+    var that = this;
     if (options.region) {
       this.setData({
         consignee: options.consignee,
@@ -18,11 +19,13 @@ Page({
         isAdd: '',
         isDefault: options.isDefault
       })
+    } else {
+      that.setData({
+        isDefault: 0,
+      })
     }
-    var that = this;
-    that.setData({
-      isDefault: 0,
-    })
+
+
   },
   onShow: function () {
     // 页面显示
@@ -130,7 +133,11 @@ Page({
         isError: ''
       })
     } else {
-      
+      console.log(wxData.wxOpenid)
+      console.log(wxData.clientId)
+      console.log(that.data.consignee)
+      console.log(wxData.wxOpenid)
+      console.log(wxData.wxOpenid)
       wx.request({
         url: gConfig.http + 'xcx/address/add',
         data: {
@@ -147,7 +154,7 @@ Page({
         },
         success: function (res) {
           console.log(res)
-          wx.setStorageSync('wxData', {wxOpenid:wxData.wxOpenid,clientId:res.data.data.clientId})
+          wx.setStorageSync('wxData', { wxOpenid: wxData.wxOpenid, clientId: res.data.data.clientId })
           wx.showToast({
             title: '新增成功',
             icon: 'success',

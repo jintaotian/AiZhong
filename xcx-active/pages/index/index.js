@@ -3,12 +3,28 @@ var gConfig = getApp();
 var util = require('../../utils/md5.js');
 Page({
   data: {},
-  onLoad:function(options){
+  onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数
     this.getPositionFn();
   },
+  onShow:function(){
+    var that = this;
+    var delData = wx.getStorageSync('delData');
+    var newActData = that.data.actData;
+    if(delData){
+      for(var i = 0; i < newActData.length; i++){
+        for(var j = 0; j < delData.length; j++){
+          if( delData[j].id == newActData[i].id){
+            newActData[i].shopcar = false;
+          }
+        }
+      }
+      that.setData({actData:newActData});
+      wx.removeStorageSync('delData');
+    }
+  },
   purchaseFn: function (event) {
-    /*循环数据查找商品是否加入购物车*/
+    /*立即购买方法*/
     var that = this;
     var cartid = event.currentTarget.dataset.cartid;
     var goodslist = that.data.actData;
@@ -16,17 +32,7 @@ Page({
     for (var i = 0; i < goodslist.length; i++) {
       if (goodslist[i].id == cartid) {
         orderData.push({
-          brand: goodslist[i].brand,
           id: goodslist[i].id,
-          itemId: goodslist[i].itemId,
-          companyId: goodslist[i].companyId,
-          img: goodslist[i].img,
-          defauliImg: goodslist[i].defauliImg,
-          itemName: goodslist[i].itemName,
-          companyName: goodslist[i].companyName,
-          units: goodslist[i].units,
-          norm: goodslist[i].norm,
-          retailPrice: goodslist[i].retailPrice,
           moq: goodslist[i].moq <= 1 ? 1 : goodslist[i].moq
         })
 
@@ -109,6 +115,7 @@ Page({
           companyName: goodslist[i].companyName,
           units: goodslist[i].units,
           norm: goodslist[i].norm,
+          retailPromotionPrice:goodslist[i].retailPromotionPrice,
           retailPrice: goodslist[i].retailPrice,
           moq: goodslist[i].moq <= 1 ? 1 : goodslist[i].moq
         })
@@ -124,8 +131,15 @@ Page({
     /*--加入购物车成功提示--*/
     wx.showToast({
       title: '已加入购物车',
-      icon: 'shoppingcar',
+      icon: 'success',
       duration: 500
+    })
+  },
+  tipFn: function (event) {
+    wx.showToast({
+      title: '待定不支持购买',
+      icon: 'success',
+      duration: 1000
     })
   },
   getRegionFn: function (lati, longi) {
@@ -150,19 +164,26 @@ Page({
           "regionName": res.data.data.fullName,
           "companyId": res.data.data.companyId
         });
-        that.setData({ regionName: res.data.data.fullName });
-        that.getGoodsListFn(region);
-        that.getCouponsFn(region, companyId)
+        if (companyId) {
+          that.setData({ regionName: res.data.data.fullName });
+          that.getGoodsListFn(region, companyId);
+          that.getCouponsFn(region, companyId);
+        } else {
+          wx.redirectTo({
+            url: '../noActivity/noActivity'
+          })
+        }
       },
     })
   },
-  getGoodsListFn: function (region) {
+  getGoodsListFn: function (region, companyId) {
     //商品信息请求
     var that = this;
-    var sign = util.hexMD5('region=' + region + gConfig.key);
+    var sign = util.hexMD5('companyId=' + companyId + '&region=' + region + gConfig.key);
     wx.request({
       url: gConfig.http + 'xcx/item/promotionitems',
       data: {
+        companyId: companyId,
         region: region,
         sign: sign
       },
@@ -171,40 +192,15 @@ Page({
       },
       success: function (res) {
         console.log(res)
-        var isActivity = res.data.data.length
-
-        if (isActivity > 0) {
-          var actDataArr = []
-          for (var i = 0; i < res.data.data.length; i++) {
-            actDataArr.push({
-              brand: res.data.data[i].brand,
-              companyId: res.data.data[i].companyId,
-              companyName: res.data.data[i].companyName,
-              defauliImg: res.data.data[i].defauliImg,
-              id: res.data.data[i].id,
-              img: res.data.data[i].img,
-              itemId: res.data.data[i].itemId,
-              moq: res.data.data[i].moq,
-              itemName: res.data.data[i].itemName,
-              norm: res.data.data[i].norm,
-              price: res.data.data[i].price.toFixed(2),
-              qty: res.data.data[i].qty,
-              retailPrice: res.data.data[i].retailPrice.toFixed(2),
-              retailPromotionPrice: res.data.data[i].retailPromotionPrice.toFixed(2),
-              skuId: res.data.data[i].skuId,
-              skuName: res.data.data[i].skuName,
-              units: res.data.data[i].units
-            })
-          }
-          that.setData({
-            actData: actDataArr
-          })
-        } else {
-          wx.redirectTo({
-            url: '../noActivity/noActivity'
-          })
+        var actDataArr = res.data.data;
+        for (var i = 0; i < actDataArr.length; i++) {
+          actDataArr[i].retailPrice = actDataArr[i].retailPrice.toFixed(2);
+          actDataArr[i].retailPromotionPrice = actDataArr[i].retailPromotionPrice.toFixed(2);
+          actDataArr[i].price = actDataArr[i].price.toFixed(2);
         }
-
+        that.setData({
+          actData: actDataArr
+        })
       }
     })
   },

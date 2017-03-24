@@ -1,4 +1,5 @@
 // pages/shoppingcar/shoppingcar.js
+var delData = [];
 Page({
   data: {
     totalPrice: 0,
@@ -14,7 +15,7 @@ Page({
         isOrder: ""
       })
       that.sumcalcFn();
-    }else{
+    } else {
       that.setData({
         shoppingListData: [],
         isOrder: "true"
@@ -24,7 +25,8 @@ Page({
   },
   settlementFn: function () {
     var that = this;
-    var orderData = wx.getStorageSync('shoppingcarData')
+    var orderData = wx.getStorageSync('shoppingcarData');
+
     wx.setStorage({
       key: "orderData",
       data: orderData
@@ -89,7 +91,7 @@ Page({
     var sumcalc = 0;
     var that = this;
     for (var i = 0; i < that.data.shoppingListData.length; i++) {
-      var price = parseInt(that.data.shoppingListData[i].moq) * (that.data.shoppingListData[i].retailPrice);
+      var price = parseInt(that.data.shoppingListData[i].moq) * ((that.data.shoppingListData[i].retailPrice > 0 && that.data.shoppingListData[i].retailPromotionPrice > 0) ? that.data.shoppingListData[i].retailPromotionPrice : that.data.shoppingListData[i].retailPrice);
       sumcalc += price;
     }
     /*--重新渲染--*/
@@ -111,6 +113,11 @@ Page({
           content: '您确定要删除该商品吗？',
           success: function (res) {
             if (res.confirm) {
+              delData.push({
+                'id':goodslist[i].id
+              });
+              wx.setStorageSync('delData', delData);
+
               goodslist.splice(goodslist[i].index, 1);/*从当前列表删除*/
               /*--重新渲染--*/
               wx.setStorage({

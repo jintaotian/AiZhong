@@ -27,7 +27,6 @@ Page({
     var userData = wx.getStorageSync('userData');
     var wxData = wx.getStorageSync('wxData');
     var sign = util.hexMD5('clientId=' + wxData.clientId + '&sdate=1&status=1' + gConfig.key);
-    console.log(userData)
     wx.request({
       url: gConfig.http + 'xcx/order/list',
       data: {
@@ -40,23 +39,17 @@ Page({
         'content-type': 'application/json'
       },
       success: function (res) {
-        console.log(res);
-        var listData = [];
+        var listData = res.data.data;
+        var j;
         for (var i = 0; i < res.data.data.length; i++) {
-          listData.push({
-            brand:res.data.data[i].amount.brand,
-            amount: res.data.data[i].amount.toFixed(2),
-            couponDiscount: res.data.data[i].couponDiscount.toFixed(2),
-            id: res.data.data[i].id,
-            itemQty: res.data.data[i].itemQty,
-            items: res.data.data[i].items,
-            orderType: res.data.data[i].orderType,
-            payMode: res.data.data[i].payMode,
-            remark: res.data.data[i].remark,
-            retailPayAmount: res.data.data[i].retailPayAmount.toFixed(2),
-            saleName: res.data.data[i].saleName,
-            status: res.data.data[i].status
-          })
+          for (j = 0; j < res.data.data[i].items.length; j++) {
+            res.data.data[i].items[j].price = res.data.data[i].items[j].price.toFixed(2);
+          }
+
+          listData[i].amount = listData[i].amount.toFixed(2);
+          listData[i].couponDiscount = listData[i].couponDiscount.toFixed(2);
+          listData[i].retailPayAmount = listData[i].retailPayAmount.toFixed(2);
+          res.data.data[i].items = res.data.data[i].items
         }
         that.setData({
           listData: listData,
@@ -64,7 +57,6 @@ Page({
         })
       }
     })
-
   },
   paidListFn: function () {
     var that = this;
@@ -83,23 +75,17 @@ Page({
         'content-type': 'application/json'
       },
       success: function (res) {
-        console.log(res)
-        var listData = [];
+        var listData = res.data.data;
+        var j;
         for (var i = 0; i < res.data.data.length; i++) {
-          listData.push({
-            brand:res.data.data[i].amount.brand,
-            amount: res.data.data[i].amount.toFixed(2),
-            couponDiscount: res.data.data[i].couponDiscount.toFixed(2),
-            id: res.data.data[i].id,
-            itemQty: res.data.data[i].itemQty,
-            items: res.data.data[i].items,
-            orderType: res.data.data[i].orderType,
-            payMode: res.data.data[i].payMode,
-            remark: res.data.data[i].remark,
-            retailPayAmount: res.data.data[i].retailPayAmount.toFixed(2),
-            saleName: res.data.data[i].saleName,
-            status: res.data.data[i].status
-          })
+          for (j = 0; j < res.data.data[i].items.length; j++) {
+            res.data.data[i].items[j].price = res.data.data[i].items[j].price.toFixed(2);
+          }
+
+          listData[i].amount = listData[i].amount.toFixed(2);
+          listData[i].couponDiscount = listData[i].couponDiscount.toFixed(2);
+          listData[i].retailPayAmount = listData[i].retailPayAmount.toFixed(2);
+          res.data.data[i].items = res.data.data[i].items
         }
         that.setData({
           unListData: listData,
@@ -111,7 +97,6 @@ Page({
   //未支付订单点击跳转订单详情页面
   orderDetailFn: function (event) {
     var orderId = event.currentTarget.dataset.orderid;
-    console.log(orderId)
     wx.navigateTo({
       url: '../orderDetail/orderDetail?orderId=' + orderId + '&ispaid=' + this.data.ispaid
     })

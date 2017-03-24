@@ -6,7 +6,7 @@
             <text class="tit ellipsis">{{item.brand}}{{item.itemName}}</text>
             <view class="price-info">
               <text>{{item.norm}}/{{item.units}}</text>
-              <text class="price">￥{{item.retailPrice}}</text>
+              <text class="price">￥{{(item.retailPrice > 0 && item.retailPromotionPrice > 0)? item.retailPromotionPrice : item.retailPrice}}</text>
             </view>
             <view class="operation">
               <text data-cartid="{{item.id}}" class="decr-btn" bindtap="decrFn">-</text>

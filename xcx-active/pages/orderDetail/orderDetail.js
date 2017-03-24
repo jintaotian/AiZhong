@@ -8,10 +8,10 @@ Page({
     var that = this;
     if (options.ispaid == true || options.ispaid == 'true') {
       that.getOrderInfoFn(options.orderId);
-      that.setData({ ispaid: '',orderId:options.orderId })
+      that.setData({ ispaid: '', orderId: options.orderId })
     } else {
       that.getOrderInfoFn(options.orderId);
-      that.setData({ ispaid: true,orderId:options.orderId })
+      that.setData({ ispaid: true, orderId: options.orderId })
     }
   },
   onReady: function () {
@@ -39,9 +39,18 @@ Page({
         'content-type': 'application/json'
       },
       success: function (res) {
-        console.log(res)
+        console.log(res.data.data.company.name)
+        var detailData = res.data.data;
+        for (var i = 0; i < detailData.items.length; i++) {
+          detailData.items[i].price = detailData.items[i].price.toFixed(2);
+        }
+        detailData.retailPayAmount = parseFloat(detailData.retailPayAmount).toFixed(2);
+        detailData.couponDiscount = parseFloat(detailData.couponDiscount).toFixed(2);
+        detailData.items = detailData.items;
+
         that.setData({
-          orderDeatilData: res.data.data,
+          orderDeatilData: detailData,
+          amountPrice:(parseFloat(detailData.retailPayAmount) + parseFloat(detailData.couponDiscount)).toFixed(2)
         })
       }
 
@@ -87,7 +96,7 @@ Page({
   placeOrderFn: function (event) {
     // 下单方法
     var that = this;
-    var orderId = event.currentTarget.dataset.orderid;    
+    var orderId = event.currentTarget.dataset.orderid;
     var sign = util.hexMD5('orderId=' + orderId + gConfig.key);
     wx.request({
       url: gConfig.http + 'xcx/wx/prepardId',
@@ -105,7 +114,12 @@ Page({
           'nonceStr': res.data.data.nonceStr,
           'package': res.data.data.package,
           'signType': 'MD5',
-          'paySign': res.data.data.paySign
+          'paySign': res.data.data.paySign,
+          'success': function (res) {
+            wx.switchTab({
+              url: '../index/index'
+            })
+          }
         })
         // 微信支付接口
       }
