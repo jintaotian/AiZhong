@@ -1,16 +1,15 @@
 <view class="container">
-    <view class="errorTip" class="noPosition" hidden="{{!isPosition}}">
-      <text>请授权当前位置信息</text>
-      <button bindtap="getPositionFn">点击授权</button>
-    </view>
-
+  <view class="errorTip" class="noPosition" hidden="{{!isPosition}}">
+    <text>请授权当前位置信息</text>
+    <button bindtap="getPositionFn">点击授权</button>
+  </view>
   <view hidden="{{isPosition}}">
     <text class="coupons-tit">{{regionName}}种子促销会</text>
 
     <!--优惠券-start-->
     <scroll-view class="coupons-con" scroll-x="true">
       <block wx:for="{{couponsData}}" wx:key="i">
-        <view class="coupons" data-couponsId="{{item.id}}" bindtap="useCouponsFn" data-index="{{index}}">
+        <view class="coupons" bindtap="useCouponsFn" data-index="{{index}}">
           <text>￥</text>
           <text class="quota">{{item.discount}}</text>
           <text class="requirement">满{{item.fullPrice}}可用券</text>
@@ -24,7 +23,8 @@
 
       <!--产品列表-start-->
       <view class="active-list" wx:for="{{actData}}" wx:key="i">
-      <!--{{item.img?item.img:item.defauliImg}}-->
+
+        <!--{{item.img?item.img:item.defauliImg}}-->
         <image src="../../images/list1.jpg"></image>
         <text class="product-tit ellipsis">{{item.brand}}{{item.itemName}}</text>
         <text class="product-pro">由{{item.companyName}}提供发货和售后服务</text>

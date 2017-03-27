@@ -11,9 +11,9 @@
 }
 
 .coupons-con {
+  width: 100%;
   padding-left: 30rpx;
   white-space: nowrap;
-  display: flex;
   background-color: #fff;
   padding-bottom: 40rpx;
   box-sizing: border-box;
