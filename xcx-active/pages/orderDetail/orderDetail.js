@@ -22,6 +22,9 @@ Page({
   },
   onHide: function () {
     // 页面隐藏
+    wx.switchTab({
+      url: '../index/index'
+    })
   },
   onUnload: function () {
     // 页面关闭
@@ -41,8 +44,10 @@ Page({
       success: function (res) {
         console.log(res.data.data.company.name)
         var detailData = res.data.data;
+        var amountPrice = 0;
         for (var i = 0; i < detailData.items.length; i++) {
           detailData.items[i].price = detailData.items[i].price.toFixed(2);
+          amountPrice += detailData.items[i].price * detailData.items[i].qty;
         }
         detailData.retailPayAmount = parseFloat(detailData.retailPayAmount).toFixed(2);
         detailData.couponDiscount = parseFloat(detailData.couponDiscount).toFixed(2);
@@ -50,7 +55,7 @@ Page({
 
         that.setData({
           orderDeatilData: detailData,
-          amountPrice:(parseFloat(detailData.retailPayAmount) + parseFloat(detailData.couponDiscount)).toFixed(2)
+          amountPrice:amountPrice.toFixed(2)
         })
       }
 

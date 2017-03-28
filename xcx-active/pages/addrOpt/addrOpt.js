@@ -19,6 +19,9 @@ Page({
   },
   onHide: function () {
     // 页面隐藏
+    wx.switchTab({
+      url: '../center/center'
+    })
   },
   onUnload: function () {
     // 页面关闭

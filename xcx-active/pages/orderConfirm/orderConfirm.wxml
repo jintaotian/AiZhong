@@ -7,8 +7,7 @@
 
   <!--订单列表-start-->
   <view class="order-con" wx:for="{{orderData}}" wx:key="i">
-  <!--{{item.img ? item.img : item.defauliImg}}-->
-    <image src="../../images/list1.jpg"></image>
+    <image src="{{item.img ? item.img : item.defauliImg}}"></image>
     <view class="order-info">
       <text class="order-tit ellipsis">{{item.brand}}{{item.itemName}}</text>
       <text class="order-pro ellipsis2">由{{item.companyName}}提供发货和售后服务</text>
@@ -29,7 +28,7 @@
       <text class="settlement-price">￥{{orderPrice}}</text>
     </view>
     <view class="price-wrap">
-      <text>优惠券</text>
+      <text>优惠券抵现金额</text>
       <text class="settlement-coupon">￥{{coupon}}</text>
     </view>
     <view class="price-wrap">

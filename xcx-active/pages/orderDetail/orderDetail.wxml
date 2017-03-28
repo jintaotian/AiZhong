@@ -22,11 +22,11 @@
   <!--订单操作-start-->
   <view class="order-settlement">
     <view class="price-wrap">
-      <text>商品金额</text>
+      <text>订单金额</text>
       <text class="settlement-price">{{amountPrice}}</text>
     </view>
     <view class="price-wrap">
-      <text>优惠券</text>
+      <text>优惠券抵现金额</text>
       <text class="settlement-coupon">￥{{orderDeatilData.couponDiscount}}</text>
     </view>
     <view class="price-wrap">

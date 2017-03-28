@@ -15,13 +15,12 @@
         </view>
       </view>
       <view class="order-con" wx:for="{{item.items}}" wx:key="i" wx:for-item="list" bindtap="orderDetailFn" data-orderId="{{item.id}}">
-      <!--<image src="{{list.img}}"></image>-->
-        <image src="../../images/list1.jpg"></image>
+      <image src="{{list.img}}"></image>
         <view class="order-info">
          <text class="order-tit ellipsis">{{list.brand}}{{list.itemName}}</text>
           <text class="order-pro ellipsis2">由{{item.saleName}}提供发货和售后</text>
           <view class="peice-wrap">
-            <text class="weight">{{list.norm}}/{{item.units}}</text>
+            <text class="weight">{{list.norm}}/{{list.units}}</text>
             <text class="num">x{{list.qty}}</text>
             <text class="price">￥{{list.price}}</text>
           </view>
@@ -47,7 +46,7 @@
           <text class="order-tit ellipsis">{{unList.brand}}{{unList.itemName}}</text>
           <text class="order-pro ellipsis2">由 {{item.saleName}} 提供发货和售后</text>
           <view class="peice-wrap">
-            <text class="weight">{{unList.norm}}</text>
+            <text class="weight">{{unList.norm}}/{{unList.units}}</text>
             <text class="num">x{{unList.qty}}</text>
             <text class="price">￥{{unList.price}}</text>
           </view>

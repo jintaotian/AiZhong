@@ -127,8 +127,10 @@ Page({
         'content-type': 'application/json'
       },
       success: function (res) {
+        var orderPrice = 0;
         for(var i =0; i < res.data.data.itemList.length;i++){
             res.data.data.itemList[i].price = res.data.data.itemList[i].price.toFixed(2);
+            orderPrice += res.data.data.itemList[i].price * res.data.data.itemList[i].qty
         }
         // 重新渲染页面
         that.setData({
@@ -138,7 +140,7 @@ Page({
           coupon: res.data.data.discount.toFixed(2),
           couponId: res.data.data.couponId,
           itemListLen: res.data.data.itemList.length,
-          orderPrice: (res.data.data.total + res.data.data.discount).toFixed(2)
+          orderPrice: orderPrice.toFixed(2)
         })
       }
     })
