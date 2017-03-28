@@ -10,22 +10,6 @@ Page({
       management: options.management
     })
   },
-  onReady: function () {
-    // 页面渲染完成a
-  },
-  onShow: function () {
-    // 页面显示
-    this.getAddrListFn()
-  },
-  onHide: function () {
-    // 页面隐藏
-    wx.switchTab({
-      url: '../center/center'
-    })
-  },
-  onUnload: function () {
-    // 页面关闭
-  },
   editorFn: function (event) {
     var that = this;
     var consignee, mob, region, address, isDefault, id;

@@ -30,12 +30,6 @@ Page({
     var userData = wx.getStorageSync('userData')
     this.setData({ regionName: userData.regionName })
   },
-  onHide: function () {
-    // 页面隐藏
-    wx.switchTab({
-      url: '../index/index'
-    })
-  },
   consigneeFn: function (event) {
     this.data.consignee = event.detail.value;
   },

@@ -14,21 +14,6 @@ Page({
       that.setData({ ispaid: true, orderId: options.orderId })
     }
   },
-  onReady: function () {
-    // 页面渲染完成
-  },
-  onShow: function () {
-    // 页面显示
-  },
-  onHide: function () {
-    // 页面隐藏
-    wx.switchTab({
-      url: '../index/index'
-    })
-  },
-  onUnload: function () {
-    // 页面关闭
-  },
   getOrderInfoFn: function (orderId) {
     var that = this;
     var sign = util.hexMD5('orderId=' + orderId + gConfig.key);
