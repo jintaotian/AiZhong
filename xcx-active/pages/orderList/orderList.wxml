@@ -15,7 +15,7 @@
         </view>
       </view>
       <view class="order-con" wx:for="{{item.items}}" wx:key="i" wx:for-item="list" bindtap="orderDetailFn" data-orderId="{{item.id}}">
-      <image src="{{list.img}}"></image>
+      <image src="{{gConfig.imgPath}}{{list.img}}"></image>
         <view class="order-info">
          <text class="order-tit ellipsis">{{list.brand}}{{list.itemName}}</text>
           <text class="order-pro ellipsis2">由{{item.saleName}}提供发货和售后</text>

@@ -1,6 +1,6 @@
 <view class="container">
         <view class="shopping-list" wx:for="{{shoppingListData}}" wx:key="i">
-          <image src="{{item.img ? item.img : item.defauliImg}}"></image>
+          <image src="{{gConfig.imgPath}}{{item.img ? item.img : item.defauliImg}}"></image>
           <view class="info-wrap">
             <text class="tit ellipsis">{{item.brand}}{{item.itemName}}</text>
             <view class="price-info">

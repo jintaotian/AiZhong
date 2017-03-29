@@ -5,6 +5,9 @@ Page({
   data: {
     ispaid: true
   },
+  onShow:function(){
+    this.unPaidListFn();
+  },
   unPaidListFn: function () {
     var that = this;
     var userData = wx.getStorageSync('userData');

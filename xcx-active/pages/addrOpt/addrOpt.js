@@ -10,6 +10,9 @@ Page({
       management: options.management
     })
   },
+  onShow:function(){
+    this.getAddrListFn();
+  },
   editorFn: function (event) {
     var that = this;
     var consignee, mob, region, address, isDefault, id;
