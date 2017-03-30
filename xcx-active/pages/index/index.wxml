@@ -4,10 +4,13 @@
     <button bindtap="getPositionFn">点击授权</button>
   </view>
   <view hidden="{{isPosition}}">
-    <text class="coupons-tit">{{regionName}}种子促销会</text>
-
+    <view class="tit-wrap">
+      <text class="coupons-tit">{{regionName}}种子促销会</text>
+      <text class="relocationBtn" bindtap="getPositionFn" ></text>
+    </view>
+    
     <!--优惠券-start-->
-    <scroll-view class="coupons-con" scroll-x="true">
+    <scroll-view class="coupons-con" hidden="{{isCoupons}}" scroll-x="true">
       <block wx:for="{{couponsData}}" wx:key="i">
         <view class="coupons" bindtap="useCouponsFn" data-index="{{index}}">
           <text>￥</text>

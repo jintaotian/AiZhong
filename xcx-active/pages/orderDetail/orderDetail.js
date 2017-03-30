@@ -69,13 +69,13 @@ Page({
               wx.showToast({
                 title: '取消成功',
                 icon: 'success',
-                duration: 500
+                duration: 1000
               })
               setTimeout(function () {
                 wx.switchTab({
                   url: '../index/index'
                 })
-              }, 1000)
+              }, 1500)
             }
           })
 

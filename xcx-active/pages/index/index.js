@@ -8,6 +8,9 @@ Page({
     this.getPositionFn();
   },
   onShow:function(){
+    this.shopcarDataFn();
+  },
+  shopcarDataFn:function(){
     var that = this;
     var delData = wx.getStorageSync('delData');
     var newActData = that.data.actData;
@@ -219,7 +222,8 @@ Page({
       },
       success: function (res) {
         that.setData({
-          couponsData: res.data.data,
+          isCoupons:(res.data.data.length == 0) ? true : '',
+          couponsData: res.data.data
         })
       }
     })
@@ -233,6 +237,7 @@ Page({
     })
   },
   getPositionFn: function () {
+    console.log(1)
     var that = this;
     wx.getLocation({
       type: 'wgs84',

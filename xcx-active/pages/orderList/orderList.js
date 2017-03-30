@@ -4,9 +4,9 @@ var util = require('../../utils/md5.js');
 Page({
   data: {
     ispaid: true,
-    imgPath : gConfig.imgPath
+    imgPath: gConfig.imgPath
   },
-  onShow:function(){
+  onShow: function () {
     this.unPaidListFn();
   },
   unPaidListFn: function () {
@@ -112,6 +112,11 @@ Page({
                   'content-type': 'application/json'
                 },
                 success: function (res) {
+                  wx.showToast({
+                    title: '取消成功',
+                    icon: 'success',
+                    duration: 1000
+                  })
                   that.setData({
                     listData: orderList
                   })
