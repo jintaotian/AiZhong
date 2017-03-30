@@ -15,7 +15,7 @@
         </view>
       </view>
       <view class="order-con" wx:for="{{item.items}}" wx:key="i" wx:for-item="list" bindtap="orderDetailFn" data-orderId="{{item.id}}">
-      <image src="{{gConfig.imgPath}}{{list.img}}"></image>
+      <image src="{{imgPath}}{{list.img}}"></image>
         <view class="order-info">
          <text class="order-tit ellipsis">{{list.brand}}{{list.itemName}}</text>
           <text class="order-pro ellipsis2">由{{item.saleName}}提供发货和售后</text>
@@ -41,7 +41,7 @@
         <text class="order-status paid-status">已支付</text>
       </view>
       <view class="order-con"  wx:for="{{item.items}}" data-orderId="{{item.id}}" bindtap="orderDetailFn" wx:key="i" wx:for-item="unList">
-        <image src="{{unList.img}}"></image>
+        <image src="{{imgPath}}{{unList.img}}"></image>
         <view class="order-info">
           <text class="order-tit ellipsis">{{unList.brand}}{{unList.itemName}}</text>
           <text class="order-pro ellipsis2">由 {{item.saleName}} 提供发货和售后</text>

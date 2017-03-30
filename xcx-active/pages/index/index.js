@@ -2,7 +2,7 @@
 var gConfig = getApp();
 var util = require('../../utils/md5.js');
 Page({
-  data: {},
+  data: {imgPath : gConfig.imgPath},
   onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数
     this.getPositionFn();

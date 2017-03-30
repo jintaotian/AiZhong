@@ -6,7 +6,7 @@
 
   <!--订单列表-start-->
   <view class="order-con" wx:for="{{orderDeatilData.items}}" wx:key="i">
-    <image src="{{gConfig.imgPath}}{{item.img}}"></image>
+    <image src="{{imgPath}}{{item.img}}"></image>
     <view class="order-info">
       <text class="order-tit ellipsis">{{item.brand}}{{item.itemName}}</text>
       <text class="order-pro ellipsis2">由{{orderDeatilData.company.name}}提供发货和售后</text>

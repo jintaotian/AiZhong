@@ -3,7 +3,8 @@ var gConfig = getApp();
 var util = require('../../utils/md5.js');
 Page({
   data: {
-    ispaid: true
+    ispaid: true,
+    imgPath : gConfig.imgPath
   },
   onShow:function(){
     this.unPaidListFn();

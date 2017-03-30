@@ -2,7 +2,7 @@
 var gConfig = getApp();
 var util = require('../../utils/md5.js');
 Page({
-  data: { value: '请选择收货地址' },
+  data: { value: '请选择收货地址',imgPath : gConfig.imgPath},
   onShow: function () {
     // 页面显示
     var that = this;

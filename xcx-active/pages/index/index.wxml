@@ -23,7 +23,7 @@
 
       <!--产品列表-start-->
       <view class="active-list" wx:for="{{actData}}" wx:key="i">
-        <image src="{{gConfig.imgPath}}{{item.img?item.img:item.defauliImg}}"></image>
+        <image src="{{imgPath}}{{item.img?item.img:item.defauliImg}}"></image>
         <text class="product-tit ellipsis">{{item.brand}}{{item.itemName}}</text>
         <text class="product-pro">由{{item.companyName}}提供发货和售后服务</text>
         <view class="product-info">

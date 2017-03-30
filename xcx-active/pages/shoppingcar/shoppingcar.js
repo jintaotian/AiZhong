@@ -1,9 +1,11 @@
 // pages/shoppingcar/shoppingcar.js
 var delData = [];
+var gConfig = getApp();
 Page({
   data: {
     totalPrice: 0,
-    isOrder: 'true'
+    isOrder: 'true',
+    imgPath : gConfig.imgPath
   },
   onShow: function () {
     // 页面显示 
