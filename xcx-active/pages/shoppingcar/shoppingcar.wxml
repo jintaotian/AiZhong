@@ -9,7 +9,7 @@
             </view>
             <view class="operation">
               <text data-cartid="{{item.id}}" class="decr-btn" bindtap="decrFn">-</text>
-              <input class="operation-result" disabled="true" value="{{item.moq}}" type="number" />
+              <input class="operation-result" bindinput="goodsNumFn" data-numid="{{item.id}}" value="{{item.moq <= 1 ? 1 : item.moq}}" type="number" placeholder="1"/>
               <text data-cartid="{{item.id}}" hover-class="hover" class="incr-btn" bindtap="incrFn" >+</text>
             </view>
           </view>

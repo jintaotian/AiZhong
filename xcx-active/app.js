@@ -33,6 +33,7 @@ App({
     })
   },
   http: "https://msi-mall.51zhongzi.com/",
+  // http:"https://xcx.51zhongzi.com/farms-msi/",
   imgPath: "https://img.51zhongzi.com/",
   key: '&key=9da1ec1d11f0401968d52cab64df46d8'
 })

@@ -6,7 +6,7 @@
   </view>
   <view class="info-list">
     <text>联系电话</text>
-    <input placeholder="请输入收货人的联系电话" type="number" placeholder-style="color:#ddd" value="{{mob}}" bindblur="mobFn" />
+    <input placeholder="请输入收货人的联系电话" type="number" placeholder-style="color:#ddd" value="{{mob}}" bindinput="mobFn" />
   </view>
   <view class="info-list">
     <text>所在地区</text>

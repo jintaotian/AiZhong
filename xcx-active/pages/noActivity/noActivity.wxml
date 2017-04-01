@@ -1,2 +1,7 @@
 <!--pages/noActivity/noActivity.wxml-->
 <text class="isActivity">该地区暂无相关活动！</text>
+<view class="tipMag">您可以登录爱种网官网 </view>
+<view class="tipMag"> https://www.51zhongzi.com</view>
+<view class="tipMag">或下载爱种网APP查看更多优惠活动！</view>
+<image class="scApp" src="../../images/scApp.jpg"></image>
+<view class="Appxz">APP下载</view>

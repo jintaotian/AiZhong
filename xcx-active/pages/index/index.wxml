@@ -23,7 +23,6 @@
     <!--优惠券-end-->
     <view class="active-wrap">
       <text class="active-tit" id="textId">活动产品</text>
-
       <!--产品列表-start-->
       <view class="active-list" wx:for="{{actData}}" wx:key="i">
         <image src="{{imgPath}}{{item.img?item.img:item.defauliImg}}"></image>
@@ -37,7 +36,7 @@
         <view class="operation-group" data-index="{{index}}">
           <view class="operation">
             <text class="decr-btn" bindtap="decrFn" data-cartid="{{item.id}}">-</text>
-            <input class="operation-result" disabled="true" value="{{item.moq <= 1 ? 1 : item.moq}}" type="number" />
+            <input class="operation-result" type="number" bindinput="goodsNumFn" data-numid="{{item.id}}" type="number" value="{{item.moq}}" placeholder="1"/>
             <text class="incr-btn" bindtap="incrFn" data-cartid="{{item.id}}">+</text>
           </view>
           <button class="join-shoppingcar-btn" data-shopcar="false" data-cartid="{{item.id}}" bindtap="{{item.retailPrice == 0 ? 'tipFn' : 'joinCarFn'}}">加入购物车</button>
