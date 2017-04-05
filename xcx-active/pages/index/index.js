@@ -65,7 +65,6 @@ Page({
 
       }
     }
-
   },
   decrFn: function (event) {
     /*--产品数量-1--*/
@@ -90,7 +89,7 @@ Page({
     var goodslist = that.data.actData;
     for (var i = 0; i < goodslist.length; i++) {
       if (goodslist[i].id == cartid) {
-        goodslist[i].moq = (parseInt(goodslist[i].moq) + 1) >= 99999 ? 99999 : (parseInt(goodslist[i].moq) + 1); 
+        goodslist[i].moq = (parseInt(goodslist[i].moq) + 1) >= 99999 ? 99999 : (parseInt(goodslist[i].moq) + 1);
       }
     }
     /*--设置data数据，重新渲染页面--*/
@@ -104,36 +103,40 @@ Page({
     var that = this;
     var goodslist = that.data.actData;
     var cartid = event.currentTarget.dataset.cartid;
-    var shoppingcarData = [];
-    for (var i = 0; i < goodslist.length; i++) {
-      if (goodslist[i].id == cartid) {
-        goodslist[i].shopcar = true;
-        that.setData({
-          actData: goodslist
-        })
-      }
-    }
-    /*循环数据查找商品是否加入购物车*/
-    for (var i = 0; i < goodslist.length; i++) {
-      if (goodslist[i].shopcar == true) {
-        shoppingcarData.push({
-          brand: goodslist[i].brand,
-          id: goodslist[i].id,
-          itemId: goodslist[i].itemId,
-          companyId: goodslist[i].companyId,
-          img: goodslist[i].img,
-          defauliImg: goodslist[i].defauliImg,
-          itemName: goodslist[i].itemName,
-          companyName: goodslist[i].companyName,
-          units: goodslist[i].units,
-          norm: goodslist[i].norm,
-          retailPromotionPrice: goodslist[i].retailPromotionPrice,
-          retailPrice: goodslist[i].retailPrice,
-          moq: goodslist[i].moq <= 1 ? 1 : goodslist[i].moq
-        })
+    var moq = event.currentTarget.dataset.moq;
+    var shoppingcarData = wx.getStorageSync('shoppingcarData');
+    var isShoppingcar = true;
+    if (shoppingcarData.length > 0) {
+      for (var j = 0; j < shoppingcarData.length; j++) {
+        if (shoppingcarData[j].id == cartid) {
+          shoppingcarData[j].moq = moq
+          isShoppingcar = false;
+          break
+        }
       }
     }
 
+    if (isShoppingcar) {
+      for (var i = 0; i < goodslist.length; i++) {
+        if (goodslist[i].id == cartid) {
+          shoppingcarData.push({
+            brand: goodslist[i].brand,
+            id: goodslist[i].id,
+            itemId: goodslist[i].itemId,
+            companyId: goodslist[i].companyId,
+            img: goodslist[i].img,
+            defauliImg: goodslist[i].defauliImg,
+            itemName: goodslist[i].itemName,
+            companyName: goodslist[i].companyName,
+            units: goodslist[i].units,
+            norm: goodslist[i].norm,
+            retailPromotionPrice: goodslist[i].retailPromotionPrice,
+            retailPrice: goodslist[i].retailPrice,
+            moq: goodslist[i].moq <= 1 ? 1 : goodslist[i].moq
+          })
+        }
+      }
+    }
     /*--将加入购物车数据存入缓存到后台数据库==ps:要将用户openId一起存入本地，用于辨别同一手机的不同购物车列表--*/
     wx.setStorage({
       key: "shoppingcarData",

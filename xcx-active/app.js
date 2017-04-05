@@ -24,6 +24,7 @@ App({
                 "wxOpenid": res.data.data.wxOpenid,
                 "clientId": res.data.data.clientId
               });
+              wx.setStorageSync('shoppingcarData',[]); 
             }
           })
         } else {

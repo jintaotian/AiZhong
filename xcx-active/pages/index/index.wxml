@@ -39,7 +39,7 @@
             <input class="operation-result" type="number" bindinput="goodsNumFn" data-numid="{{item.id}}" type="number" value="{{item.moq}}" placeholder="1"/>
             <text class="incr-btn" bindtap="incrFn" data-cartid="{{item.id}}">+</text>
           </view>
-          <button class="join-shoppingcar-btn" data-shopcar="false" data-cartid="{{item.id}}" bindtap="{{item.retailPrice == 0 ? 'tipFn' : 'joinCarFn'}}">加入购物车</button>
+          <button class="join-shoppingcar-btn" data-moq="{{item.moq}}" data-cartid="{{item.id}}" bindtap="{{item.retailPrice == 0 ? 'tipFn' : 'joinCarFn'}}">加入购物车</button>
           <button class="purchase-btn" data-cartid="{{item.id}}" bindtap="{{item.retailPrice == 0 ? 'tipFn' : 'purchaseFn'}}">立即购买</button>
         </view>
       </view>

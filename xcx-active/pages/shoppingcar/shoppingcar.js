@@ -1,5 +1,4 @@
 // pages/shoppingcar/shoppingcar.js
-var delData = [];
 var gConfig = getApp();
 Page({
   data: {
@@ -11,7 +10,7 @@ Page({
     // 页面显示 
     var that = this;
     var shoppingcarData = wx.getStorageSync('shoppingcarData');
-    if (shoppingcarData) {
+    if (shoppingcarData.length > 0) {
       that.setData({
         shoppingListData: shoppingcarData,
         isOrder: ""
@@ -121,10 +120,6 @@ Page({
           content: '您确定要删除该商品吗？',
           success: function (res) {
             if (res.confirm) {
-              delData.push({
-                'id': goodslist[i].id
-              });
-              wx.setStorageSync('delData', delData);
               goodslist.splice(goodslist[i].index, 1);/*从当前列表删除*/
               /*--重新渲染--*/
               if (goodslist.length > 0) {
