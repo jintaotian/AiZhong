@@ -5,4 +5,25 @@
     display: block;
     text-align: center;
     margin-top: 120rpx;
+    margin-bottom: 90rpx;
+}
+.scApp {
+    width: 400rpx;
+    height: 400rpx;
+    display: block;
+    margin: 20rpx auto 0;
+}
+.tipMag {
+    color: #999;
+    line-height: 50rpx;
+    font-size: 36rpx;
+    margin:0 auto;
+    padding: 0 30rpx;
+    text-align: center;
+}
+.Appxz{
+    text-align: center;
+    font-size: 32rpx;
+    padding-top: 20rpx;
+    color: #999;
 }

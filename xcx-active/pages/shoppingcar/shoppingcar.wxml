@@ -1,6 +1,6 @@
 <view class="container">
         <view class="shopping-list" wx:for="{{shoppingListData}}" wx:key="i">
-          <image src="{{item.img ? item.img : item.defauliImg}}"></image>
+          <image src="{{imgPath}}{{item.img ? item.img : item.defauliImg}}"></image>
           <view class="info-wrap">
             <text class="tit ellipsis">{{item.brand}}{{item.itemName}}</text>
             <view class="price-info">
@@ -9,7 +9,7 @@
             </view>
             <view class="operation">
               <text data-cartid="{{item.id}}" class="decr-btn" bindtap="decrFn">-</text>
-              <input class="operation-result" disabled="true" value="{{item.moq}}" type="number" />
+              <input class="operation-result" bindinput="goodsNumFn" data-numid="{{item.id}}" value="{{item.moq <= 1 ? 1 : item.moq}}" type="number" placeholder="1"/>
               <text data-cartid="{{item.id}}" hover-class="hover" class="incr-btn" bindtap="incrFn" >+</text>
             </view>
           </view>

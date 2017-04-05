@@ -1,9 +1,11 @@
 // pages/shoppingcar/shoppingcar.js
 var delData = [];
+var gConfig = getApp();
 Page({
   data: {
     totalPrice: 0,
-    isOrder: 'true'
+    isOrder: 'true',
+    imgPath: gConfig.imgPath
   },
   onShow: function () {
     // 页面显示 
@@ -14,14 +16,29 @@ Page({
         shoppingListData: shoppingcarData,
         isOrder: ""
       })
-      that.sumcalcFn();
     } else {
       that.setData({
         shoppingListData: [],
         isOrder: "true"
       })
-      that.sumcalcFn();
     }
+    that.sumcalcFn(shoppingcarData);
+  },
+  goodsNumFn: function (event) {
+    var that = this;
+    var newData = that.data.shoppingListData;
+    var numId = event.currentTarget.dataset.numid;
+    for (var i = 0; i < newData.length; i++) {
+      if (newData[i].id == numId) {
+        newData[i].moq = (event.detail.value == "" || event.detail.value <= 1) ? 1 : (event.detail.value >= 99999 ? 99999 : event.detail.value);
+        console.log(event.detail.value)
+        console.log(newData[i].moq)
+      }
+    }
+    /*--重新渲染--*/
+    that.setData({ shoppingListData: newData })
+    /*--求和--*/
+    that.sumcalcFn(newData);
   },
   settlementFn: function () {
     var that = this;
@@ -31,7 +48,6 @@ Page({
       key: "orderData",
       data: orderData
     })
-
     wx.navigateTo({
       url: '../orderConfirm/orderConfirm'
     })
@@ -43,11 +59,7 @@ Page({
     var goodslist = that.data.shoppingListData;
     for (var i = 0; i < goodslist.length; i++) {
       if (goodslist[i].id == cartid) {
-        if ((goodslist[i].moq - 1) < 1) {
-          goodslist[i].moq = 1;
-        } else {
-          goodslist[i].moq = parseInt(goodslist[i].moq) - 1
-        }
+        goodslist[i].moq = (goodslist[i].moq - 1) <= 1 ? 1 : (goodslist[i].moq - 1);
       }
     }
 
@@ -55,12 +67,8 @@ Page({
     that.setData({
       shoppingListData: goodslist,
     })
-    wx.setStorage({
-      key: "shoppingcarData",
-      data: goodslist
-    })
     /*--求和--*/
-    that.sumcalcFn();
+    that.sumcalcFn(goodslist);
 
   },
   incrFn: function (event) {
@@ -70,7 +78,7 @@ Page({
     var goodslist = that.data.shoppingListData;
     for (var i = 0; i < goodslist.length; i++) {
       if (goodslist[i].id == cartid) {
-        goodslist[i].moq = parseInt(goodslist[i].moq) + 1;
+        goodslist[i].moq = (parseInt(goodslist[i].moq) + 1) >= 99999 ? 99999 : (parseInt(goodslist[i].moq) + 1);
       }
     }
 
@@ -78,15 +86,11 @@ Page({
     that.setData({
       shoppingListData: goodslist,
     })
-    wx.setStorage({
-      key: "shoppingcarData",
-      data: goodslist
-    })
     /*--求和--*/
-    that.sumcalcFn();
+    that.sumcalcFn(goodslist);
 
   },
-  sumcalcFn: function () {
+  sumcalcFn: function (newData) {
     /*--订单求和--*/
     var sumcalc = 0;
     var that = this;
@@ -96,7 +100,11 @@ Page({
     }
     /*--重新渲染--*/
     that.setData({
-      totalPrice: sumcalc.toFixed(2),
+      totalPrice: sumcalc.toFixed(2)
+    })
+    wx.setStorage({
+      key: "shoppingcarData",
+      data: newData
     })
   },
   removeFn: function (event) {
@@ -114,16 +122,11 @@ Page({
           success: function (res) {
             if (res.confirm) {
               delData.push({
-                'id':goodslist[i].id
+                'id': goodslist[i].id
               });
               wx.setStorageSync('delData', delData);
-
               goodslist.splice(goodslist[i].index, 1);/*从当前列表删除*/
               /*--重新渲染--*/
-              wx.setStorage({
-                key: "shoppingcarData",
-                data: goodslist
-              })
               if (goodslist.length > 0) {
                 that.setData({
                   shoppingListData: goodslist,
@@ -136,7 +139,7 @@ Page({
                 })
               }
               /*--订单求和--*/
-              that.sumcalcFn();
+              that.sumcalcFn(goodslist);
             }
           }
         })

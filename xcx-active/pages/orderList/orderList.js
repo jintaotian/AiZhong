@@ -3,7 +3,11 @@ var gConfig = getApp();
 var util = require('../../utils/md5.js');
 Page({
   data: {
-    ispaid: true
+    ispaid: true,
+    imgPath: gConfig.imgPath
+  },
+  onShow: function () {
+    this.unPaidListFn();
   },
   unPaidListFn: function () {
     var that = this;
@@ -108,6 +112,11 @@ Page({
                   'content-type': 'application/json'
                 },
                 success: function (res) {
+                  wx.showToast({
+                    title: '取消成功',
+                    icon: 'success',
+                    duration: 1000
+                  })
                   that.setData({
                     listData: orderList
                   })

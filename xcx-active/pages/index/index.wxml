@@ -4,10 +4,13 @@
     <button bindtap="getPositionFn">点击授权</button>
   </view>
   <view hidden="{{isPosition}}">
-    <text class="coupons-tit">{{regionName}}种子促销会</text>
-
+    <view class="tit-wrap">
+      <text class="coupons-tit">{{regionName}}种子促销会</text>
+      <text class="relocationBtn" bindtap="getPositionFn" ></text>
+    </view>
+    
     <!--优惠券-start-->
-    <scroll-view class="coupons-con" scroll-x="true">
+    <scroll-view class="coupons-con" hidden="{{isCoupons}}" scroll-x="true">
       <block wx:for="{{couponsData}}" wx:key="i">
         <view class="coupons" bindtap="useCouponsFn" data-index="{{index}}">
           <text>￥</text>
@@ -20,10 +23,9 @@
     <!--优惠券-end-->
     <view class="active-wrap">
       <text class="active-tit" id="textId">活动产品</text>
-
       <!--产品列表-start-->
       <view class="active-list" wx:for="{{actData}}" wx:key="i">
-        <image src="{{item.img?item.img:item.defauliImg}}"></image>
+        <image src="{{imgPath}}{{item.img?item.img:item.defauliImg}}"></image>
         <text class="product-tit ellipsis">{{item.brand}}{{item.itemName}}</text>
         <text class="product-pro">由{{item.companyName}}提供发货和售后服务</text>
         <view class="product-info">
@@ -34,7 +36,7 @@
         <view class="operation-group" data-index="{{index}}">
           <view class="operation">
             <text class="decr-btn" bindtap="decrFn" data-cartid="{{item.id}}">-</text>
-            <input class="operation-result" disabled="true" value="{{item.moq <= 1 ? 1 : item.moq}}" type="number" />
+            <input class="operation-result" type="number" bindinput="goodsNumFn" data-numid="{{item.id}}" type="number" value="{{item.moq}}" placeholder="1"/>
             <text class="incr-btn" bindtap="incrFn" data-cartid="{{item.id}}">+</text>
           </view>
           <button class="join-shoppingcar-btn" data-shopcar="false" data-cartid="{{item.id}}" bindtap="{{item.retailPrice == 0 ? 'tipFn' : 'joinCarFn'}}">加入购物车</button>

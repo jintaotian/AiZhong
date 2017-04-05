@@ -2,24 +2,42 @@
 var gConfig = getApp();
 var util = require('../../utils/md5.js');
 Page({
-  data: {},
+  data: { imgPath: gConfig.imgPath },
   onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数
     this.getPositionFn();
   },
-  onShow:function(){
+  onShow: function () {
+    this.shopcarDataFn();
+  },
+  goodsNumFn: function (event) {
+    var that = this;
+    var newData = that.data.actData;
+    var numId = event.currentTarget.dataset.numid;
+    for (var i = 0; i < newData.length; i++) {
+      if (newData[i].id == numId) {
+        newData[i].moq = (event.detail.value == "" || event.detail.value <= 1) ? 1 : (event.detail.value >= 99999 ? 99999 : event.detail.value);
+        console.log(event.detail.value)
+        console.log(newData[i].moq)
+      }
+    }
+    that.setData({
+      actData: newData
+    })
+  },
+  shopcarDataFn: function () {
     var that = this;
     var delData = wx.getStorageSync('delData');
     var newActData = that.data.actData;
-    if(delData){
-      for(var i = 0; i < newActData.length; i++){
-        for(var j = 0; j < delData.length; j++){
-          if( delData[j].id == newActData[i].id){
+    if (delData) {
+      for (var i = 0; i < newActData.length; i++) {
+        for (var j = 0; j < delData.length; j++) {
+          if (delData[j].id == newActData[i].id) {
             newActData[i].shopcar = false;
           }
         }
       }
-      that.setData({actData:newActData});
+      that.setData({ actData: newActData });
       wx.removeStorageSync('delData');
     }
   },
@@ -57,12 +75,7 @@ Page({
     var sum = that.data.sumretailPrice;
     for (var i = 0; i < goodslist.length; i++) {
       if (goodslist[i].id == cartid) {
-        if ((goodslist[i].moq - 1) < 1) {
-          goodslist[i].moq = 1;
-        } else {
-          goodslist[i].moq = parseInt(goodslist[i].moq) - 1;
-        }
-        //break;
+        goodslist[i].moq = (goodslist[i].moq - 1) <= 1 ? 1 : (goodslist[i].moq - 1);
       }
     }
     /*--设置data数据，重新渲染页面--*/
@@ -77,8 +90,7 @@ Page({
     var goodslist = that.data.actData;
     for (var i = 0; i < goodslist.length; i++) {
       if (goodslist[i].id == cartid) {
-        goodslist[i].moq = parseInt(goodslist[i].moq) + 1;
-        //break; 
+        goodslist[i].moq = (parseInt(goodslist[i].moq) + 1) >= 99999 ? 99999 : (parseInt(goodslist[i].moq) + 1); 
       }
     }
     /*--设置data数据，重新渲染页面--*/
@@ -115,7 +127,7 @@ Page({
           companyName: goodslist[i].companyName,
           units: goodslist[i].units,
           norm: goodslist[i].norm,
-          retailPromotionPrice:goodslist[i].retailPromotionPrice,
+          retailPromotionPrice: goodslist[i].retailPromotionPrice,
           retailPrice: goodslist[i].retailPrice,
           moq: goodslist[i].moq <= 1 ? 1 : goodslist[i].moq
         })
@@ -191,12 +203,12 @@ Page({
         'content-type': 'application/json'
       },
       success: function (res) {
-        console.log(res)
         var actDataArr = res.data.data;
         for (var i = 0; i < actDataArr.length; i++) {
           actDataArr[i].retailPrice = actDataArr[i].retailPrice.toFixed(2);
           actDataArr[i].retailPromotionPrice = actDataArr[i].retailPromotionPrice.toFixed(2);
           actDataArr[i].price = actDataArr[i].price.toFixed(2);
+          actDataArr[i].moq = actDataArr[i].moq <= 1 ? 1 : actDataArr[i].moq;
         }
         that.setData({
           actData: actDataArr
@@ -219,7 +231,8 @@ Page({
       },
       success: function (res) {
         that.setData({
-          couponsData: res.data.data,
+          isCoupons: (res.data.data.length == 0) ? true : '',
+          couponsData: res.data.data
         })
       }
     })
