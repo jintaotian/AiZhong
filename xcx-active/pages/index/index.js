@@ -2,13 +2,13 @@
 var gConfig = getApp();
 var util = require('../../utils/md5.js');
 Page({
-  data: { imgPath: gConfig.imgPath },
+  data: { imgPath: gConfig.imgPath,isDoubleClick:''},
   onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数
     this.getPositionFn();
   },
   onShow: function () {
-    this.shopcarDataFn();
+    this.setData({isDoubleClick:''})
   },
   goodsNumFn: function (event) {
     var that = this;
@@ -17,33 +17,16 @@ Page({
     for (var i = 0; i < newData.length; i++) {
       if (newData[i].id == numId) {
         newData[i].moq = (event.detail.value == "" || event.detail.value <= 1) ? 1 : (event.detail.value >= 99999 ? 99999 : event.detail.value);
-        console.log(event.detail.value)
-        console.log(newData[i].moq)
       }
     }
     that.setData({
       actData: newData
     })
   },
-  shopcarDataFn: function () {
-    var that = this;
-    var delData = wx.getStorageSync('delData');
-    var newActData = that.data.actData;
-    if (delData) {
-      for (var i = 0; i < newActData.length; i++) {
-        for (var j = 0; j < delData.length; j++) {
-          if (delData[j].id == newActData[i].id) {
-            newActData[i].shopcar = false;
-          }
-        }
-      }
-      that.setData({ actData: newActData });
-      wx.removeStorageSync('delData');
-    }
-  },
   purchaseFn: function (event) {
     /*立即购买方法*/
     var that = this;
+    that.setData({isDoubleClick:true})
     var cartid = event.currentTarget.dataset.cartid;
     var goodslist = that.data.actData;
     var orderData = [];
@@ -62,7 +45,6 @@ Page({
         wx.navigateTo({
           url: '../orderConfirm/orderConfirm'
         })
-
       }
     }
   },
@@ -249,6 +231,12 @@ Page({
     })
   },
   getPositionFn: function () {
+    wx.showToast({
+      title: '加载中...',
+      mask: true,
+      icon: 'loading',
+      duration: 500
+    })
     var that = this;
     wx.getLocation({
       type: 'wgs84',

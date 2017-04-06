@@ -41,5 +41,5 @@
       <text class="num">{{totalPrice}}</text>
     </view>
   </view>
-  <button class="payment-btn" bindtap="placeOrderFn" disabled="{{adr}}">微信支付</button>
+  <button class="payment-btn" bindtap="placeOrderFn" disabled="{{isDoubleClick}}">微信支付</button>
 </view>

@@ -4,7 +4,9 @@ Page({
   data: {
     totalPrice: 0,
     isOrder: 'true',
-    imgPath: gConfig.imgPath
+    imgPath: gConfig.imgPath,
+    isDataTip:'',
+    isDoubleClick:''
   },
   onShow: function () {
     // 页面显示 
@@ -13,12 +15,14 @@ Page({
     if (shoppingcarData.length > 0) {
       that.setData({
         shoppingListData: shoppingcarData,
-        isOrder: ""
+        isOrder: "",
+        isDataTip:true
       })
     } else {
       that.setData({
         shoppingListData: [],
-        isOrder: "true"
+        isOrder: "true",
+        isDataTip:''
       })
     }
     that.sumcalcFn(shoppingcarData);
@@ -41,8 +45,8 @@ Page({
   },
   settlementFn: function () {
     var that = this;
+    that.setData({isOrder:true});
     var orderData = wx.getStorageSync('shoppingcarData');
-
     wx.setStorage({
       key: "orderData",
       data: orderData
@@ -125,12 +129,14 @@ Page({
               if (goodslist.length > 0) {
                 that.setData({
                   shoppingListData: goodslist,
-                  isOrder: ""
+                  isOrder: "",
+                  isDataTip:true
                 })
               } else {
                 that.setData({
                   shoppingListData: goodslist,
-                  isOrder: true
+                  isOrder: true,
+                  isDataTip:''
                 })
               }
               /*--订单求和--*/

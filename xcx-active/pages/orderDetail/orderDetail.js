@@ -84,6 +84,12 @@ Page({
     })
   },
   placeOrderFn: function (event) {
+    wx.showToast({
+      title: '加载中...',
+      mask: true,
+      icon: 'loading',
+      duration: 1000
+    })
     // 下单方法
     var that = this;
     var orderId = event.currentTarget.dataset.orderid;

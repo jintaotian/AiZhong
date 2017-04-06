@@ -20,7 +20,7 @@
     <text>设为默认地址</text>
     <switch checked="{{isDefault == 1 ? true : ''}}" class="addrDefault" bindchange="isDefaultFn" />
   </view>
-  <button class="seve-btn" bindtap="editAddrFn" hidden="{{isAdd}}">保存并使用</button>
-  <button class="seve-btn" bindtap="addAddrFn" hidden="{{!isAdd}}">保存并使用</button>
+  <button class="seve-btn" bindtap="editAddrFn" disabled="{{isDoubleClick}}" hidden="{{isAdd}}">保存并使用</button>
+  <button class="seve-btn" bindtap="addAddrFn" disabled="{{isDoubleClick}}" hidden="{{!isAdd}}">保存并使用</button>
   <button class="seve-btn remove-btn" bindtap="removeAddrFn" hidden="{{isAdd}}">删除该地址</button>
 </view>

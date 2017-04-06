@@ -4,7 +4,8 @@ var util = require('../../utils/md5.js');
 Page({
   data: {
     isAdd: true,
-    isError: true
+    isError: true,
+    isDoubleClick:''
   },
   onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数
@@ -27,8 +28,8 @@ Page({
   },
   onShow: function () {
     // 页面显示
-    var userData = wx.getStorageSync('userData')
-    this.setData({ regionName: userData.regionName })
+    var userData = wx.getStorageSync('userData');
+    this.setData({ regionName: userData.regionName,isDoubleClick:''});
   },
   consigneeFn: function (event) {
     this.data.consignee = event.detail.value;
@@ -58,7 +59,7 @@ Page({
     // 修改地址
     var that = this;
     var userData = wx.getStorageSync('userData');
-    var wxData = wx.getStorageSync('wxData')
+    var wxData = wx.getStorageSync('wxData');
 
     if (that.data.consignee == '' || that.data.consignee == null) {
       that.setData({
@@ -76,6 +77,7 @@ Page({
         isError: ''
       })
     } else {
+      that.setData({isDoubleClick:true});
       wx.request({
         url: gConfig.http + 'xcx/address/update',
         data: {
@@ -131,11 +133,7 @@ Page({
         isError: ''
       })
     } else {
-      console.log(wxData.wxOpenid)
-      console.log(wxData.clientId)
-      console.log(that.data.consignee)
-      console.log(wxData.wxOpenid)
-      console.log(wxData.wxOpenid)
+      that.setData({isDoubleClick:true});
       wx.request({
         url: gConfig.http + 'xcx/address/add',
         data: {
@@ -155,6 +153,7 @@ Page({
           wx.setStorageSync('wxData', { wxOpenid: wxData.wxOpenid, clientId: res.data.data.clientId })
           wx.showToast({
             title: '新增成功',
+            mask: true,
             icon: 'success',
             duration: 1000
           })

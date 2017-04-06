@@ -12,6 +12,7 @@ Page({
   },
   onShow:function(){
     this.getAddrListFn();
+    this.setData({isDoubleClick:''});
   },
   editorFn: function (event) {
     var that = this;
@@ -33,6 +34,7 @@ Page({
     })
   },
   creatAddrFn: function () {
+    this.setData({isDoubleClick:true});
     wx.navigateTo({
       url: '../addrEdit/addrEdit'
     })

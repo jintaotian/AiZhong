@@ -4,7 +4,8 @@ var util = require('../../utils/md5.js');
 Page({
   data: {
     ispaid: true,
-    imgPath: gConfig.imgPath
+    imgPath: gConfig.imgPath,
+    isDataTip:true
   },
   onShow: function () {
     this.unPaidListFn();
@@ -27,6 +28,7 @@ Page({
       },
       success: function (res) {
         var listData = res.data.data;
+        listData.length == 0 ? that.setData({isDataTip:''}) : that.setData({isDataTip:true});
         var j;
         for (var i = 0; i < res.data.data.length; i++) {
           for (j = 0; j < res.data.data[i].items.length; j++) {
@@ -63,6 +65,7 @@ Page({
       },
       success: function (res) {
         var listData = res.data.data;
+        listData.length == 0 ? that.setData({isDataTip:''}) : that.setData({isDataTip:true});
         var j;
         for (var i = 0; i < res.data.data.length; i++) {
           for (j = 0; j < res.data.data[i].items.length; j++) {
@@ -112,6 +115,7 @@ Page({
                   'content-type': 'application/json'
                 },
                 success: function (res) {
+                  that.data.listData.length == 0 ? that.setData({isDataTip:''}) : that.setData({isDataTip:true});
                   wx.showToast({
                     title: '取消成功',
                     icon: 'success',
@@ -129,6 +133,12 @@ Page({
     }
   },
   placeOrderFn: function (event) {
+    wx.showToast({
+      title: '加载中...',
+      mask: true,
+      icon: 'loading',
+      duration: 1000
+    })
     // 下单方法
     var that = this;
     var orderId = event.currentTarget.dataset.orderid;
@@ -143,10 +153,6 @@ Page({
         'content-type': 'application/json'
       },
       success: function (res) {
-        console.log(res.data.data.timeStamp)
-        console.log(res.data.data.nonceStr)
-        console.log(res.data.data.package)
-        console.log(res.data.data.paySign)
         // 微信支付接口
         wx.requestPayment({
           'timeStamp': res.data.data.timeStamp,

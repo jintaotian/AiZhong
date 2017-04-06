@@ -3,7 +3,7 @@
     <text class="{{ispaid ? 'on' : ''}}" bindtap="unPaidListFn">未支付</text>
     <text class="{{ispaid ? '' : 'on'}}" bindtap="paidListFn">已支付</text>
   </view>
-
+  <view class="noDataTip" hidden="{{isDataTip}}">暂无相关数据</view>
   <!--未支付-->
   <view class="order-paid" hidden="{{!ispaid}}">
     <view class="order-list" wx:for="{{listData}}" wx:key="i">

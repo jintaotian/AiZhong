@@ -2,7 +2,7 @@
 var gConfig = getApp();
 var util = require('../../utils/md5.js');
 Page({
-  data: { value: '请选择收货地址',imgPath : gConfig.imgPath},
+  data: { value: '请选择收货地址',imgPath : gConfig.imgPath,isDoubleClick:''},
   onShow: function () {
     // 页面显示
     var that = this;
@@ -41,9 +41,11 @@ Page({
         "id": orderInfoData[i].skuId,
         "qty": orderInfoData[i].qty
       })
+      
     }
     wx.setStorageSync('delData', itemListData);
     if (that.data.mobile) {
+      that.setData({isDoubleClick:true});
       wx.request({
         url: gConfig.http + 'xcx/order/save',
         data: {
@@ -92,7 +94,7 @@ Page({
           // 微信支付接口
         },
         complete: function () {
-          wx.removeStorageSync('shoppingcarData');
+          wx.setStorageSync('shoppingcarData', []);
           wx.removeStorageSync('addressData');
         }
       })

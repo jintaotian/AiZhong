@@ -8,5 +8,5 @@
       <text class="edit-addr" data-region="{{item.id}}" bindtap="editorFn"></text>
     </view>
   </radio-group>
-  <button class="newedit-btn" bindtap="creatAddrFn">添加新地址</button>
+  <button class="newedit-btn" disabled="{{isDoubleClick}}" bindtap="creatAddrFn">添加新地址</button>
 </view>

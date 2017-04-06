@@ -6,7 +6,7 @@
   <view hidden="{{isPosition}}">
     <view class="tit-wrap">
       <text class="coupons-tit">{{regionName}}种子促销会</text>
-      <text class="relocationBtn" bindtap="getPositionFn" ></text>
+      <button class="relocationBtn" bindtap="getPositionFn" ></button>
     </view>
     
     <!--优惠券-start-->
@@ -40,7 +40,7 @@
             <text class="incr-btn" bindtap="incrFn" data-cartid="{{item.id}}">+</text>
           </view>
           <button class="join-shoppingcar-btn" data-moq="{{item.moq}}" data-cartid="{{item.id}}" bindtap="{{item.retailPrice == 0 ? 'tipFn' : 'joinCarFn'}}">加入购物车</button>
-          <button class="purchase-btn" data-cartid="{{item.id}}" bindtap="{{item.retailPrice == 0 ? 'tipFn' : 'purchaseFn'}}">立即购买</button>
+          <button class="purchase-btn" data-cartid="{{item.id}}" bindtap="{{item.retailPrice == 0 ? 'tipFn' : 'purchaseFn'}}" disabled="{{isDoubleClick}}">立即购买</button>
         </view>
       </view>
     </view>
